@@ -7,7 +7,7 @@ In this project, you can compress files using either **Huffman coding** or **LZW
 
 ## Algorithms
 
-| algorithm | source | info | time complexity | space complexity |
+| algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
 | Huffman coding | [source](https://github.com/gotonode/compress/blob/master/src/compress/algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | TBD | TBD |
 | LZW | [source](https://github.com/gotonode/compress/blob/master/src/compress/algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | TBD | TBD |
