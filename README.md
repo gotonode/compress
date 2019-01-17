@@ -5,7 +5,13 @@
 
 In this project, you can compress files using either **Huffman coding** or **LZW**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
+## The problem
+
+To reduce the size of a file, and to be able to return the original file from the size-reduced file. This is also known as "lossless compression" (compared to "lossy comparison", which results in irrevocable data loss such as with JPEG files).
+
 ## Algorithms
+
+Two different algorithms are compared in this project.
 
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
