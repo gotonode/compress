@@ -3,7 +3,9 @@
 
 > This is a student project and should not be of any interest to anyone not attending this course (related to Data Structures and Algorithms).
 
-In this project, you can compress files using either the **Huffman coding** or the **LZW coding**. Decompression, as well as comparisons between the two algorithms, are possible.
+In this project, you can compress files using either **Huffman coding** or **LZW**. Decompression, as well as comparisons between the two algorithms, are also possible.
+
+## Algorithms
 
 | algorithm | source | info | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
