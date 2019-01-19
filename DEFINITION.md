@@ -45,9 +45,7 @@ I'll probably implement a feature which tests all of the files in a special `dat
 
 #### Big O -notation
 
-The time complexity for Huffman coding is O(n) and the space complexity is O(k) for the tree and O(n) for the coded data.
-
-Same time complexity applies for LZW.
+The time complexity for Huffman coding is O(n) and the same time complexity applies for LZW.
 
 It'll be interesting to see how these two algorithms fare up against each other. Obvisouly implementation matters, and the type and quality of it. A LZW done will could be 10 times as fast as a Huffman done wrong.
 
