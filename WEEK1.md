@@ -10,7 +10,7 @@ I'm now dedicated to completing an app that tests Huffman coding and LZW algorit
 
 What motivated me? I remember when I was about 8-10 years old, I discussed RAR archives with someone at school. And we concluded that it does indeed make games fit into smaller space, such as on a 1.44 MB floppy disk, but that repeated runs of the same RAR algorithm on a file would begin to increase the file system. Back then, we didn't realize that it's because of the overhead that is generated, but it was a fascinating topic, one that I haven't explored until now.
 
-I also chose the IDE. The IDE I'm going to be using is **IntelliJ IDEA Community**, testing will be done with **jUnit 4** (skipping version 5 for now) and code coverage is by **JaCoCo**. Some online tools will be used to assess the quality of my code.
+I also chose the IDE. The IDE I'm going to be using is **IntelliJ IDEA Community**, testing will be done with **JUnit 4** (skipping version 5 for now) and code coverage is by **JaCoCo**. Some online tools will be used to assess the quality of my code.
 
 #### Progress
 
