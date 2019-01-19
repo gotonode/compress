@@ -4,7 +4,7 @@
 
 #### Algorithms
 
-I'll be doing a comparison between the **Huffman coding** and **LZW coding** algorithms. Both are used to compress data in a lossless fashion. A lossless compression means that no data is lost in the compression/decompression process.
+I'll be doing a comparison between the **Huffman coding** and **LZW** algorithms. Both are used to compress data in a lossless fashion. A lossless compression means that no data is lost in the compression/decompression process.
 
 #### The problem
 
