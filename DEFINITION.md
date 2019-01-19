@@ -56,4 +56,3 @@ It'll be interesting to see how these two algorithms fare up against each other.
 * [Huffman coding on Wikipedia](https://en.wikipedia.org/wiki/Huffman_coding) (used as a strating point for reference)
 * [Huffman Code on Brilliant.org](https://brilliant.org/wiki/huffman-encoding/)
 * [Lempel–Ziv–Welch on Wikipedia](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) (used as a strating point for reference)
-* [LZW (Lempel–Ziv–Welch) Compression technique on GeeksforGeeks](https://www.geeksforgeeks.org/lzw-lempel-ziv-welch-compression-technique/
