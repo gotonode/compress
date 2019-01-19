@@ -28,6 +28,8 @@ So far so good. I think this section will be a lot more populated come next week
 
 I'll be creating the skeleton for the app. The algorithms will start taking a little bit of shape, but will not yet be functional the next week. I'll be using built-in data structures (such as ArrayLists), and migrate to my own implementations once the basics are working. This way, I'll know which data structures I need to make myself. There's little point in making an implementation of a HashMap yourself if you're not going to be using it during the confines of this course.
 
+Because this app is pretty useless without data, next week I'll create all the data files defined in `DEFINITION.md`. I'll also add functionality to read the data in.
+
 ##### Hours used
 
 Counting the time I used to read all of the articles (such as on Wikipedia and Brilliant.org), I used 11 hours the first week. I made this repository and pushed the changes only at the last moment.
