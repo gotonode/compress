@@ -43,7 +43,7 @@ Currently planned data:
 
 I'll probably implement a feature which tests all of the files in a special `data`-folder with both of these algorithms and outputs the results to the console. Then the user can easily put files into this folder and run the benchmarks. At the end of the benchmarks, the created (compressed) files can be deleted.
 
-# Big O
+#### Big O -notation
 
 The time complexity for Huffman coding is O(n) and the space complexity is O(k) for the tree and O(n) for the coded data.
 
