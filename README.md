@@ -15,5 +15,5 @@ Two different algorithms are compared in this project.
 
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
-| Huffman coding | [source](https://github.com/gotonode/compress/blob/master/src/main/java/io/github/gotonode/compress/algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | TBD | TBD |
-| LZW | [source](https://github.com/gotonode/compress/blob/master/src/main/java/io/github/gotonode/compress/algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | TBD | TBD |
+| Huffman coding | [source](https://github.com/gotonode/compress/blob/master/src/main/java/io/github/gotonode/compress/algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
+| LZW | [source](https://github.com/gotonode/compress/blob/master/src/main/java/io/github/gotonode/compress/algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
