@@ -8,7 +8,7 @@ I'll be doing a comparison between the **Huffman coding** and **LZW** algorithms
 
 #### The problem
 
-The smaller the files, the faster they can be trasnferred over a network. Likewise the less storage space they occupy while being stored on a client or a server somewhere. Both Huffman coding and LZW work in binary mode to compress documents of any type, so that they take up less space.
+The smaller the files, the faster they can be trasnferred over a network. Likewise the less storage space they occupy while being stored on a client or a server somewhere. Both Huffman coding and LZW work in binary mode to compress files of any type, so that they take up less space.
 
 #### How to use
 
