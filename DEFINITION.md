@@ -16,11 +16,11 @@ Compress is a console application, with no graphical user interface. The user in
 
 Once the app is launched, the user can either compress a file, decompress a file, or compare the speeds of the two algorithms. In the first case (compressing a single file), the user must define whether to use Huffman coding or LZW. Decompression automatically detects the used compression method, and the benchmark will use both.
 
-After that, the path to the file will be provided.
+After that, the path to the file must be provided.
 
 #### Input
 
-The app ("Compress") will only read in binary data from files. The user cannot enter binary sequences into the console, but rather will input the path to the file in question. The path can either be absolute or relative.
+The app will only read in binary data from files. The user cannot enter binary sequences into the console, but rather will input the path to the file in question. The path can either be absolute or relative.
 
 An absolute path contains everything needed to know, starting from the root, like this:  
 ```C:\Users\gotonode\Apps\Compress\data.bin```
