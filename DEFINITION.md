@@ -28,6 +28,29 @@ An absolute path contains everything needed to know, starting from the root, lik
 A relative path is relative to the app's location, such as:  
 ```.\data.bin```
 
+#### Sample data
+
+With this project, I'll be providing sample data so that the user can easily test the algorithms.
+
+Currently planned data:
+
+* Completely random ("pseudorandom") sequence of bits
+* "Lorem ipsum" text in the order of a few megabytes
+* Uncompresseable sequence of zero's
+* An audio file (personally recorded)
+* A video file (personally recorded)
+* A PDF document (personally created)
+
+I'll probably implement a feature which tests all of the files in a special `data`-folder with both of these algorithms and outputs the results to the console. Then the user can easily put files into this folder and run the benchmarks. At the end of the benchmarks, the created (compressed) files can be deleted.
+
+# Big O
+
+The time complexity for Huffman coding is O(n) and the space complexity is O(k) for the tree and O(n) for the coded data.
+
+Same time complexity applies for LZW.
+
+It'll be interesting to see how these two algorithms fare up against each other. Obvisouly implementation matters, and the type and quality of it. A LZW done will could be 10 times as fast as a Huffman done wrong.
+
 #### Sources
 
 * [Huffman coding on Wikipedia](https://en.wikipedia.org/wiki/Huffman_coding) (used as a strating point for reference)
