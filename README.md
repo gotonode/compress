@@ -5,6 +5,7 @@ In this project, you can compress files using either **Huffman coding** or **LZW
 
 * [App Definition](https://github.com/gotonode/compress/blob/master/DEFINITION.md)
 * [Week 1 Report](https://github.com/gotonode/compress/blob/master/WEEK1.md)
+* [Week 2 Report](https://github.com/gotonode/compress/blob/master/WEEK2.md)
 
 #### The problem
 
