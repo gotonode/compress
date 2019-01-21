@@ -1,6 +1,6 @@
 package test.java;
 
-import main.java.io.github.gotonode.compress.Main;
+import main.java.io.github.gotonode.compress.main.Main;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
