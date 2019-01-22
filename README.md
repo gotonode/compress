@@ -24,6 +24,8 @@ Two different algorithms are compared in this project.
 
 You'll find sample data that you can use in the [data](data) folder. The contents of that folder are in the public domain.
 
+More data (not created by me) can be found online with search query "`data compression corpora`".
+
 | name | type | format | size | contents |
 | :- | :- | :- | :-| :-|
 | [lorem_ipsum.txt](data/lorem_ipsum.txt) | TXT | text file | 92,6 KB | Lorem Ipsum |
