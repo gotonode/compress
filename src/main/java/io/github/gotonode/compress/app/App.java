@@ -56,11 +56,11 @@ public class App {
                     return;
 
                 case COMPRESS_HUFFMAN:
-                    compress(Algorithms.HUFFMAN);
+                    processCompression(Algorithms.HUFFMAN);
                     break;
 
                 case COMPRESS_LZW:
-                    compress(Algorithms.LZW);
+                    processCompression(Algorithms.LZW);
                     break;
 
                 case BENCHMARK:
@@ -68,7 +68,7 @@ public class App {
                     break;
 
                 case DECOMPRESS:
-                    decompress();
+                    processDecompression();
                     break;
 
                 case COMMANDS:
@@ -80,17 +80,29 @@ public class App {
 
     }
 
-    private void compress(Algorithms algorithm) {
+    private void processCompression(Algorithms algorithm) {
         uiController.printUsing(algorithm);
 
-        File sourceFile = io.askForAndFindSourceFile(uiController);
+        File sourceFile = io.askForSourceFile(uiController);
+
         if (sourceFile == null) {
+            uiController.printFileError();
             return;
         }
 
-        uiController.printAcknowledgeFile(sourceFile.getAbsolutePath());
+        File targetFile = io.askForTargetFile(uiController);
 
-        File targetFile = io.askForAndDeleteAndUseTargetFile(uiController);
+        if (sourceFile.equals(targetFile)) {
+            uiController.printFilesCannotBeTheSame();
+            return;
+        }
+
+        if (targetFile.exists() && !targetFile.canWrite()) {
+            uiController.printCannotWrite();
+            return;
+        }
+
+        // At this point, we have an input file we can read, and an output file we can write to.
 
         switch (algorithm) {
 
@@ -106,27 +118,45 @@ public class App {
     }
 
     /**
-     * Benchmarks Huffman against LZW. Only asks for the source file, since the files created during the benchmark
-     * are placed in a temporary folder, and removed once the benchmarking is complete.
+     * Asks the user for the input and output files, then decompresses the input file into the output location. The
+     * used algorithm is determined automatically.
      */
-    private void benchmark() {
-         uiController.printBenchmarking();
-         File sourceFile = io.askForAndFindSourceFile(uiController);
-    }
+    private void processDecompression() {
 
-    private void decompress() {
-
-        File sourceFile = io.askForAndFindSourceFile(uiController);
+        File sourceFile = io.askForSourceFile(uiController);
 
         if (sourceFile == null) {
+            uiController.printFileError();
             return;
         }
 
-        uiController.printAcknowledgeFile(sourceFile.getAbsolutePath());
+        File targetFile = io.askForTargetFile(uiController);
 
-        File targetFile = io.askForAndDeleteAndUseTargetFile(uiController);
+        if (targetFile.exists() && !targetFile.canWrite()) {
+            uiController.printCannotWrite();
+            return;
+        }
+
+        // At this point, we have an input file we can read, and an output file we can write to.
 
         uiController.printDecompressionSuccessful(targetFile.getName());
+    }
+
+    /**
+     * Benchmarks Huffman against LZW. Only asks for the source file, since the files created during the benchmark
+     * are placed in a temporary folder, and removed once the benchmarking is complete. Finally, reports on the
+     * benchmark (in milliseconds, and in kilobytes).
+     */
+    private void benchmark() {
+
+        uiController.printBenchmarking();
+
+        File sourceFile = io.askForSourceFile(uiController);
+
+        if (sourceFile == null) {
+            uiController.printFileError();
+            return;
+        }
     }
 
 }

@@ -130,16 +130,8 @@ public class UiController {
         System.out.println("E: Exit from the program");
     }
 
-    public void printFileNotFound() {
-        System.out.println("I couldn't find that file. Please try again.");
-    }
-
     public void printFileError() {
-        System.out.println("An error occurred trying to access that file.");
-    }
-
-    public void printAcknowledgeFile(String absolutePath) {
-        System.out.println("Okay, we'll use this file as the source: " + absolutePath);
+        System.out.println("An error occurred trying to access that file. Maybe it doesn't exist or you don't have the necessary permissions?");
     }
 
     public void printDecompressionSuccessful(String targetPath) {
@@ -147,6 +139,14 @@ public class UiController {
     }
 
     public void printBenchmarking() {
-        System.out.println("Okay, we'll benchmark Huffman against LZW using your chosen file. No new files will be created.");
+        System.out.println("We'll benchmark Huffman against LZW using your chosen file. No new files will be created.");
+    }
+
+    public void printCannotWrite() {
+        System.out.println("Cannot write to that output location. Is the file in use, and do you have the necessary permissions?");
+    }
+
+    public void printFilesCannotBeTheSame() {
+        System.out.println("Your input and output files cannot be the same.");
     }
 }
