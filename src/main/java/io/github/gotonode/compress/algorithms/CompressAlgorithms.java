@@ -1,10 +1,9 @@
 package io.github.gotonode.compress.algorithms;
 
 /**
- * This interface is used by both Huffman and LZW. If additional io.github.gotonode.compress.algorithms are added later, they should
- * implement this interface fully.
+ * This interface is used by both Huffman and LZW.
  */
-public interface CompressAlgorithms {
+public interface CompressAlgorithm {
 
     /**
      * Compresses the input file into the output location.
