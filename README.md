@@ -23,8 +23,8 @@ Two different io.github.gotonode.compress.algorithms are compared in this projec
 
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
-| Huffman coding | [source](src/main/java/io/github/gotonode/compress/io.github.gotonode.compress.algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
-| LZW | [source](src/main/java/io/github/gotonode/compress/io.github.gotonode.compress.algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
+| Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/Huffman) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
+| LZW | [source](src/main/java/io/github/gotonode/compress/algorithms/LZW) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
 
 ##### Sample data
 
