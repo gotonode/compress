@@ -1,7 +1,7 @@
 package main.java.io.github.gotonode.compress.app;
 
-import main.java.io.github.gotonode.compress.algorithms.Huffman;
-import main.java.io.github.gotonode.compress.algorithms.LZW;
+import main.java.io.github.gotonode.compress.algorithms.Huffman.Huffman;
+import main.java.io.github.gotonode.compress.algorithms.LZW.LZW;
 import main.java.io.github.gotonode.compress.enums.Algorithms;
 import main.java.io.github.gotonode.compress.enums.Commands;
 import main.java.io.github.gotonode.compress.io.IO;

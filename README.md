@@ -7,11 +7,11 @@ In this project, you can compress files using either **Huffman coding** or **LZW
 * [Week 1 Report](docs/WEEK1.md)
 * [Week 2 Report](docs/WEEK2.md)
 
-#### The problem
+##### The problem
 
 To reduce the size of a file, and to be able to return the original file from the size-reduced file. This is also known as "lossless compression" (compared to "lossy comparison", which results in irrevocable data loss such as with JPEG files).
 
-#### Algorithms
+##### Algorithms
 
 Two different algorithms are compared in this project.
 
@@ -20,7 +20,7 @@ Two different algorithms are compared in this project.
 | Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
 | LZW | [source](src/main/java/io/github/gotonode/compress/algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
 
-#### Sample data
+##### Sample data
 
 You'll find sample data that you can use in the [data](data) folder. The contents of that folder are in the public domain.
 
