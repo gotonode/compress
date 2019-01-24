@@ -1,6 +1,6 @@
-package main.java.io.github.gotonode.compress.algorithms.Huffman;
+package io.github.gotonode.compress.algorithms.Huffman;
 
-import main.java.io.github.gotonode.compress.algorithms.CompressAlgorithms;
+import io.github.gotonode.compress.algorithms.CompressAlgorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,12 +10,13 @@ import java.util.PriorityQueue;
 
 /**
  * This class contains my personal Huffman coding implementation.
+ *
+ * This section will eventually contain more info.
 
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
  *
  * Sources:
  * - <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a> (Wikipedia)
- * - <a href="https://algs4.cs.princeton.edu/55compression/Huffman.java.html">Huffman.java</a> (Princeton University)
  *
  * @author gotonode (github.com/gotonode)
  */
@@ -108,16 +109,16 @@ public class Huffman implements CompressAlgorithms {
             out.append(map.get(c));
         }
 
-        //System.out.println(out);
+        System.out.println(out);
 
         Collections.sort(results);
         Collections.reverse(results);
 
         printTable();
 
-        //String decodedString = decode(out.toString());
+        String decodedString = decode(out.toString());
 
-        //System.out.println(decodedString);
+        System.out.println(decodedString);
     }
 
     private String decode(String s) {

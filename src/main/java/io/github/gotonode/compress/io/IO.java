@@ -1,6 +1,6 @@
-package main.java.io.github.gotonode.compress.io;
+package io.github.gotonode.compress.io;
 
-import main.java.io.github.gotonode.compress.ui.UiController;
+import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
 

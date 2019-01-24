@@ -1,7 +1,7 @@
-package main.java.io.github.gotonode.compress.algorithms;
+package io.github.gotonode.compress.algorithms;
 
 /**
- * This interface is used by both Huffman and LZW. If additional algorithms are added later, they should
+ * This interface is used by both Huffman and LZW. If additional io.github.gotonode.compress.algorithms are added later, they should
  * implement this interface fully.
  */
 public interface CompressAlgorithms {

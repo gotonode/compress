@@ -1,11 +1,11 @@
-package main.java.io.github.gotonode.compress.app;
+package io.github.gotonode.compress.app;
 
-import main.java.io.github.gotonode.compress.algorithms.Huffman.Huffman;
-import main.java.io.github.gotonode.compress.algorithms.LZW.LZW;
-import main.java.io.github.gotonode.compress.enums.Algorithms;
-import main.java.io.github.gotonode.compress.enums.Commands;
-import main.java.io.github.gotonode.compress.io.IO;
-import main.java.io.github.gotonode.compress.ui.UiController;
+import io.github.gotonode.compress.algorithms.Huffman.Huffman;
+import io.github.gotonode.compress.algorithms.LZW.LZW;
+import io.github.gotonode.compress.enums.Algorithms;
+import io.github.gotonode.compress.enums.Commands;
+import io.github.gotonode.compress.io.IO;
+import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
 import java.util.Arrays;
@@ -80,7 +80,12 @@ public class App {
 
     }
 
+    /**
+     * Asks the user for the input and output files, then compresses the input file into the output location. The
+     * used algorithm is specified as a parameter.
+     */
     private void processCompression(Algorithms algorithm) {
+
         uiController.printUsing(algorithm);
 
         File sourceFile = io.askForSourceFile(uiController);
@@ -104,6 +109,8 @@ public class App {
 
         // At this point, we have an input file we can read, and an output file we can write to.
 
+        long current = System.currentTimeMillis();
+
         switch (algorithm) {
 
             case HUFFMAN:
@@ -115,6 +122,21 @@ public class App {
                 lzw.compress();
                 break;
         }
+
+        long next = System.currentTimeMillis();
+
+        long time = next - current;
+
+        uiController.printCompressionSuccessful(algorithm.getName(), targetFile.getName());
+
+        long sourceFileSize = sourceFile.length() / 1024; // In kilobytes.
+        long targetFileSize = targetFile.length() / 1024;
+
+        double difference = Math.abs(Math.min(sourceFileSize, targetFileSize) / Math.max(sourceFileSize * 1d, targetFileSize));
+
+        uiController.printDifference(sourceFileSize, targetFileSize, difference);
+
+        uiController.printOperationTime(time);
     }
 
     /**
@@ -130,6 +152,10 @@ public class App {
             return;
         }
 
+        // TODO: Determine the used algorithm here.
+
+        Algorithms algorithm = Algorithms.HUFFMAN; // Temp!
+
         File targetFile = io.askForTargetFile(uiController);
 
         if (targetFile.exists() && !targetFile.canWrite()) {
@@ -139,7 +165,33 @@ public class App {
 
         // At this point, we have an input file we can read, and an output file we can write to.
 
-        uiController.printDecompressionSuccessful(targetFile.getName());
+        long current = System.currentTimeMillis();
+
+        switch (algorithm) {
+
+            case HUFFMAN:
+                Huffman huffman = new Huffman(sourceFile, targetFile);
+                huffman.decompress();
+                break;
+            case LZW:
+                LZW lzw = new LZW(sourceFile, targetFile);
+                lzw.decompress();
+                break;
+        }
+
+        long next = System.currentTimeMillis();
+
+        long time = next - current;
+
+        uiController.printDecompressionSuccessful(algorithm.getName(), targetFile.getName());
+
+        long sourceFileSize = sourceFile.length() / 1024; // In kilobytes.
+        long targetFileSize = targetFile.length() / 1024;
+
+        double difference = Math.abs(Math.min(sourceFileSize, targetFileSize) / Math.max(sourceFileSize * 1d, targetFileSize));
+
+        uiController.printDifference(sourceFileSize, targetFileSize, difference);
+        uiController.printOperationTime(time);
     }
 
     /**

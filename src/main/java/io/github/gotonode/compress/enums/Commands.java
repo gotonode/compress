@@ -1,5 +1,8 @@
-package main.java.io.github.gotonode.compress.enums;
+package io.github.gotonode.compress.enums;
 
+/**
+ * These are the commands available to the user. Using enums just makes everything simpler and neater.
+ */
 public enum Commands {
 
     EXIT('E'), COMPRESS_HUFFMAN('H'), COMPRESS_LZW('L'), BENCHMARK('B'), DECOMPRESS('D'), COMMANDS('X');

@@ -1,7 +1,7 @@
-package main.java.io.github.gotonode.compress.ui;
+package io.github.gotonode.compress.ui;
 
-import main.java.io.github.gotonode.compress.enums.Algorithms;
-import main.java.io.github.gotonode.compress.main.Main;
+import io.github.gotonode.compress.enums.Algorithms;
+import io.github.gotonode.compress.main.Main;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -35,12 +35,12 @@ public class UiController {
             String next = readLine(prompt.trim() + ":");
 
             if (next.isEmpty()) {
-                println("Please enter something.");
+                System.out.println("Please enter something.");
                 continue;
             }
 
             if (next.length() > 1) {
-                println("Please only enter 1 character.");
+                System.out.println("Please only enter 1 character.");
                 continue;
             }
 
@@ -56,7 +56,7 @@ public class UiController {
             }
 
             if (!found) {
-                println("Please enter a character from the following: " + Arrays.toString(allowedChars));
+                System.out.println("Please enter a character from the following: " + Arrays.toString(allowedChars));
             } else {
                 return input;
             }
@@ -64,13 +64,9 @@ public class UiController {
 
     }
 
-    public String readLine(String prompt) {
+    private String readLine(String prompt) {
         System.out.println(prompt.trim() + " "); // Trim is here just in case it already has a trailing space.
         return scanner.nextLine();
-    }
-
-    public void println(String input) {
-        System.out.println(input);
     }
 
     public void printGoodbye() {
@@ -106,7 +102,7 @@ public class UiController {
                 if (allowEmpty) {
                     break;
                 } else {
-                    println("Please write something.");
+                    System.out.println("Please write something.");
                 }
             } else {
                 break;
@@ -134,8 +130,20 @@ public class UiController {
         System.out.println("An error occurred trying to access that file. Maybe it doesn't exist or you don't have the necessary permissions?");
     }
 
-    public void printDecompressionSuccessful(String targetPath) {
-        System.out.println("Done! Decompression was successful, and your decompressed file is located at '" + targetPath + "'.");
+    public void printDecompressionSuccessful(String algorithmName, String targetPath) {
+        System.out.println("Done! Decompression with " + algorithmName.trim() + " was successful, and your decompressed file is located at '" + targetPath + "'.");
+    }
+
+    public void printCompressionSuccessful(String algorithmName, String targetPath) {
+        System.out.println("Done! Compression with " + algorithmName.trim() + " was successful, and your new and tiny file is located at '" + targetPath + "'.");
+
+    }
+    public void printDifference(long sourceBytes, long targetBytes, double difference) {
+        System.out.println("Your source file was " + sourceBytes + " kB, and your target file came out at " + targetBytes + " kB, which is a " + difference + " % difference!");
+    }
+
+    public void printOperationTime(long milliseconds) {
+        System.out.println("This operation took " + milliseconds + " milliseconds in total.");
     }
 
     public void printBenchmarking() {
@@ -149,4 +157,6 @@ public class UiController {
     public void printFilesCannotBeTheSame() {
         System.out.println("Your input and output files cannot be the same.");
     }
+
+
 }

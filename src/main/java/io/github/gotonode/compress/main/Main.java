@@ -1,8 +1,8 @@
-package main.java.io.github.gotonode.compress.main;
+package io.github.gotonode.compress.main;
 
-import main.java.io.github.gotonode.compress.app.App;
-import main.java.io.github.gotonode.compress.io.IO;
-import main.java.io.github.gotonode.compress.ui.UiController;
+import io.github.gotonode.compress.app.App;
+import io.github.gotonode.compress.io.IO;
+import io.github.gotonode.compress.ui.UiController;
 
 import java.util.Scanner;
 
@@ -27,5 +27,10 @@ public class Main {
         app.run();
 
         // Once this location has been reached, the program has terminated.
+    }
+
+    @Override
+    public String toString() {
+        return APP_NAME;
     }
 }

@@ -1,4 +1,4 @@
-package main.java.io.github.gotonode.compress.algorithms.Huffman;
+package io.github.gotonode.compress.algorithms.Huffman;
 
 /**
  * A leaf in the HuffmanTree contains a character (char primitive type)

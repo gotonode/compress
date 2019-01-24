@@ -1,6 +1,5 @@
-package test.java;
+package io.github.gotonode.compress.main;
 
-import main.java.io.github.gotonode.compress.main.Main;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
@@ -20,8 +19,17 @@ public class MainTest {
      * Tests that the app's name is correct.
      */
     @Test
-    public void testAppName() {
+    public void appNameTest() {
         String name = Main.APP_NAME;
         assertEquals(name, "Compress");
+    }
+
+    /**
+     * This test will cause an error if the Main class somehow can't be created.
+     */
+    @Test
+    public void mainTest() {
+        Main main = new Main();
+        assertEquals(main.toString(), "Compress");
     }
 }

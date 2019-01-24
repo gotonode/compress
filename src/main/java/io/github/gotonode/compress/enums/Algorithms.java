@@ -1,5 +1,8 @@
-package main.java.io.github.gotonode.compress.enums;
+package io.github.gotonode.compress.enums;
 
+/**
+ * All of the used algorithms are listed here.
+ */
 public enum Algorithms {
 
     HUFFMAN("Huffman"), LZW("Lempel–Ziv–Welch");

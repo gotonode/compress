@@ -1,4 +1,4 @@
-package main.java.io.github.gotonode.compress.algorithms.Huffman;
+package io.github.gotonode.compress.algorithms.Huffman;
 
 public class Result implements Comparable<Result> {
 
@@ -6,21 +6,22 @@ public class Result implements Comparable<Result> {
     private final int count;
     private final String code;
 
-    public Result(char value, int count, String code) {
+    Result(char value, int count, String code) {
+
         this.value = value;
         this.count = count;
         this.code = code;
     }
 
-    public char getValue() {
+    char getValue() {
         return value;
     }
 
-    public int getCount() {
+    int getCount() {
         return count;
     }
 
-    public String getCode() {
+    String getCode() {
         return code;
     }
 

@@ -3,7 +3,13 @@
 
 In this project, you can compress files using either **Huffman coding** or **LZW**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
-* [App Definition](docs/DEFINITION.md)
+App documentation:
+* [Manual](docs/MANUAL.md) (this might interest the general user the most)
+* [Definition](docs/DEFINITION.md) (what was planned)
+* [Implementation](docs/IMPLEMENTATION.md) (how it turned out)
+* [Testing](docs/TESTING.md) (how testing was done)
+
+Weekly reports:
 * [Week 1 Report](docs/WEEK1.md)
 * [Week 2 Report](docs/WEEK2.md)
 
@@ -13,12 +19,12 @@ To reduce the size of a file, and to be able to return the original file from th
 
 ##### Algorithms
 
-Two different algorithms are compared in this project.
+Two different io.github.gotonode.compress.algorithms are compared in this project.
 
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
-| Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
-| LZW | [source](src/main/java/io/github/gotonode/compress/algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
+| Huffman coding | [source](src/main/java/io/github/gotonode/compress/io.github.gotonode.compress.algorithms/Huffman.java) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
+| LZW | [source](src/main/java/io/github/gotonode/compress/io.github.gotonode.compress.algorithms/LZW.java) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
 
 ##### Sample data
 

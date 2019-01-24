@@ -1,4 +1,4 @@
-package main.java.io.github.gotonode.compress.algorithms.Huffman;
+package io.github.gotonode.compress.algorithms.Huffman;
 
 public class HuffmanNode extends HuffmanTree {
 
