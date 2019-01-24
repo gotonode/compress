@@ -1,6 +1,6 @@
 package io.github.gotonode.compress.algorithms.Huffman;
 
-import io.github.gotonode.compress.algorithms.CompressAlgorithms;
+import io.github.gotonode.compress.algorithms.CompressAlgorithm;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.PriorityQueue;
  *
  * @author gotonode (github.com/gotonode)
  */
-public class Huffman implements CompressAlgorithms {
+public class Huffman implements CompressAlgorithm {
 
     private final File source;
     private final File target;
@@ -124,7 +124,7 @@ public class Huffman implements CompressAlgorithms {
     private String decode(String s) {
 
         char[] chars = s.toCharArray();
-        String output = "";
+        StringBuilder output = new StringBuilder();
         int pos = 0;
 
         while (pos < chars.length){
@@ -133,10 +133,10 @@ public class Huffman implements CompressAlgorithms {
                 key += chars[pos];
                 pos++;
             }
-            output += mapInverse.get(key);
+            output.append(mapInverse.get(key));
         }
 
-        return output;
+        return output.toString();
     }
 
     private void printTable() {

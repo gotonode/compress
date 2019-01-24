@@ -8,9 +8,14 @@ import java.util.Scanner;
 
 public class Main {
 
+    // This is the name. Not to be confused with the UNIX tool that shares the same name.
     public static final String APP_NAME = "Compress";
+
+    // Newest version can be found here.
     public static final String APP_URL = "https://github.com/gotonode/compress/";
-    public static final int APP_VERSION = 2; // Per week numbering.
+
+    // Per week numbering. So week 3 will have a version number of 3 and so forth.
+    public static final int APP_VERSION = 2;
 
     public static void main(String[] args) {
 

@@ -1,6 +1,6 @@
 package io.github.gotonode.compress.algorithms.LZW;
 
-import io.github.gotonode.compress.algorithms.CompressAlgorithms;
+import io.github.gotonode.compress.algorithms.CompressAlgorithm;
 
 import java.io.File;
 
@@ -17,7 +17,7 @@ import java.io.File;
  *
  * @author gotonode (github.com/gotonode)
  */
-public class LZW implements CompressAlgorithms {
+public class LZW implements CompressAlgorithm {
 
     private final File source;
     private final File target;
