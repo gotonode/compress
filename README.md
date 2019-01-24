@@ -19,7 +19,7 @@ To reduce the size of a file, and to be able to return the original file from th
 
 ##### Algorithms
 
-Two different io.github.gotonode.compress.algorithms are compared in this project.
+Two different algorithms are compared in this project.
 
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
