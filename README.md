@@ -1,7 +1,7 @@
 # Compress
 *Compare Huffman coding and LZW*
 
-In this project, you can compress files using either **Huffman coding** or **LZW**. Decompression, as well as comparisons between the two algorithms, are also possible.
+In this project, you can compress files using either **Huffman coding** or **LZW (Lempel-Ziv-Welch)**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
 App documentation:
 * [Manual](docs/MANUAL.md) (this might interest the general user the most)
@@ -24,7 +24,7 @@ Two different algorithms are compared in this project.
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
 | Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/Huffman) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
-| LZW | [source](src/main/java/io/github/gotonode/compress/algorithms/LZW) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
+| LZW (Lempel-Ziv-Welch)| [source](src/main/java/io/github/gotonode/compress/algorithms/LZW) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
 
 ##### Sample data
 
