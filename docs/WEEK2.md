@@ -44,6 +44,8 @@ Rewriting of both Huffman and LZW will need to be done. At the present stage, th
 
 More tests will be added later when there's functionality to be tested (rather than just UI printing).
 
+Comments (especially Javadoc) will be added next week. Getters and setters do not get their own comments, but some other parts of code that aren't that straightforward will.
+
 ##### Hours used
 
 This week consumed 23 hours. But some of which was used watching videos on bitwise (etc) operations and practicing on paper (such as `>>`, `|`, `&`).
