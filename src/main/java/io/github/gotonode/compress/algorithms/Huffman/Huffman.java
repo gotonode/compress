@@ -10,11 +10,11 @@ import java.util.PriorityQueue;
 
 /**
  * This class contains my personal Huffman coding implementation.
- *
+ * <p>
  * This section will eventually contain more info.
-
+ * <p>
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
- *
+ * <p>
  * Sources:
  * - <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a> (Wikipedia)
  *
@@ -31,6 +31,7 @@ public class Huffman implements CompressAlgorithm {
 
     /**
      * Creates a new Huffman object. This is used to compress/decompress a file using Huffman coding.
+     *
      * @param source The file to be compressed/decompressed.
      * @param target The file to write the results of the compression/decompression to.
      */
@@ -72,7 +73,7 @@ public class Huffman implements CompressAlgorithm {
         for (int i = 0; i < frequencies.length; i++) {
             if (frequencies[i] > 0) {
                 // Now we have some copies of this specific character.
-                forest.offer(new HuffmanLeaf(frequencies[i], (char)i));
+                forest.offer(new HuffmanLeaf(frequencies[i], (char) i));
             }
         }
 
@@ -80,7 +81,7 @@ public class Huffman implements CompressAlgorithm {
             HuffmanTree alpha = forest.poll();
             HuffmanTree beta = forest.poll();
 
-            assert(alpha != null && beta != null);
+            assert (alpha != null && beta != null);
             forest.offer(new HuffmanNode(alpha, beta));
         }
 
@@ -127,7 +128,7 @@ public class Huffman implements CompressAlgorithm {
         StringBuilder output = new StringBuilder();
         int pos = 0;
 
-        while (pos < chars.length){
+        while (pos < chars.length) {
             String key = "";
             while (!(mapInverse.containsKey(key))) {
                 key += chars[pos];
@@ -150,7 +151,7 @@ public class Huffman implements CompressAlgorithm {
         if (huffmanTree instanceof HuffmanLeaf) {
 
             // This is a safe cast since the type is always the correct one.
-            HuffmanLeaf huffmanLeaf = (HuffmanLeaf)huffmanTree;
+            HuffmanLeaf huffmanLeaf = (HuffmanLeaf) huffmanTree;
 
             map.put(huffmanLeaf.getValue(), stringBuffer.toString());
             mapInverse.put(stringBuffer.toString(), huffmanLeaf.getValue());
@@ -175,3 +176,93 @@ public class Huffman implements CompressAlgorithm {
         }
     }
 }
+
+class HuffmanLeaf extends HuffmanTree {
+
+    private final char value;
+
+    public HuffmanLeaf(int freq, char value) {
+        super(freq);
+
+        this.value = value;
+    }
+
+    public char getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "HuffmanLeaf{" +
+                "value=" + value +
+                '}';
+    }
+}
+
+class HuffmanNode extends HuffmanTree {
+
+    private final HuffmanTree leftTree, rightTree;
+
+    public HuffmanNode(HuffmanTree leftTree, HuffmanTree rightTree) {
+
+        // Always call the super first.
+        super(leftTree.getFreq() + rightTree.getFreq());
+
+        this.leftTree = leftTree;
+        this.rightTree = rightTree;
+    }
+
+    public HuffmanTree getLeftTree() {
+        return leftTree;
+    }
+
+    public HuffmanTree getRightTree() {
+        return rightTree;
+    }
+
+    @Override
+    public String toString() {
+        return "HuffmanNode{" +
+                "leftTree=" + leftTree +
+                ", rightTree=" + rightTree +
+                '}';
+    }
+}
+
+abstract class HuffmanTree implements Comparable<HuffmanTree> {
+
+    private final int freq;
+
+    /**
+     * This package-private constructor creates a new HuffmanTree object.
+     *
+     * @param freq This tree's frequency.
+     */
+    HuffmanTree(int freq) {
+        this.freq = freq;
+    }
+
+    int getFreq() {
+        // Optionally add a debug print here to see when this is being read.
+        return this.freq;
+    }
+
+    /**
+     * Compares the two trees together.
+     *
+     * @param other The other tree to compare this tree to.
+     * @return An integer value that is either negative (< 0.0), exactly zero (0.0), or positive (> 0.0).
+     */
+    @Override
+    public int compareTo(HuffmanTree other) {
+        return this.freq - other.getFreq();
+    }
+
+    @Override
+    public String toString() {
+        return "HuffmanTree{" +
+                "freq=" + freq +
+                '}';
+    }
+}
+

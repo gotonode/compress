@@ -46,4 +46,4 @@ More tests will be added later when there's functionality to be tested (rather t
 
 ##### Hours used
 
-This week consumed 19 hours. But some of which was used watching videos on bitwise (etc) operations and practicing on paper (such as `>>`, `|`, `&`).
+This week consumed 23 hours. But some of which was used watching videos on bitwise (etc) operations and practicing on paper (such as `>>`, `|`, `&`).

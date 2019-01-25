@@ -6,13 +6,13 @@ import java.io.File;
 
 /**
  * This class contains my personal Lempel–Ziv–Welch implementation.
- *
+ * <p>
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
- *
+ * <p>
  * This section will eventually contain more info.
- *
+ * <p>
  * Sources:
- *
+ * <p>
  * - <a href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch">Lempel–Ziv–Welch</a> (Wikipedia)
  *
  * @author gotonode (github.com/gotonode)
@@ -24,6 +24,7 @@ public class LZW implements CompressAlgorithm {
 
     /**
      * Creates a new LZW object. This is used to compress/decompress a file using LZW.
+     *
      * @param source The file to be compressed/decompressed.
      * @param target The file to write the results of the compression/decompression to.
      */
@@ -53,43 +54,42 @@ public class LZW implements CompressAlgorithm {
     private String[] dictionary;
     private int position;
 
-    private String compress (String input) {
+    private String compress(String input) {
         init(input.length());
-        String out = "";
+        StringBuilder out = new StringBuilder();
         String w = "";
         char k;
         while (input.length() > 0) {
             k = input.charAt(0);
             input = input.substring(1);
-            if (dictionaryContains(w + k)) {
-                w+= k;
-            }
-            else {
-                out+=dictionaryCode(w);
-                dictionaryAdd(w+k);
+            if (has(w + k)) {
+                w += k;
+            } else {
+                out.append(getCode(w));
+                add(w + k);
                 w = k + "";
             }
         }
-        return out + dictionaryCode(w);
+        return out + getCode(w);
     }
 
     private String decompress(String input) {
         init(input.length() + 1);
-        String out = "";
+        StringBuilder out = new StringBuilder();
         String w = "";
-        int k = (int)input.charAt(0);
-        w = dictionaryCharacter(k);
+        int k = (int) input.charAt(0);
+        w = getChar(k);
         input = input.substring(1);
-        out += w;
+        out.append(w);
 
         while (input.length() > 0) {
-            k = (int)input.charAt(0);
+            k = (int) input.charAt(0);
             input = input.substring(1);
-            out += dictionaryCharacter(k);
-            dictionaryAdd(w + dictionaryCharacter(k).charAt(0));
-            w = dictionaryCharacter(k);
+            out.append(getChar(k));
+            add(w + getChar(k).charAt(0));
+            w = getChar(k);
         }
-        return out;
+        return out.toString();
     }
 
     private void init(int size) {
@@ -99,11 +99,11 @@ public class LZW implements CompressAlgorithm {
         position = 0;
     }
 
-    private boolean dictionaryContains(String s) {
-        return (dictionaryCode(s).length() > 0);
+    private boolean has(String s) {
+        return (getCode(s).length() > 0);
     }
 
-    private String dictionaryCode(String s) {
+    private String getCode(String s) {
         String code = "";
         char c;
         int i = 0;
@@ -112,7 +112,7 @@ public class LZW implements CompressAlgorithm {
         } else {
             while ((code.length() == 0) && (i < dictionary.length)) {
                 if ((dictionary[i] != null) && dictionary[i].equals(s)) {
-                    c = (char)(i+256);
+                    c = (char) (i + 256);
                     code = "" + c;
                 }
                 i++;
@@ -121,22 +121,22 @@ public class LZW implements CompressAlgorithm {
         }
     }
 
-    private String dictionaryCharacter(int code) {
+    private String getChar(int code) {
         if (code < 256) {
-            return "" + (char)code;
-        }
-        else if ((code-256) < dictionary.length) {
-            return dictionary[code-256];
+            return "" + (char) code;
+        } else if ((code - 256) < dictionary.length) {
+            return dictionary[code - 256];
         } else {
             return "";
         }
     }
 
-    private void dictionaryAdd(String s) {
+    private void add(String s) {
         dictionary[position] = s;
         position++;
     }
 
+    // TODO: REMOVE THIS WHEN DONE!
     public void runTest(String s) {
         String compressed = compress(s);
         System.out.println(compressed);
