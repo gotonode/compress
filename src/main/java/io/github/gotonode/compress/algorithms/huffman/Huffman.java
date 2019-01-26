@@ -1,6 +1,7 @@
 package io.github.gotonode.compress.algorithms.huffman;
 
 import io.github.gotonode.compress.algorithms.CompressAlgorithm;
+import io.github.gotonode.compress.algorithms.huffman.HuffmanNode;
 
 import java.io.File;
 
