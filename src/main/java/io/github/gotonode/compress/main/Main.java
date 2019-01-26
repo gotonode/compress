@@ -6,6 +6,9 @@ import io.github.gotonode.compress.ui.UiController;
 
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class Main {
 
     // This is the name. Not to be confused with the UNIX tool that shares the same name.
@@ -17,6 +20,12 @@ public class Main {
     // Per week numbering. So week 3 will have a version number of 3 and so forth.
     public static final int APP_VERSION = 3;
 
+    public static final int ALPHABET_SIZE = 256;
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);

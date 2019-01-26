@@ -1,7 +1,7 @@
 package io.github.gotonode.compress.app;
 
-import io.github.gotonode.compress.algorithms.Huffman.Huffman;
-import io.github.gotonode.compress.algorithms.LZW.LZW;
+import io.github.gotonode.compress.algorithms.huffman.Huffman;
+import io.github.gotonode.compress.algorithms.lzw.LZW;
 import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
 import io.github.gotonode.compress.io.IO;

@@ -1,4 +1,4 @@
-package io.github.gotonode.compress.algorithms.Huffman;
+package io.github.gotonode.compress.algorithms.lzw;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -8,9 +8,10 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-public class HuffmanTest {
+public class LZWTest {
 
     // THIS FILE IS A WORK IN PROGRESS. TESTS NON-FUNCTIONAL!
     //
@@ -29,24 +30,24 @@ public class HuffmanTest {
 
     @Before
     public void before() {
-        outputFile = new File(inputFile.getName() + ".huffman");
+        outputFile = new File(inputFile.getName() + ".lzw");
     }
 
     @Test
     public void huffmanCompressionTest() {
         File input = new File("data/lorem_ipsum.txt");
-        File output = new File("data/lorem_ipsum.huffman"); // This file is ignored in source control.
+        File output = new File("data/lorem_ipsum.lzw"); // This file is ignored in source control.
 
-        Huffman huffman = new Huffman(input, output);
-        assertFalse(huffman.compress());
+        LZW lzw = new LZW(input, output);
+        assertFalse(lzw.compress());
     }
 
     @Test
     public void huffmanDecompressionTest() {
-        File input = new File("data/lorem_ipsum.huffman");
+        File input = new File("data/lorem_ipsum.lzw");
         File output = new File("data/lorem_ipsum (temp).txt"); // This file is ignored in source control.
 
-        Huffman huffman = new Huffman(input, output);
-        assertFalse(huffman.decompress());
+        LZW lzw = new LZW(input, output);
+        assertFalse(lzw.decompress());
     }
 }

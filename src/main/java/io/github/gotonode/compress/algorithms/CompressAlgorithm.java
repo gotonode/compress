@@ -19,7 +19,7 @@ public interface CompressAlgorithm {
 
     /**
      * This has to implemented. It'll contain the name of the algorithm as well as the short names
-     * (e.g. "nice_picture.jpeg") for the input and output files.
+     * (e.g. "nice_picture.jpeg") for the input and output files. Primarily for debug purposes.
      */
     String toString();
 }

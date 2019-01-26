@@ -24,7 +24,7 @@ public class MainTest {
     @Test
     public void appNameTest() {
         String name = Main.APP_NAME;
-        assertEquals(name, "Compress");
+        assertEquals("Compress", name);
     }
 
     /**
@@ -33,6 +33,6 @@ public class MainTest {
     @Test
     public void mainTest() {
         Main main = new Main();
-        assertEquals(main.toString(), "Compress");
+        assertEquals("Compress", main.toString());
     }
 }

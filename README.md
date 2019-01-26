@@ -12,6 +12,7 @@ App documentation:
 Weekly reports:
 * [Week 1 Report](docs/WEEK1.md)
 * [Week 2 Report](docs/WEEK2.md)
+* [Week 3 Report](docs/WEEK3.md)
 
 ##### The problem
 
@@ -23,8 +24,8 @@ Two different algorithms are compared in this project.
 
 | algorithm | GitHub (source) | Wikipedia (info) | time complexity | space complexity |
 | :-------  | :----- | :--- | :-------------- | :--------------- |
-| Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/Huffman) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | TBD |
-| LZW (Lempel-Ziv-Welch)| [source](src/main/java/io/github/gotonode/compress/algorithms/LZW) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | TBD |
+| Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/huffman) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | O(n) |
+| LZW (Lempel-Ziv-Welch)| [source](src/main/java/io/github/gotonode/compress/algorithms/lzw) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | O(n) |
 
 ##### Sample data
 
