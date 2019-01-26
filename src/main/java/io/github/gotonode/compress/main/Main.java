@@ -15,7 +15,7 @@ public class Main {
     public static final String APP_URL = "https://github.com/gotonode/compress/";
 
     // Per week numbering. So week 3 will have a version number of 3 and so forth.
-    public static final int APP_VERSION = 2;
+    public static final int APP_VERSION = 3;
 
     public static void main(String[] args) {
 
