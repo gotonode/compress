@@ -113,9 +113,20 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
 
     @Override
     public int hashCode() {
+        // This is potentially an expensive, recursive call since all
+        // child nodes need to be hashed before this method can return
+        // its own hash code. Remove if this is not needed.
         return Objects.hash(value, weight, leftNode, rightNode);
     }
 
+    /**
+     * Compares two HuffmanNode-objects together. This is used by the PriorityQueue
+     * structure to order nodes in order of their respective weights.
+     *
+     * @param huffmanNode The HuffmanNode to compare this node to.
+     * @return An integer value that is either greater than zero, exactly zero
+     * or less than zero.
+     */
     @Override
     public int compareTo(HuffmanNode huffmanNode) {
         return this.weight - huffmanNode.getWeight();

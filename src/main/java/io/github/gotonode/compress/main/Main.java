@@ -22,6 +22,9 @@ public class Main {
 
     public static final int ALPHABET_SIZE = 256;
 
+    public static final int LEFT_TREE_BINARY_VALUE = 0;
+    public static final int RIGHT_TREE_BINARY_VALUE = 1;
+
     /**
      *
      * @param args
