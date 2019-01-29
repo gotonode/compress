@@ -10,7 +10,7 @@ FINALLY! This week has been a big binary hurdle! Let's just say that hours upon 
 
 I started working on Huffman immediately on Saturday, and only now it is complete.
 
-So Huffman is working, and I just ran 10,000 random binary files through it (compressed + decompress) and compared that the decompressed file was identical to the original file.
+So Huffman is working, and I just ran 10,000 random binary files through it (compress + decompress) and compared that the decompressed file was identical to the original file.
 
 ##### What I learned this week
 
@@ -26,7 +26,7 @@ I also used Apache Common's IO module. It's only for testing, so I don't think I
 
 How to split up tests on my Huffman coding, since I'd of course like to test compression and decompression in a different method, but how can one test decompression if there's nothing to decompress. So first I'll have to compress something; or, alternatively, supply test data with my program (but I'd like to avoid this and generate all of them on the fly).
 
-I added a bit 0 into the beginning of the file to indicate it's a Huffman coded file, and a bit 1 for LZW files. An alternative is to ask the user each time which algorithm was used. But I'm not sure adding that bit is a good thing. But it seems to be a better idea than to constantly bother the user.
+I added a bit 0 into the beginning of the file to indicate it's a Huffman coded file, and a bit 1 for LZW files. An alternative is to ask the user each time which algorithm was used. But I'm not sure adding that bit is a good thing.
 
 ##### What I'll do next
 
@@ -36,4 +36,4 @@ I haven't commented every important part so I'll go over all of my code and add 
 
 ##### Hours used
 
-So far I used 22 this week hours trying to get Huffman and binary reading/writing to work. But to be fair, I've never done actual binary reading/writing directly, only single characters at most.
+So far I used 22 hours this week trying to get Huffman and binary reading/writing to work. But to be fair, I've never done actual binary reading/writing directly, only single characters at most.
