@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 public class MainTest {
 	
 	// MORE TESTS COMING SOON! Once I've got something that can actually be tested
-	// in a meaningful way. I'll expect week 3 to introduce real unit tests.
+	// in a meaningful way. I'll expect week 4 to introduce real unit tests.
 
     /**
      * A sample test.

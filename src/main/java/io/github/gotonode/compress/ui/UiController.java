@@ -65,7 +65,7 @@ public class UiController {
     }
 
     private String readLine(String prompt) {
-        System.out.println(prompt.trim() + " "); // Trim is here just in case it already has a trailing space.
+        System.out.print(prompt.trim() + " "); // Trim is here just in case it already has a trailing space.
         return scanner.nextLine();
     }
 

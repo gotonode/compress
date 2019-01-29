@@ -25,6 +25,11 @@ public class Main {
     public static final int LEFT_TREE_BINARY_VALUE = 0;
     public static final int RIGHT_TREE_BINARY_VALUE = 1;
 
+    // Used by the binary write and read tools. Preferably do not change this value.
+    public static final int BITS_IN_A_BYTE = 8;
+
+    public static final boolean DEBUG = false;
+
     /**
      *
      * @param args

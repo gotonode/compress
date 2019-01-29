@@ -5,6 +5,8 @@ out
 TEMP
 *.huffman
 *.lzw
+.gradle
+build
 
 # Compiled class file
 *.class
