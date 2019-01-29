@@ -31,7 +31,7 @@ public class Main {
     // We're using a codeword of 12, as that's the most common one.
     public static final int CODEWORD_WIDTH = 12;
 
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     /**
      *

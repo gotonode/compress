@@ -380,7 +380,7 @@ public class Huffman implements CompressAlgorithm {
             binaryWriteTool.writeOneBit();
 
             // Writes the current character's code.
-            binaryWriteTool.writeInt(charCode);
+            binaryWriteTool.write(charCode);
 
         } else {
             // Writes a '0'.
