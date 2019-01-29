@@ -56,23 +56,24 @@ public class HuffmanTest {
     }
 
     /**
-     * This is a very verbose test on the Huffman coding.
+     * This is a very verbose test on the Huffman coding. It's now easy to
+     * change the code and run this test to see if it broke it somehow.
      * @throws IOException Only when IO fails somehow.
      */
     @Test
     public void huffmanTestVerbose() throws IOException {
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 10; i++) {
 
             _Generic generic = new _Generic();
 
-            //System.out.println("Working directory: " + tempFolder.getRoot());
+            System.out.println("Working directory: " + tempFolder.getRoot());
 
             File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
 
-            generic.generateBinaryFile(input);
+            generic.generateTextFile(input);
 
-            //System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
+            System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
 
             File output = new File(input.getAbsolutePath() + ".huffman");
 
@@ -80,7 +81,7 @@ public class HuffmanTest {
 
             huffmanCompression.compress();
 
-            //System.out.println("Compressed the TXT file into " + output.getAbsolutePath());
+            System.out.println("Compressed the TXT file into " + output.getAbsolutePath());
 
             File finalOutput = new File(input.getAbsolutePath() + ".txt");
 
@@ -88,16 +89,16 @@ public class HuffmanTest {
 
             huffmanDecompression.decompress();
 
-            //System.out.println("Decompressed the compressed TXT file into " + finalOutput.getAbsolutePath());
+            System.out.println("Decompressed the compressed TXT file into " + finalOutput.getAbsolutePath());
 
             boolean filesIdentical = generic.checkIdenticalFiles(input, finalOutput);
 
-            //System.out.print("The original and the decompressed files are: ");
+            System.out.print("The original and the decompressed files are: ");
 
             if (filesIdentical) {
-                //System.out.println("IDENTICAL (this is a good thing)");
+                System.out.println("IDENTICAL (this is a good thing)");
             } else {
-                //System.out.println("DIFFERENT (something's not working right)");
+                System.out.println("DIFFERENT (something's not working right)");
             }
 
             assertTrue(filesIdentical);

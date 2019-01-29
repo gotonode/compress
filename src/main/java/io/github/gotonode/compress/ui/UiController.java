@@ -159,4 +159,7 @@ public class UiController {
     }
 
 
+    public void printAlgorithmDetected(String name) {
+        System.out.println("It seems that this file was compressed with " + name.trim() + ".");
+    }
 }

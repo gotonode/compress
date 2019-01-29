@@ -26,6 +26,8 @@ I also used Apache Common's IO module. It's only for testing, so I don't think I
 
 How to split up tests on my Huffman coding, since I'd of course like to test compression and decompression in a different method, but how can one test decompression if there's nothing to decompress. So first I'll have to compress something; or, alternatively, supply test data with my program (but I'd like to avoid this and generate all of them on the fly).
 
+I added a bit 0 into the beginning of the file to indicate it's a Huffman coded file, and a bit 1 for LZW files. An alternative is to ask the user each time which algorithm was used. But I'm not sure adding that bit is a good thing. But it seems to be a better idea than to constantly bother the user.
+
 ##### What I'll do next
 
 Next week I'll implement LZW. I already understand how it works (creating a dictionary of fixed size elements from variable length data). Because I've already created my binary reader and binary writer, my hope is that I can use them directly with with the LZW (only minimal changes).

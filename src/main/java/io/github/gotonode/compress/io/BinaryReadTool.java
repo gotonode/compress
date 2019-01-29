@@ -10,7 +10,7 @@ public class BinaryReadTool {
     private int freeSlots = 0; // How much space is left.
     private int bitBuffer = 0; // Bits waiting to be flushed.
 
-    public BinaryReadTool(File file) throws FileNotFoundException, IOException {
+    public BinaryReadTool(File file) throws IOException {
 
         FileInputStream fileInputStream = new FileInputStream(file);
 
@@ -38,17 +38,28 @@ public class BinaryReadTool {
 
     public char readChar() throws IOException {
         if (freeSlots == Main.BITS_IN_A_BYTE) {
+
             int temp = bitBuffer;
+
             fill();
+
             return (char) (temp & 0xff);
+
         } else {
+
             int temp = bitBuffer;
+
             temp <<= (Main.BITS_IN_A_BYTE - freeSlots);
+
             int oldFreeSlots = freeSlots;
+
             fill();
+
             freeSlots = oldFreeSlots;
+
             temp |= (bitBuffer >>> freeSlots);
-            return (char)(temp & 0xff);
+
+            return (char) (temp & 0xff);
         }
     }
 
@@ -69,8 +80,7 @@ public class BinaryReadTool {
 
         for (int i = 0; i < Main.CODEWORD_WIDTH; i++) {
             output <<= 1;
-            boolean bit = readBool();
-            if (bit == true) {
+            if (readBool()) {
                 output |= 1;
             }
         }

@@ -6,7 +6,6 @@ import io.github.gotonode.compress.io.BinaryWriteTool;
 import io.github.gotonode.compress.main.Main;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.PriorityQueue;
@@ -44,9 +43,7 @@ public class Huffman implements CompressAlgorithm {
         try {
             this.binaryReadTool = new BinaryReadTool(source);
             this.binaryWriteTool = new BinaryWriteTool(target);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -79,7 +76,24 @@ public class Huffman implements CompressAlgorithm {
         int dataLength = input.length();
 
         if (dataLength <= 0) {
-            throw new RuntimeException("Running with empty data.");
+            throw new RuntimeException("That file was empty. Try another one?");
+        }
+
+        // Write a bit to indicate that this file is Huffman coded.
+        try {
+            binaryWriteTool.writeZeroBit();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+
+        // Write the length of the data into the output file. This
+        // is measured in bytes (8 bits).
+        try {
+            binaryWriteTool.writeInt(dataLength);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            return false;
         }
 
         char[] characters = input.toCharArray();
@@ -133,15 +147,6 @@ public class Huffman implements CompressAlgorithm {
             return false;
         }
 
-        // After the tree, we'll write the length of the data into
-        // the output file. This is measured in bytes (8 bits).
-        try {
-            binaryWriteTool.writeInt(dataLength);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-            return false;
-        }
-
         // Iterate over each character in the input data, looking up the binary
         // representation of it and writing it to the output stream.
         //
@@ -158,10 +163,6 @@ public class Huffman implements CompressAlgorithm {
             // varies from file to file, and is based on the character's respective
             // weights in the data.
             String binaryRepresentation = table[character];
-
-            if (Main.DEBUG) {
-                //System.out.println(character + "=" + binaryRepresentation);
-            }
 
             // Loop through the binary representation of the character and write
             // it to the output stream, one bit at a time (the stream is buffered).
@@ -198,16 +199,17 @@ public class Huffman implements CompressAlgorithm {
     @Override
     public boolean decompress() {
 
-        HuffmanNode huffmanRootNode = null;
-
+        // Read the first bit in. We don't do anything with it here. It
+        // was used to determine what algorithm was used to compress this
+        // file.
         try {
-            huffmanRootNode = readTreeFromFile();
+            binaryReadTool.readBool();
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
 
-        // We'll read (as a 32-bit integer) the data area's length from the file.
+        // We'll read (as a 32-bit integer) the data area's length from
+        // the file. A compressed file always begins with this byte.
         Integer dataLength = null;
 
         try {
@@ -217,6 +219,19 @@ public class Huffman implements CompressAlgorithm {
             return false;
         }
 
+        HuffmanNode huffmanRootNode = null;
+
+        // After the data length, we'll read the actual Huffman tree
+        // from the compressed file.
+        try {
+            huffmanRootNode = readTreeFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Now that we have the tree, we can start decompressing the
+        // the data and writing the characters to output as we go.
         try {
             for (int i = 0; i < dataLength; i++) {
                 // Start from the root node.
@@ -224,8 +239,7 @@ public class Huffman implements CompressAlgorithm {
 
                 // Loop until we reach a leaf.
                 while (!huffmanNode.isLeafNode()) {
-                    boolean bit = binaryReadTool.readBool();
-                    if (bit == true) {
+                    if (binaryReadTool.readBool()) {
                         // Move to the right subnode.
                         huffmanNode = huffmanNode.getRightNode();
                     } else {
@@ -268,10 +282,10 @@ public class Huffman implements CompressAlgorithm {
 
         if (leafNode) {
             char character = binaryReadTool.readChar();
-            HuffmanNode huffmanNode = new HuffmanNode(character, -1, null, null);
+            HuffmanNode huffmanNode = new HuffmanNode(character, null);
             return huffmanNode;
         } else {
-            HuffmanNode huffmanNode = new HuffmanNode('\0', -1, readTreeFromFile(), readTreeFromFile());
+            HuffmanNode huffmanNode = new HuffmanNode(null, null, readTreeFromFile(), readTreeFromFile());
             return huffmanNode;
         }
     }
@@ -316,7 +330,7 @@ public class Huffman implements CompressAlgorithm {
 
             int combinedNodeWeight = (leftNodeWeight + rightNodeWeight);
 
-            HuffmanNode newNode = new HuffmanNode('\0', combinedNodeWeight, leftNode, rightNode);
+            HuffmanNode newNode = new HuffmanNode(null, combinedNodeWeight, leftNode, rightNode);
 
             // The newly created tree ("node"), which has combined the two previous trees
             // is added to the queue.

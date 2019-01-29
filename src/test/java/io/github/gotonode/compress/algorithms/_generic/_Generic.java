@@ -19,8 +19,7 @@ public class _Generic {
     private final int size = FILE_SIZE;
 
     public _Generic() {
-        //random = new Random(RANDOM_SEED);
-        random = new Random();
+        random = new Random(RANDOM_SEED);
     }
 
     /**

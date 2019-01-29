@@ -36,11 +36,16 @@ public class BinaryWriteTool {
     private void writeByte(int value) throws IOException {
         
         if (freeSlots == 0) {
+
             bufferedOutputStream.write(value);
+
         } else {
+
             for (int i = 0; i < BITS_IN_A_BYTE; i++) {
+
                 boolean bit = ((value >> (BITS_IN_A_BYTE - i - 1)) & 1) == 1;
-                if (bit == true) {
+
+                if (bit) {
                     writeOneBit();
                 } else {
                     writeZeroBit();
@@ -63,9 +68,11 @@ public class BinaryWriteTool {
     }
 
     public void write(int value) throws IOException {
+
         for (int i = 0; i < Main.BITS_IN_A_BYTE; i++) {
+
             boolean bit = ((value >>> (Main.BITS_IN_A_BYTE - i - 1)) & 1) == 1;
-            if (bit == true) {
+            if (bit) {
                 writeOneBit();
             } else {
                 writeZeroBit();

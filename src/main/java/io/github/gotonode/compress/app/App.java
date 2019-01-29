@@ -4,10 +4,12 @@ import io.github.gotonode.compress.algorithms.huffman.Huffman;
 import io.github.gotonode.compress.algorithms.lzw.LZW;
 import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
+import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.IO;
 import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -152,9 +154,26 @@ public class App {
             return;
         }
 
-        // TODO: Determine the used algorithm here.
+        boolean algorithmType = false;
 
-        Algorithms algorithm = Algorithms.HUFFMAN; // Temp!
+        try {
+            BinaryReadTool binaryReadTool = new BinaryReadTool(sourceFile);
+            algorithmType = binaryReadTool.readBool();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Algorithms algorithm = null;
+
+        if (algorithmType == false) {
+            algorithm = Algorithms.HUFFMAN;
+        } else {
+            algorithm = Algorithms.LZW;
+        }
+
+        String name = algorithm.getName();
+
+        uiController.printAlgorithmDetected(name);
 
         File targetFile = io.askForTargetFile(uiController);
 

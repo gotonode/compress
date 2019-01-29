@@ -17,7 +17,7 @@ import java.util.Objects;
 public class HuffmanNode implements Comparable<HuffmanNode> {
 
     // The character in question. Only one node in a tree can have the same character.
-    private char value;
+    private Character value;
 
     // How many times this character appears in the data. Also called a frequency.
     private Integer weight;
@@ -35,7 +35,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      * @param leftNode  A non-null left node (marked as binary 0).
      * @param rightNode A non-null right node (marked as binary 1).
      */
-    public HuffmanNode(char value, Integer weight, HuffmanNode leftNode, HuffmanNode rightNode) {
+    public HuffmanNode(Character value, Integer weight, HuffmanNode leftNode, HuffmanNode rightNode) {
         this.value = value;
         this.weight = weight;
         this.leftNode = leftNode;
