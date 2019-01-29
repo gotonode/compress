@@ -1,5 +1,7 @@
 package io.github.gotonode.compress.io;
 
+import io.github.gotonode.compress.main.Main;
+
 import java.io.*;
 
 public class BinaryWriteTool {
@@ -57,6 +59,17 @@ public class BinaryWriteTool {
         freeSlots++;
         if (freeSlots == BITS_IN_A_BYTE) {
             clear();
+        }
+    }
+
+    public void write(int value) throws IOException {
+        for (int i = 0; i < Main.BITS_IN_A_BYTE; i++) {
+            boolean bit = ((value >>> (Main.BITS_IN_A_BYTE - i - 1)) & 1) == 1;
+            if (bit == true) {
+                writeOneBit();
+            } else {
+                writeZeroBit();
+            }
         }
     }
 

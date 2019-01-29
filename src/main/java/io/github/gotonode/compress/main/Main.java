@@ -28,7 +28,10 @@ public class Main {
     // Used by the binary write and read tools. Preferably do not change this value.
     public static final int BITS_IN_A_BYTE = 8;
 
-    public static final boolean DEBUG = false;
+    // We're using a codeword of 12, as that's the most common one.
+    public static final int CODEWORD_WIDTH = 12;
+
+    public static final boolean DEBUG = true;
 
     /**
      *

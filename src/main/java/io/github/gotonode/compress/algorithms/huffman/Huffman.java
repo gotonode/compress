@@ -42,8 +42,11 @@ public class Huffman implements CompressAlgorithm {
         this.source = source;
         this.target = target;
         try {
+            this.binaryReadTool = new BinaryReadTool(source);
             this.binaryWriteTool = new BinaryWriteTool(target);
         } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
     }
@@ -65,10 +68,19 @@ public class Huffman implements CompressAlgorithm {
     @Override
     public boolean compress() {
 
-        // TODO: Replace this with the actual data.
-        String input = "TESTING_HUFFMAN";
+        String input = null;
+        try {
+            input = binaryReadTool.readData();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
 
         int dataLength = input.length();
+
+        if (dataLength <= 0) {
+            throw new RuntimeException("Running with empty data.");
+        }
 
         char[] characters = input.toCharArray();
 
@@ -97,16 +109,17 @@ public class Huffman implements CompressAlgorithm {
         // This will build the table used to find the binary representation
         // (in String format) quickly by means of the array's index.
         String[] table = new String[Main.ALPHABET_SIZE];
+
         buildTable(table, rootHuffmanNode, "");
 
         if (Main.DEBUG) {
-//            for (int i = 0; i < table.length; i++) {
-//                String representation = table[i];
-//                if (representation != null) {
-//                    // Example: 65=1010
-//                    System.out.println(i + "=" + representation);
-//                }
-//            }
+            for (int i = 0; i < table.length; i++) {
+                String representation = table[i];
+                if (representation != null) {
+                    // Example: 65=1010
+                    System.out.println(i + "=" + representation);
+                }
+            }
         }
 
         // Print the binary tree to the output file. This is
@@ -184,7 +197,83 @@ public class Huffman implements CompressAlgorithm {
 
     @Override
     public boolean decompress() {
-        return false;
+
+        HuffmanNode huffmanRootNode = null;
+
+        try {
+            huffmanRootNode = readTreeFromFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // We'll read (as a 32-bit integer) the data area's length from the file.
+        Integer dataLength = null;
+
+        try {
+            dataLength = binaryReadTool.readInt();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        try {
+            for (int i = 0; i < dataLength; i++) {
+                // Start from the root node.
+                HuffmanNode huffmanNode = huffmanRootNode;
+
+                // Loop until we reach a leaf.
+                while (!huffmanNode.isLeafNode()) {
+                    boolean bit = binaryReadTool.readBool();
+                    if (bit == true) {
+                        // Move to the right subnode.
+                        huffmanNode = huffmanNode.getRightNode();
+                    } else {
+                        // Move to the left subnode.
+                        huffmanNode = huffmanNode.getLeftNode();
+                    }
+                }
+
+                binaryWriteTool.write(huffmanNode.getValue());
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+        try {
+            binaryWriteTool.flushAndClose();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+
+        // At this point, everything went well and we can return
+        // a true boolean value to mark the success.
+        return true;
+    }
+
+    /**
+     * This recursive method reads binary data from the input file and constructs a
+     * Huffman tree based on it. First bit tells if it's a leaf node or not, then
+     * we'll read additional data such as the character itself.
+     * @return The fully constructed Huffman tree.
+     * @throws IOException If there's an error reading or constructing the tree.
+     */
+    private HuffmanNode readTreeFromFile() throws IOException {
+
+        // The first bit tells if this is a leaf or not.
+        boolean leafNode = binaryReadTool.readBool();
+
+        if (leafNode) {
+            char character = binaryReadTool.readChar();
+            HuffmanNode huffmanNode = new HuffmanNode(character, -1, null, null);
+            return huffmanNode;
+        } else {
+            HuffmanNode huffmanNode = new HuffmanNode('\0', -1, readTreeFromFile(), readTreeFromFile());
+            return huffmanNode;
+        }
     }
 
     /**
@@ -294,7 +383,6 @@ public class Huffman implements CompressAlgorithm {
             binaryWriteTool.writeInt(charCode);
 
         } else {
-
             // Writes a '0'.
             binaryWriteTool.writeZeroBit();
 

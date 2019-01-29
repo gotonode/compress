@@ -8,6 +8,7 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class HuffmanTest {
@@ -39,15 +40,15 @@ public class HuffmanTest {
 
         Huffman huffman = new Huffman(input, output);
         boolean a = huffman.compress();
-        assertFalse(a);
+        assertTrue(a);
     }
 
     @Test
     public void huffmanDecompressionTest() {
-//        File input = new File("data/lorem_ipsum.huffman");
-//        File output = new File("data/lorem_ipsum (temp).txt"); // This file is ignored in source control.
-//
-//        Huffman huffman = new Huffman(input, output);
-//        assertFalse(huffman.decompress());
+        File input = new File("data/lorem_ipsum.huffman");
+        File output = new File("data/lorem_ipsum (temp).txt"); // This file is ignored in source control.
+
+        Huffman huffman = new Huffman(input, output);
+        assertTrue(huffman.decompress());
     }
 }
