@@ -10,16 +10,22 @@ public class _Generic {
     // You can change this if you want. A seed should be used so the created files
     // are deterministic in a "random" way. What this means is that each time
     // the code is run, you'd get the exact same generated files.
-    public static final int RANDOM_SEED = 1337;
+    private static final int RANDOM_SEED = 1337;
 
-    public static final int FILE_SIZE = 8192;
+    private static final boolean USE_SEED = false;
+
+    private static final int MEGABYTE = 1048576;
+
+    private static final int FILE_SIZE = 8192;
 
     private Random random;
 
-    private final int size = FILE_SIZE;
-
     public _Generic() {
-        random = new Random(RANDOM_SEED);
+        if (USE_SEED) {
+            random = new Random(RANDOM_SEED);
+        } else {
+            random = new Random();
+        }
     }
 
     /**
@@ -31,7 +37,7 @@ public class _Generic {
 
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path.getAbsolutePath()));
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < FILE_SIZE; i++) {
             bufferedWriter.write(getRandomChar());
         }
 
@@ -49,7 +55,7 @@ public class _Generic {
 
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < FILE_SIZE; i++) {
             bufferedOutputStream.write(getRandomByte());
         }
 
