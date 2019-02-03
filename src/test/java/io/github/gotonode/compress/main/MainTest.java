@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class MainTest {
 	
@@ -33,6 +34,6 @@ public class MainTest {
     @Test
     public void mainTest() {
         Main main = new Main();
-        assertEquals("Compress", main.toString());
+        assertFalse(main.toString().isEmpty());
     }
 }
