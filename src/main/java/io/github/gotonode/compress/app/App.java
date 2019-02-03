@@ -6,6 +6,7 @@ import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
 import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.IO;
+import io.github.gotonode.compress.main.Main;
 import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
@@ -36,7 +37,8 @@ public class App {
         uiController.printInstructions();
 
         // Get a list of available commands from the enum.
-        Character[] availableCommands = Arrays.stream(Commands.values()).map(a -> a.getCommand()).toArray(Character[]::new);
+        Character[] availableCommands = Arrays.stream(
+                Commands.values()).map(Commands::getCommand).toArray(Character[]::new);
 
         // This is the main loop for the app. It won't break until explicitly told to do so via the EXIT-command.
         while (appRunning) {
@@ -48,7 +50,10 @@ public class App {
 
             // This line of code returns a "Commands" enum, as dictated by "character". For an example, 'L' returns
             // a Commands.LIST and so forth.
-            Commands command = Arrays.stream(Commands.values()).filter(a -> a.getCommand() == character).findFirst().get();
+            Commands command = Arrays.stream(Commands.values())
+                    .filter(a -> a.getCommand() == character)
+                    .findFirst()
+                    .get();
 
             switch (command) {
 
@@ -75,8 +80,10 @@ public class App {
 
                 case COMMANDS:
                     uiController.printInstructions();
-                    uiController.printEmptyLine();
                     break;
+
+                default:
+                    throw new IllegalArgumentException();
             }
         }
 
@@ -123,18 +130,21 @@ public class App {
                 LZW lzw = new LZW(sourceFile, targetFile);
                 lzw.compress();
                 break;
+
+            default:
+                throw new IllegalArgumentException();
         }
 
         long next = System.currentTimeMillis();
 
         long time = next - current;
 
-        uiController.printCompressionSuccessful(algorithm.getName(), targetFile.getName());
+        uiController.printCompressionSuccessful(algorithm, targetFile.getName());
 
         long sourceFileSize = sourceFile.length() / 1024; // In kilobytes.
         long targetFileSize = targetFile.length() / 1024;
 
-        double difference = Math.abs(Math.min(sourceFileSize, targetFileSize) / Math.max(sourceFileSize * 1d, targetFileSize));
+        double difference = calculateDifference(sourceFileSize, targetFileSize);
 
         uiController.printDifference(sourceFileSize, targetFileSize, difference);
 
@@ -154,26 +164,27 @@ public class App {
             return;
         }
 
-        boolean algorithmType = false;
+        boolean algorithmBitCode = false;
+        int decompressedDataLength = 0;
 
         try {
             BinaryReadTool binaryReadTool = new BinaryReadTool(sourceFile);
-            algorithmType = binaryReadTool.readBool();
+            algorithmBitCode = binaryReadTool.readBool();
+            decompressedDataLength = binaryReadTool.readInt();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Algorithms algorithm = null;
+        Algorithms algorithm;
 
-        if (algorithmType == false) {
-            algorithm = Algorithms.HUFFMAN;
-        } else {
+        if (algorithmBitCode) {
             algorithm = Algorithms.LZW;
+        } else {
+            algorithm = Algorithms.HUFFMAN;
         }
 
-        String name = algorithm.getName();
-
-        uiController.printAlgorithmDetected(name);
+        uiController.printAlgorithmDetected(algorithm);
+        uiController.printDecompressedDataLength(decompressedDataLength / Main.BITS_IN_A_KILOBYTE);
 
         File targetFile = io.askForTargetFile(uiController);
 
@@ -196,18 +207,20 @@ public class App {
                 LZW lzw = new LZW(sourceFile, targetFile);
                 lzw.decompress();
                 break;
+            default:
+                throw new IllegalArgumentException();
         }
 
         long next = System.currentTimeMillis();
 
         long time = next - current;
 
-        uiController.printDecompressionSuccessful(algorithm.getName(), targetFile.getName());
+        uiController.printDecompressionSuccessful(algorithm, targetFile.getName());
 
-        long sourceFileSize = sourceFile.length() / 1024; // In kilobytes.
-        long targetFileSize = targetFile.length() / 1024;
+        long sourceFileSize = sourceFile.length() / Main.BITS_IN_A_KILOBYTE;
+        long targetFileSize = targetFile.length() / Main.BITS_IN_A_KILOBYTE;
 
-        double difference = Math.abs(Math.min(sourceFileSize, targetFileSize) / Math.max(sourceFileSize * 1d, targetFileSize));
+        double difference = calculateDifference(sourceFileSize, targetFileSize);
 
         uiController.printDifference(sourceFileSize, targetFileSize, difference);
         uiController.printOperationTime(time);
@@ -228,6 +241,86 @@ public class App {
             uiController.printFileError();
             return;
         }
+
+        uiController.printEmptyLine();
+
+        long[] huffmanBenchmarkResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
+        long[] lzwBenchmarkResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
+
+        long huffmanCompressionTime = huffmanBenchmarkResults[0];
+        long lzwCompressionTime = lzwBenchmarkResults[0];
+
+        long huffmanDecompressionTime = huffmanBenchmarkResults[1];
+        long lzwDecompressionTime = lzwBenchmarkResults[1];
+
+        double compressionDifference = calculateDifference(huffmanCompressionTime, lzwCompressionTime);
+        double decompressionDifference = calculateDifference(huffmanDecompressionTime, lzwDecompressionTime);
+
+        uiController.printCompressionResultsHeader();
+
+        uiController.printCompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanCompressionTime);
+        uiController.printCompressionBenchmarkResults(Algorithms.LZW, lzwCompressionTime);
+
+        if (huffmanCompressionTime < lzwCompressionTime) {
+            uiController.printCompressionTimeWinner(Algorithms.HUFFMAN);
+        } else if (huffmanCompressionTime > lzwCompressionTime) {
+            uiController.printCompressionTimeWinner(Algorithms.LZW);
+        } else {
+            uiController.printEqualCompressionTime();
+        }
+
+        uiController.printEmptyLine();
+
+        uiController.printDecompressionResultsHeader();
+
+        uiController.printDecompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanDecompressionTime);
+        uiController.printDecompressionBenchmarkResults(Algorithms.LZW, lzwDecompressionTime);
+
+        if (huffmanDecompressionTime < lzwDecompressionTime) {
+            uiController.printDecompressionTimeWinner(Algorithms.HUFFMAN);
+        } else if (huffmanDecompressionTime > lzwDecompressionTime) {
+            uiController.printDecompressionTimeWinner(Algorithms.LZW);
+        } else {
+            uiController.printEqualDecompressionTime();
+        }
+
+        uiController.printEmptyLine();
+
+        long originalFileSize = sourceFile.length() / Main.BITS_IN_A_KILOBYTE;
+
+        long huffmanCompressedFileSize = huffmanBenchmarkResults[2] / Main.BITS_IN_A_KILOBYTE;
+        long lzwCompressedFileSize = lzwBenchmarkResults[2] / Main.BITS_IN_A_KILOBYTE;
+
+        double huffmanDifference = calculateDifference(huffmanCompressedFileSize, originalFileSize);
+        double lzwDifference = calculateDifference(lzwCompressedFileSize, originalFileSize);
+
+        uiController.printOriginalFileSize(originalFileSize);
+
+        uiController.printCompressedFileSize(Algorithms.HUFFMAN, huffmanCompressedFileSize, huffmanDifference);
+        uiController.printCompressedFileSize(Algorithms.LZW, lzwCompressedFileSize, lzwDifference);
+
+        if (huffmanDifference < lzwDifference) {
+            uiController.printCompressionSizeWinner(Algorithms.HUFFMAN);
+        } else if (huffmanDifference > lzwDifference) {
+            uiController.printCompressionSizeWinner(Algorithms.LZW);
+        } else {
+            uiController.printEqualCompressionSize();
+        }
+    }
+
+    /**
+     * Simply calculates the difference of the two files, as a percentage.
+     *
+     * @param size1 First file's size.
+     * @param size2 The other file's size.
+     * @return The percentage difference (as a double).
+     */
+    private double calculateDifference(long size1, long size2) {
+
+        long bigger = Math.max(size1, size2);
+        long smaller = Math.min(size1, size2);
+
+        return (smaller * 100.0d) / bigger;
     }
 
 }

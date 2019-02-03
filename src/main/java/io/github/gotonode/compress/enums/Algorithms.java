@@ -5,7 +5,7 @@ package io.github.gotonode.compress.enums;
  */
 public enum Algorithms {
 
-    HUFFMAN("Huffman"), LZW("Lempel–Ziv–Welch");
+    HUFFMAN("Huffman"), LZW("LZW");
 
     private final String name;
 
