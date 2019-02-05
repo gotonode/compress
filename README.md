@@ -1,9 +1,9 @@
 # Compress
 *Compare Huffman coding and LZW*
 
-| Travis CI | Codacy |
-| :-: | :-: |
-|[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) |
+| Travis CI | Codacy | Codecov |
+| :-: | :-: | :-: |
+|[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) | [![codecov](https://codecov.io/gh/gotonode/compress/branch/master/graph/badge.svg)](https://codecov.io/gh/gotonode/compress) |
 
 In this project, you can compress files using either **Huffman coding** or **LZW (Lempel-Ziv-Welch)**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
@@ -17,6 +17,7 @@ Weekly reports:
 * [Week 1 Report](docs/WEEK1.md)
 * [Week 2 Report](docs/WEEK2.md)
 * [Week 3 Report](docs/WEEK3.md)
+* [Week 4 Report](docs/WEEK3.md)
 
 ##### The problem
 
