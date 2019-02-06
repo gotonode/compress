@@ -1,0 +1,8 @@
+io.github.gotonode.compress.algorithms
+io.github.gotonode.compress.algorithms.huffman
+io.github.gotonode.compress.algorithms.lzw
+io.github.gotonode.compress.app
+io.github.gotonode.compress.enums
+io.github.gotonode.compress.io
+io.github.gotonode.compress.main
+io.github.gotonode.compress.ui
