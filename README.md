@@ -17,7 +17,7 @@ Advanced interest:
 * [Testing](docs/TESTING.md) (how testing was done)
 
 Geek interest:
-* [Javadoc](https://gotonode.github.io/compress) (code documentation)
+* [Javadoc](https://gotonode.github.io/compress) (code documentation, updated manually)
 
 #### Weekly reports:
 * [Week 1 Report](docs/WEEK1.md)
