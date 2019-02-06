@@ -2,8 +2,8 @@
 
 This document outlines the structure and functionality of the app.
 
-##### General structure
+#### General structure
 
-##### Shortcomings
+#### Shortcomings
 
-##### Sources
+#### Sources
