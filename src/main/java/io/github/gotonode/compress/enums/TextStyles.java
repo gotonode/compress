@@ -4,9 +4,13 @@ import io.github.gotonode.compress.main.Main;
 
 /**
  * Used to color the output in the console. May not work on all systems.
+ *
+ * If console output is not looking right, refer to the static final boolean
+ * in the Main class to disable text formatting altogether.
  */
 public enum TextStyles {
 
+    // Available colors. There are more, just do a Web search on them.
     Green("\u001b[32m"),
     Blue("\u001b[34m"),
     Magenta("\u001b[35m"),
@@ -16,6 +20,7 @@ public enum TextStyles {
     Cyan("\u001b[36m"),
     Default("\u001b[0m");
 
+    // Feel free to change these to get the UI to look even prettier.
     private static TextStyles titleColor = Red;
     private static TextStyles commandColor = Magenta;
     private static TextStyles importantColor = WhiteBold;
@@ -41,21 +46,30 @@ public enum TextStyles {
         return value;
     }
 
+    // Used to distinguish UI calls.
     public static String commandText(char command) {
         return stringWithColor(String.valueOf(command), commandColor);
     }
 
+    // Used to distinguish UI calls.
     public static String titleText(String title) {
         return stringWithColor(title, titleColor);
     }
 
-    public static String algoText(Algorithms algorithms, boolean printFullName) {
+    /**
+     * Prints the algorithm's name, and optionally in a nice text format, too.
+     *
+     * @param algorithm     The name of the algorithm.
+     * @param printFullName Whether to print the full name or the enum code.
+     * @return A String containing the algorithm's name and ANSI codes.
+     */
+    public static String algoText(Algorithms algorithm, boolean printFullName) {
 
         TextStyles color;
 
-        if (algorithms == Algorithms.HUFFMAN) {
+        if (algorithm == Algorithms.HUFFMAN) {
             color = TextStyles.huffmanColor;
-        } else if (algorithms == Algorithms.LZW) {
+        } else if (algorithm == Algorithms.LZW) {
             color = TextStyles.lzwColor;
         } else {
             throw new IllegalArgumentException();
@@ -64,31 +78,36 @@ public enum TextStyles {
         String name;
 
         if (printFullName) {
-            name = algorithms.getName();
+            name = algorithm.getName();
         } else {
-            name = algorithms.name();
+            name = algorithm.name();
         }
 
         assert color != null;
         return stringWithColor(name, color);
     }
 
+    // A convenience function. Refer to the function this one calls.
     public static String importantText(String value) {
         return stringWithColor(value, importantColor);
     }
 
+    // A convenience function. Refer to the function this one calls.
     public static String importantText(char value) {
         return importantText(String.valueOf(value));
     }
 
+    // A convenience function. Refer to the function this one calls.
     public static String importantText(int value) {
         return importantText(String.valueOf(value));
     }
 
+    // A convenience function. Refer to the function this one calls.
     public static String importantText(long value) {
         return importantText(String.valueOf(value));
     }
 
+    // A convenience function. Refer to the function this one calls.
     public static String importantText(double value) {
         return importantText(String.valueOf(value));
     }

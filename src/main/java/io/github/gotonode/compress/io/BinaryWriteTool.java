@@ -220,6 +220,12 @@ public class BinaryWriteTool {
         bufferedOutputStream = null;
     }
 
+    /**
+     * Writes a String into the stream. It is processed one character at a time, so this is a convenience function.
+     *
+     * @param value The String value to be written to the stream.
+     * @throws IOException If we can't write to the stream or to the file.
+     */
     public void writeString(String value) throws IOException {
         for (int i = 0; i < value.length(); i++) {
             write(value.charAt(i));

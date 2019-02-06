@@ -203,7 +203,8 @@ public class UiController {
 
         System.out.println(commandText('B')
                 + ": Benchmark "
-                + algoText(Algorithms.HUFFMAN, true) + " against " + algoText(Algorithms.LZW, true));
+                + algoText(Algorithms.HUFFMAN, true)
+                + " against " + algoText(Algorithms.LZW, true));
 
         System.out.println(commandText('X')
                 + ": Print these instructions again");
@@ -327,16 +328,35 @@ public class UiController {
         System.out.println("Please note that arguments are currently not supported!");
     }
 
+    /**
+     * Prints results from compression benchmarking.
+     *
+     * @param algorithm       Which algorithm was used.
+     * @param compressionTime How much time it took to compress the sample data (in milliseconds).
+     */
     public void printCompressionBenchmarkResults(Algorithms algorithm, long compressionTime) {
         System.out.println(fourSpaces + algoText(algorithm, true)
                 + " took " + importantText(compressionTime) + " ms to compress");
     }
 
+    /**
+     * Prints results from decompression benchmarking.
+     *
+     * @param algorithm         Which algorithm was used.
+     * @param decompressionTime How much time it took to decompress the sample data (in milliseconds).
+     */
     public void printDecompressionBenchmarkResults(Algorithms algorithm, long decompressionTime) {
         System.out.println(fourSpaces + algoText(algorithm, true)
                 + " took " + importantText(decompressionTime) + " ms to decompress");
     }
 
+    /**
+     * Prints the compressed file's size and the difference to the size of the original..
+     *
+     * @param algorithm          Which algorithm was used.
+     * @param compressedFileSize The size of the newly-compressed file.
+     * @param difference         The difference, as a percentage.
+     */
     public void printCompressedFileSize(Algorithms algorithm, long compressedFileSize, double difference) {
         System.out.println(fourSpaces + algoText(algorithm, true)
                 + " compressed it to " + importantText(compressedFileSize)
@@ -344,45 +364,80 @@ public class UiController {
                 + " % difference)");
     }
 
+    /**
+     * Print's the original file's size.
+     *
+     * @param originalFileSize The size of the original file.
+     */
     public void printOriginalFileSize(long originalFileSize) {
         System.out.println(twoSpaces + "Compression size results (the original file was "
                 + importantText(originalFileSize) + " kB):");
     }
 
+    /**
+     * In the rare chance that both algorithms produce a compressed file with equal size, report it.
+     */
     public void printEqualCompressionSize() {
         System.out.println(fourSpaces
                 + "Incredible! Both algorithms produced a compressed file of the exact same size!");
     }
 
+    /**
+     * Print whichever algorithm compressed the file to a smaller size.
+     *
+     * @param algorithm Which algorithm was the winner.
+     */
     public void printCompressionSizeWinner(Algorithms algorithm) {
         System.out.println(fourSpaces
                 + "Regarding file size, the winner is " + algoText(algorithm, true) + "!");
     }
 
+    /**
+     * Print whichever algorithm compressed the file the fastest.
+     *
+     * @param algorithm Which algorithm was the winner.
+     */
     public void printCompressionTimeWinner(Algorithms algorithm) {
         System.out.println(fourSpaces
                 + "Regarding compression time, the winner is " + algoText(algorithm, true) + "!");
     }
 
+    /**
+     * Print whichever algorithm decompressed the file the fastest.
+     *
+     * @param algorithm Which algorithm was the winner.
+     */
     public void printDecompressionTimeWinner(Algorithms algorithm) {
         System.out.println(fourSpaces
                 + "Regarding decompression time, the winner is " + algoText(algorithm, true) + "!");
     }
 
+    /**
+     * In the rare chance that both algorithms produce the compressed file in the same time, report it.
+     */
     public void printEqualCompressionTime() {
         System.out.println(fourSpaces
                 + "Incredible! Both algorithms took the exact same time to compress that file!");
     }
 
+    /**
+     * In the rare chance that both algorithms produce the decompressed file in the same time, report it.
+     */
     public void printEqualDecompressionTime() {
         System.out.println(fourSpaces
                 + "Incredible! Both algorithms took the exact same time to decompress that file!");
     }
 
+    /**
+     * Print the compression results header for nice UI visuals, used with the benchmarking function.
+     */
     public void printCompressionResultsHeader() {
         System.out.println(twoSpaces + "Compression time results:");
     }
 
+    /**
+     * Print the decompression results header for nice UI visuals, used with the benchmarking function.
+     */
     public void printDecompressionResultsHeader() {
         System.out.println(twoSpaces + "Decompression time results:");
     }

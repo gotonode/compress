@@ -67,7 +67,7 @@ public class HuffmanTest {
 
         System.out.println("Working directory: " + tempFolder.getRoot());
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 1; i++) {
 
             File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
 

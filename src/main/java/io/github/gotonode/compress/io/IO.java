@@ -4,6 +4,9 @@ import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
 
+/**
+ * Used to handle file input and output.
+ */
 public class IO {
 
     private boolean checkFileExistsAndCanRead(String path) {
@@ -15,6 +18,7 @@ public class IO {
     /**
      * Asks the path to a file, and if a file is found there, creates a Java's File-object, and returns that.
      *
+     * @param uiController The UI controller to use.
      * @return Java's own File-object, or null if the file wasn't found or an error occurred.
      */
     public File askForSourceFile(UiController uiController) {
@@ -30,6 +34,12 @@ public class IO {
         return new File(path);
     }
 
+    /**
+     * Asks the path to a file, and if a file is found there, creates a Java's File-object, and returns that.
+     *
+     * @param uiController The UI controller to use.
+     * @return Java's own File-object, or null if the file wasn't found or an error occurred.
+     */
     public File askForTargetFile(UiController uiController) {
 
         String path = uiController.askForTargetFilePath();

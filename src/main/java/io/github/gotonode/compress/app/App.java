@@ -22,11 +22,22 @@ public class App {
     private final IO io;
     private boolean appRunning;
 
+    /**
+     * Initializes a new App-object. This is the engine for the project.
+     *
+     * @param uiController This controller is used for UI input and output.
+     * @param io           The IO module to be attached.
+     */
     public App(UiController uiController, IO io) {
         this.uiController = uiController;
         this.io = io;
     }
 
+    /**
+     * Actually run the app. Once execution returns from this method, the app will exit.
+     *
+     * Contains a permanent loop that runs until the user has asked the app to exit.
+     */
     public void run() {
         appRunning = true;
 

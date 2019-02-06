@@ -48,3 +48,5 @@ test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
 }
+
+checkstyleTest.enabled = false

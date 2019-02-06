@@ -1,13 +1,29 @@
 package io.github.gotonode.compress.algorithms.lzw;
 
+/**
+ * Represents a node in the LZW compression scheme.
+ *
+ * Each node will contain a character, an integer value and a left child
+ * node, a middle child node, and a right child node.
+ *
+ * Please refer to file containing the LZW tree for more information.
+ */
 class LZWNode {
 
+    // The purpose of this node is to house this character.
     private char character;
+
+    // A tertiary search tree uses three child nodes, not just two
+    // like the binary search tree does.
     private LZWNode leftNode;
     private LZWNode middleNode;
     private LZWNode rightNode;
 
+    // Used by LZW to arrange things.
     private int value;
+
+    // This class only contains getters and setters, and those don't get their own Javadoc
+    // comments. This is on purpose.
 
     char getCharacter() {
         return character;

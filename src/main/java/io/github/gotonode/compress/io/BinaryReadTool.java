@@ -169,6 +169,12 @@ public class BinaryReadTool {
         return output;
     }
 
+    /**
+     * Simply reads everything from the stream, beginning from the current position.
+     *
+     * @return A String containing all of the read data.
+     * @throws IOException If we can't read from the stream.
+     */
     public String readData() throws IOException {
         String output = "";
 

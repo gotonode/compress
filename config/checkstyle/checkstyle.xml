@@ -29,9 +29,11 @@
         <module name="NoLineWrap" />
         <module name="EmptyLineSeparator">
             <property name="allowMultipleEmptyLines" value="false" />
+            <property name="tokens"
+                      value="PACKAGE_DEF, IMPORT, CLASS_DEF, INTERFACE_DEF, STATIC_INIT, INSTANCE_INIT, METHOD_DEF, CTOR_DEF" />
         </module>
         <module name="ParameterNumber">
-            <property name="max" value="3" />
+            <property name="max" value="4" />
             <property name="tokens" value="METHOD_DEF" />
         </module>
         <module name="OuterTypeNumber" />
@@ -40,14 +42,16 @@
             <property name="max" value="120" />
             <property name="countEmpty" value="false" />
         </module>
-        <module name="UncommentedMain" />
-        <module name="MethodCount">
+        <module name="UncommentedMain">
+            <property name="excludedClasses" value="\.Main$" />
+        </module>
+        <!--<module name="MethodCount">
             <property name="maxPublic" value="10" />
             <property name="maxPrivate" value="20" />
             <property name="maxTotal" value="40" />
-        </module>
+        </module>-->
         <module name="UpperEll" />
-        <module name="ClassMemberImpliedModifier" />
+        <!--<module name="ClassMemberImpliedModifier" />-->
         <module name="Indentation" />
         <module name="TodoComment">
             <property name="format" value="FIXME:" />
@@ -59,7 +63,7 @@
         </module>
         <module name="EmptyBlock" />
         <module name="ClassDataAbstractionCoupling">
-            <property name="max" value="3" />
+            <property name="max" value="4" />
         </module>
         <module name="EmptyCatchBlock" />
         <module name="JavadocMethod">
@@ -112,18 +116,18 @@
         <module name="MissingSwitchDefault" />
         <module name="ModifiedControlVariable" />
         <module name="CyclomaticComplexity">
-            <property name="max" value="15" />
+            <property name="max" value="20" />
         </module>
         <module name="MultipleStringLiterals">
             <property name="allowedDuplicates" value="4" />
         </module>
         <module name="MultipleVariableDeclarations" />
         <module name="OneStatementPerLine" />
-        <module name="NPathComplexity">
+        <!--<module name="NPathComplexity">
             <property name="max" value="200" />
-        </module>
+        </module>-->
         <module name="JavaNCSS">
-            <property name="methodMaximum" value="40" />
+            <property name="methodMaximum" value="64" />
         </module>
         <module name="ClassFanOutComplexity">
             <property name="max" value="10" />
