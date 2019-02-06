@@ -58,9 +58,10 @@ public class HuffmanTest {
      * This is a very verbose test on the Huffman coding. It's now easy to
      * change the code and run this test to see if it broke it somehow.
      *
-     * @throws IOException Only when IO fails somehow.
+     * This is not run automatically.
+     *
+     * @throws IOException Only when IO fails.
      */
-    @Test
     public void huffmanTestVerbose() throws IOException {
 
         _Generic generic = new _Generic();
@@ -71,7 +72,7 @@ public class HuffmanTest {
 
             File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
 
-            generic.generateBinaryFile(input);
+            generic.generateTextFile(input);
 
             System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
 

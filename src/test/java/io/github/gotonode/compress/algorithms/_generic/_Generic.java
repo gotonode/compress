@@ -12,11 +12,12 @@ public class _Generic {
     // the code is run, you'd get the exact same generated files.
     private static final int RANDOM_SEED = 1337;
 
-    private static final boolean USE_SEED = false;
+    private static final boolean USE_SEED = true;
 
     private static final int MEGABYTE = 1048576;
 
-    private static final int FILE_SIZE = 8192;
+    // When creating test files, how big should they be.
+    private static final int FILE_SIZE = 512;
 
     private Random random;
 
@@ -30,6 +31,7 @@ public class _Generic {
 
     /**
      * This method generates a deterministic TXT (plaintext) file.
+     *
      * @param path Where the new file will be created.
      * @throws IOException If buffers don't work.
      */
@@ -46,6 +48,7 @@ public class _Generic {
 
     /**
      * This method generates a deterministic binary file.
+     *
      * @param path Where the new file will be created.
      * @throws IOException If buffers don't work.
      */
@@ -75,7 +78,7 @@ public class _Generic {
         } else if (d >= 0.2d && d <= 0.22d) {
             return '.';
         } else {
-            return (char)(random.nextInt(26) + 'a');
+            return (char) (random.nextInt(26) + 'a');
         }
     }
 

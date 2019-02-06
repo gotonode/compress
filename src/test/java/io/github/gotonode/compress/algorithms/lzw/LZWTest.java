@@ -1,8 +1,6 @@
 package io.github.gotonode.compress.algorithms.lzw;
 
 import io.github.gotonode.compress.algorithms._generic._Generic;
-import io.github.gotonode.compress.algorithms.huffman.Huffman;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -43,7 +41,9 @@ public class LZWTest {
      * This is a very verbose test on the LZW coding. It's now easy to
      * change the code and run this test to see if it broke it somehow.
      *
-     * @throws IOException Only when IO fails somehow.
+     * This is not run automatically.
+     *
+     * @throws IOException Only when IO fails.
      */
     @Test
     public void lzwTestVerbose() throws IOException {
@@ -56,7 +56,7 @@ public class LZWTest {
 
             File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
 
-            generic.generateBinaryFile(input);
+            generic.generateTextFile(input);
 
             System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
 

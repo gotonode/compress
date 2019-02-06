@@ -8,7 +8,7 @@ import io.github.gotonode.compress.enums.Algorithms;
 import java.io.File;
 
 /**
- *
+ * Used to run a benchmark on the chosen algorithm.
  */
 public final class Benchmark {
 
@@ -18,13 +18,15 @@ public final class Benchmark {
     }
 
     /**
-     * @param sourceFile
-     * @param algorithm
-     * @return
+     * Runs the benchmark and returns the results.
+     *
+     * @param sourceFile The file to be used in the benchmarking.
+     * @param algorithm Which algorithm to use. Currently at least Huffman and LZW are available.
+     * @return The results as a {@link BenchmarkResult} object.
      */
-    public static Results runBenchmark(final File sourceFile, Algorithms algorithm) {
+    public static BenchmarkResult runBenchmark(final File sourceFile, Algorithms algorithm) {
 
-        Results output = null;
+        BenchmarkResult output = null;
 
         long start;
         long end;
@@ -67,7 +69,7 @@ public final class Benchmark {
         compressedFile.delete();
         decompressedFile.delete();
 
-        output = new Results(compressionTime, decompressionTime, compressedSize);
+        output = new BenchmarkResult(compressionTime, decompressionTime, compressedSize);
 
         return output;
     }

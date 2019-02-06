@@ -13,9 +13,9 @@ import java.util.PriorityQueue;
 /**
  * This class contains my personal Huffman coding implementation.
  *
- * This section will eventually contain more info.
- *
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
+ *
+ * Uses {@link HuffmanNode} internally.
  *
  * Sources:
  * • <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a> (Wikipedia)

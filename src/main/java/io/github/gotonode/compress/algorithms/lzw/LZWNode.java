@@ -6,7 +6,7 @@ package io.github.gotonode.compress.algorithms.lzw;
  * Each node will contain a character, an integer value and a left child
  * node, a middle child node, and a right child node.
  *
- * Please refer to file containing the LZW tree for more information.
+ * Please refer to {@link LZWTree} for more information.
  */
 class LZWNode {
 

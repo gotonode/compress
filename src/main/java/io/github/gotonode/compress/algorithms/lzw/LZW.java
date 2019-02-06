@@ -14,7 +14,7 @@ import java.io.IOException;
  *
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
  *
- * This section will eventually contain more info.
+ * Uses {@link LZWNode} and {@link LZWTree} internally.
  *
  * Sources:
  * • <a href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch">Lempel–Ziv–Welch</a> (Wikipedia)

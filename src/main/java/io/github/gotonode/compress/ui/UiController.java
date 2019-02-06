@@ -351,25 +351,43 @@ public class UiController {
     }
 
     /**
-     * Prints the compressed file's size and the difference to the size of the original..
+     * Prints the compressed file's size and the reduction to the size of the original.
      *
      * @param algorithm          Which algorithm was used.
      * @param compressedFileSize The size of the newly-compressed file.
-     * @param difference         The difference, as a percentage.
+     * @param reduction          Reduction, as a percentage.
      */
-    public void printCompressedFileSize(Algorithms algorithm, long compressedFileSize, double difference) {
+    public void printReducedFileSize(Algorithms algorithm, long compressedFileSize, double reduction) {
+        printFileSizeDifference(algorithm, compressedFileSize, reduction, true);
+    }
 
-        String change = "reduction";
+    /**
+     * If the compressed file got bigger, print information about it.
+     *
+     * @param algorithm          Which algorithm was used.
+     * @param compressedFileSize The size of the newly-compressed file.
+     * @param increase           Increase amount, as a percentage.
+     */
+    public void printIncreasedFileSize(Algorithms algorithm, long compressedFileSize, double increase) {
+        printFileSizeDifference(algorithm, compressedFileSize, increase, false);
+    }
 
-        if (difference < 0d) {
-            difference = Math.abs(difference);
-            change = "increase; TAKE NOTE";
+    private void printFileSizeDifference(Algorithms algorithm,
+                                         long compressedFileSize, double change, boolean sizeWasReduced) {
+
+        // Whether the file got bigger or smaller, choose this word accordingly.
+        String directionText;
+
+        if (sizeWasReduced) {
+            directionText = "reduction";
+        } else {
+            directionText = "increase";
         }
 
         System.out.println(fourSpaces + algoText(algorithm, true)
                 + " compressed it to " + importantText(compressedFileSize)
-                + " bytes (a " + importantText(formatTwoDecimals(difference))
-                + " % " + change + ")");
+                + " bytes (a " + importantText(formatTwoDecimals(change))
+                + " % " + directionText + ")");
     }
 
     /**

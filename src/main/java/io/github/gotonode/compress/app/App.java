@@ -1,14 +1,13 @@
 package io.github.gotonode.compress.app;
 
 import io.github.gotonode.compress.algorithms.benchmarking.Benchmark;
-import io.github.gotonode.compress.algorithms.benchmarking.Results;
+import io.github.gotonode.compress.algorithms.benchmarking.BenchmarkResult;
 import io.github.gotonode.compress.algorithms.huffman.Huffman;
 import io.github.gotonode.compress.algorithms.lzw.LZW;
 import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
 import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.IO;
-import io.github.gotonode.compress.main.Main;
 import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
@@ -241,8 +240,8 @@ public class App {
 
     /**
      * Benchmarks Huffman against LZW. Only asks for the source file, since the files created during the benchmark
-     * are placed in a temporary folder, and removed once the benchmarking is complete. Finally, reports on the
-     * benchmark (in milliseconds, and in kilobytes).
+     * are removed once the benchmarking is complete. Finally, reports on the benchmark (in milliseconds,
+     * and in bytes).
      */
     private void benchmark() {
 
@@ -259,8 +258,8 @@ public class App {
 
         uiController.printEmptyLine();
 
-        Results huffmanResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
-        Results lzwResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
+        BenchmarkResult huffmanResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
+        BenchmarkResult lzwResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
 
         uiController.printCompressionResultsHeader();
 
@@ -297,8 +296,25 @@ public class App {
         double huffmanReduction = calculateReduction(huffmanResults.getCompressedSize(), originalSize);
         double lzwReduction = calculateReduction(lzwResults.getCompressedSize(), originalSize);
 
-        uiController.printCompressedFileSize(Algorithms.HUFFMAN, huffmanResults.getCompressedSize(), huffmanReduction);
-        uiController.printCompressedFileSize(Algorithms.LZW, lzwResults.getCompressedSize(), lzwReduction);
+        if (huffmanReduction >= 0.0d) {
+            // The Huffman-compressed file got smaller.
+            uiController.printReducedFileSize(
+                    Algorithms.HUFFMAN, huffmanResults.getCompressedSize(), huffmanReduction);
+        } else {
+            // The Huffman-compressed file came out larger than the original. Probably due to overhead.
+            double huffmanIncrease = Math.abs(huffmanReduction);
+            uiController.printIncreasedFileSize(
+                    Algorithms.HUFFMAN, huffmanResults.getCompressedSize(), huffmanIncrease);
+        }
+
+        if (lzwReduction >= 0.0d) {
+            // The LZW-compressed file got smaller.
+            uiController.printReducedFileSize(Algorithms.LZW, lzwResults.getCompressedSize(), lzwReduction);
+        } else {
+            // The LZW-compressed file came out larger than the original. Probably due to overhead.
+            double lzwIncrease = Math.abs(lzwReduction);
+            uiController.printIncreasedFileSize(Algorithms.LZW, lzwResults.getCompressedSize(), lzwIncrease);
+        }
 
         if (huffmanResults.getCompressedSize() < lzwResults.getCompressedSize()) {
             uiController.printCompressionSizeWinner(Algorithms.HUFFMAN);
