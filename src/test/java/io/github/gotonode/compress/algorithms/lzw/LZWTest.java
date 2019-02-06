@@ -1,5 +1,7 @@
 package io.github.gotonode.compress.algorithms.lzw;
 
+import io.github.gotonode.compress.algorithms._generic._Generic;
+import io.github.gotonode.compress.algorithms.huffman.Huffman;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,27 +15,14 @@ import static org.junit.Assert.assertFalse;
 
 public class LZWTest {
 
-    // THIS FILE IS A WORK IN PROGRESS. TESTS NON-FUNCTIONAL!
-    //
-    // I'll use a temporary folder to first create a deterministic file, then
-    // run the algorithm to produce an output file, and reverse the action into
-    // a new file and check that they are a match (no data was corrupted).
-
-    File inputFile;
-    File outputFile;
+    private static TemporaryFolder tempFolder;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
-        TemporaryFolder tempFolder = new TemporaryFolder();
+        tempFolder = new TemporaryFolder();
         tempFolder.create();
     }
 
-    @Before
-    public void before() {
-        outputFile = new File(inputFile.getName() + ".lzw");
-    }
-
-    @Test
     public void huffmanCompressionTest() {
         File input = new File("data/lorem_ipsum.txt");
         File output = new File("data/lorem_ipsum.lzw"); // This file is ignored in source control.
@@ -42,12 +31,63 @@ public class LZWTest {
         assertFalse(lzw.compress());
     }
 
-    @Test
     public void huffmanDecompressionTest() {
         File input = new File("data/lorem_ipsum.lzw");
         File output = new File("data/lorem_ipsum (temp).txt"); // This file is ignored in source control.
 
         LZW lzw = new LZW(input, output);
         assertFalse(lzw.decompress());
+    }
+
+    /**
+     * This is a very verbose test on the LZW coding. It's now easy to
+     * change the code and run this test to see if it broke it somehow.
+     *
+     * @throws IOException Only when IO fails somehow.
+     */
+    @Test
+    public void lzwTestVerbose() throws IOException {
+
+        _Generic generic = new _Generic();
+
+        System.out.println("Working directory: " + tempFolder.getRoot());
+
+        for (int i = 0; i < 10000; i++) {
+
+            File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
+
+            generic.generateBinaryFile(input);
+
+            System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
+
+            File output = new File(input.getAbsolutePath() + ".lzw");
+
+            LZW lzwCompression = new LZW(input, output);
+
+            lzwCompression.compress();
+
+            System.out.println("Compressed the TXT file into " + output.getAbsolutePath());
+
+            File finalOutput = new File(input.getAbsolutePath() + ".txt");
+
+            LZW lzwDecompression = new LZW(output, finalOutput);
+
+            lzwDecompression.decompress();
+
+            System.out.println("Decompressed the compressed TXT file into " + finalOutput.getAbsolutePath());
+
+            boolean filesIdentical = generic.checkIdenticalFiles(input, finalOutput);
+
+            System.out.print("The original and the decompressed files are: ");
+
+            if (filesIdentical) {
+                System.out.println("IDENTICAL (this is a good thing)");
+            } else {
+                System.out.println("DIFFERENT (something's not working right)");
+            }
+
+            assertTrue(filesIdentical);
+
+        }
     }
 }

@@ -6,10 +6,10 @@ import java.util.Objects;
  * This is a node in the Huffman tree. Each node contains the character in question,
  * which is unique to the tree, the amount of times this character appears in the data
  * (its weight or frequency of appearance), and possibly left and right child nodes.
- * <p>
+ *
  * To compress data with Huffman, we start at the specific character's leaf and traverse
  * the tree up to the root and print the bits in reverse order.
- * <p>
+ *
  * To decompress data with Huffman, we start at the root, traverse to left child node
  * if the bit is 0, and traverse to right child node if the bit is 1, and once we
  * reach a leaf node, we'll output the character.
@@ -35,7 +35,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      * @param leftNode  A non-null left node (marked as binary 0).
      * @param rightNode A non-null right node (marked as binary 1).
      */
-    public HuffmanNode(Character value, Integer weight, HuffmanNode leftNode, HuffmanNode rightNode) {
+    HuffmanNode(Character value, Integer weight, HuffmanNode leftNode, HuffmanNode rightNode) {
         this.value = value;
         this.weight = weight;
         this.leftNode = leftNode;
@@ -49,7 +49,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      * @param value  The character in question. Unique to the tree.
      * @param weight How many occurrences of this character are there in the data.
      */
-    public HuffmanNode(char value, Integer weight) {
+    HuffmanNode(char value, Integer weight) {
         this.value = value;
         this.weight = weight;
         this.leftNode = null;
@@ -58,19 +58,19 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
 
     // Getters and setters are self-explanatory, and do not get their own Javadoc comments.
 
-    public char getValue() {
+    char getValue() {
         return value;
     }
 
-    public Integer getWeight() {
+    Integer getWeight() {
         return weight;
     }
 
-    public HuffmanNode getLeftNode() {
+    HuffmanNode getLeftNode() {
         return leftNode;
     }
 
-    public HuffmanNode getRightNode() {
+    HuffmanNode getRightNode() {
         return rightNode;
     }
 
@@ -96,15 +96,22 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      *
      * @return True if this is a leaf node, false otherwise.
      */
-    public boolean isLeafNode() {
+    boolean isLeafNode() {
         return leftNode == null && rightNode == null;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         HuffmanNode that = (HuffmanNode) o;
+
         return value == that.value &&
                 Objects.equals(weight, that.weight) &&
                 Objects.equals(leftNode, that.leftNode) &&

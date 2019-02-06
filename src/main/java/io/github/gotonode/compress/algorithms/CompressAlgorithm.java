@@ -7,12 +7,14 @@ public interface CompressAlgorithm {
 
     /**
      * Compresses the input file into the output location.
+     *
      * @return True if successful, false otherwise.
      */
     boolean compress();
 
     /**
      * Decompresses the input file into the output location.
+     *
      * @return True if successful, false otherwise.
      */
     boolean decompress();

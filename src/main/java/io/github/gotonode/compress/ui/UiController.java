@@ -1,31 +1,62 @@
 package io.github.gotonode.compress.ui;
 
 import io.github.gotonode.compress.enums.Algorithms;
+import io.github.gotonode.compress.enums.Commands;
 import io.github.gotonode.compress.main.Main;
 
-import java.util.Arrays;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
+import static io.github.gotonode.compress.enums.TextStyles.algoText;
+import static io.github.gotonode.compress.enums.TextStyles.commandText;
+import static io.github.gotonode.compress.enums.TextStyles.titleText;
+import static io.github.gotonode.compress.enums.TextStyles.importantText;
+
+/**
+ * This class handles printing to the console and reading from it.
+ */
 public class UiController {
+
+    private final String twoSpaces = " " + " ";
+    private final String fourSpaces = twoSpaces + twoSpaces;
 
     private Scanner scanner;
 
+    /**
+     * Initializes this object.
+     *
+     * @param scanner The scanner object to use. It's stored internally.
+     */
     public UiController(Scanner scanner) {
         this.scanner = scanner;
     }
 
+    /**
+     * Prints a greeting message along with the app's name and version.
+     */
     public void printGreetings() {
-        System.out.println("Welcome to " + Main.APP_NAME + " (version " + Main.APP_VERSION + ")!");
+        System.out.println("Welcome to " + titleText(Main.APP_NAME) + " (version " + Main.APP_VERSION + ")!");
     }
 
+    /**
+     * Prints the app's URL on GitHub. The user can download the newest version from there.
+     */
     public void printUrl() {
         System.out.println("You can find the latest version here: " + Main.APP_URL);
+    }
+
+    /**
+     * Before the user exits the app, print a thank you message.
+     */
+    public void printGoodbye() {
+        System.out.println("Thanks for using " + titleText(Main.APP_NAME) + ". Come back soon!");
     }
 
     /**
      * Continuously ask the user for a character, until a valid one is given.
      *
      * @param allowedChars A list of chars that are accepted.
+     * @param prompt       What to ask the user.
      * @return A valid uppercase character.
      */
     public char askForCharacter(Character[] allowedChars, String prompt) {
@@ -35,12 +66,16 @@ public class UiController {
             String next = readLine(prompt.trim() + ":");
 
             if (next.isEmpty()) {
-                System.out.println("Please enter something.");
+                System.out.println("Please enter something. Type "
+                        + importantText(String.valueOf(Commands.COMMANDS.getCommand()))
+                        + " to list all commands.");
+                printEmptyLine();
                 continue;
             }
 
             if (next.length() > 1) {
                 System.out.println("Please only enter 1 character.");
+                printEmptyLine();
                 continue;
             }
 
@@ -56,7 +91,22 @@ public class UiController {
             }
 
             if (!found) {
-                System.out.println("Please enter a character from the following: " + Arrays.toString(allowedChars));
+
+                StringBuilder out = new StringBuilder("[");
+
+                for (int i = 0; i < allowedChars.length; i++) {
+
+                    out.append(importantText(allowedChars[i]));
+
+                    if (i < allowedChars.length - 1) {
+                        out.append(", ");
+                    }
+                }
+
+                out.append("]");
+
+                System.out.println("Please enter a character from the following: " + out.toString());
+                printEmptyLine();
             } else {
                 return input;
             }
@@ -64,23 +114,40 @@ public class UiController {
 
     }
 
+    /**
+     * Reads in a line from the scanner object.
+     *
+     * @param prompt Message to be displayed for the user.
+     * @return A String containing the user's response.
+     */
     private String readLine(String prompt) {
         System.out.print(prompt.trim() + " "); // Trim is here just in case it already has a trailing space.
         return scanner.nextLine();
     }
 
-    public void printGoodbye() {
-        System.out.println("Thanks for using " + Main.APP_NAME + ". Come back soon!");
-    }
-
+    /**
+     * Prints the algorithm we're going to be using.
+     *
+     * @param algorithm The algorithm's name.
+     */
     public void printUsing(Algorithms algorithm) {
-        System.out.println("Great! We'll be using the " + algorithm.getName() + " algorithm.");
+        System.out.println("Great! We'll be using the " + algoText(algorithm, true) + " algorithm.");
     }
 
+    /**
+     * Asks the name of the source file.
+     *
+     * @return A String containing the source file's name.
+     */
     public String askForSourceFilePath() {
-       return askForString("Name of your source file (must already exist)", false);
+        return askForString("Name of your source file (must already exist)", false);
     }
 
+    /**
+     * Asks the name of the target file.
+     *
+     * @return A String containing the target file's name.
+     */
     public String askForTargetFilePath() {
         return askForString("Name of your target file (will be overwritten if it exists)", false);
     }
@@ -88,7 +155,7 @@ public class UiController {
     /**
      * Asks the user for a string. Optionally doesn't allow empty strings.
      *
-     * @param prompt What to ask (prompt) from the user.
+     * @param prompt     What to ask (prompt) from the user.
      * @param allowEmpty If true, the string can be empty. Otherwise it cannot.
      * @return The string the user typed in.
      */
@@ -112,54 +179,211 @@ public class UiController {
         return data;
     }
 
+    /**
+     * Prints an empty line. Simple.
+     */
     public void printEmptyLine() {
         System.out.println();
     }
 
+    /**
+     * Prints the instructions for the user to follow.
+     */
     public void printInstructions() {
         System.out.println("Please choose a command from the following:");
-        System.out.println("H: Compress a file using Huffman coding");
-        System.out.println("L: Compress a file using LZW");
-        System.out.println("D: Decompress a previously compressed file");
-        System.out.println("B: Benchmark Huffman against LZW");
-        System.out.println("X: Print these instructions again");
-        System.out.println("E: Exit from the program");
+
+        System.out.println(commandText('H')
+                + ": Compress a file using " + algoText(Algorithms.HUFFMAN, true));
+
+        System.out.println(commandText('L')
+                + ": Compress a file using " + algoText(Algorithms.LZW, true));
+
+        System.out.println(commandText('D')
+                + ": Decompress a previously compressed file");
+
+        System.out.println(commandText('B')
+                + ": Benchmark "
+                + algoText(Algorithms.HUFFMAN, true) + " against " + algoText(Algorithms.LZW, true));
+
+        System.out.println(commandText('X')
+                + ": Print these instructions again");
+
+        System.out.println(commandText('E')
+                + ": Exit from the program");
     }
 
+    /**
+     * When there's an error with a file, tell about it.
+     */
     public void printFileError() {
-        System.out.println("An error occurred trying to access that file. Maybe it doesn't exist or you don't have the necessary permissions?");
+        System.out.println("An error occurred trying to access that file."
+                + "Maybe it doesn't exist or you don't have the necessary permissions?");
     }
 
-    public void printDecompressionSuccessful(String algorithmName, String targetPath) {
-        System.out.println("Done! Decompression with " + algorithmName.trim() + " was successful, and your decompressed file is located at '" + targetPath + "'.");
+    /**
+     * Decompression was successful. Report it.
+     *
+     * @param algorithm  The algorithm that was used.
+     * @param targetPath Where the results were written to.
+     */
+    public void printDecompressionSuccessful(Algorithms algorithm, String targetPath) {
+        System.out.println("Done! Decompression with " + algoText(algorithm, true)
+                + " was successful, and your decompressed file is located at '"
+                + importantText(targetPath) + "'.");
     }
 
-    public void printCompressionSuccessful(String algorithmName, String targetPath) {
-        System.out.println("Done! Compression with " + algorithmName.trim() + " was successful, and your new and tiny file is located at '" + targetPath + "'.");
-
+    /**
+     * Compression was successful. Report it.
+     *
+     * @param algorithm  The algorithm that was used.
+     * @param targetPath Where the results were written to.
+     */
+    public void printCompressionSuccessful(Algorithms algorithm, String targetPath) {
+        System.out.println("Done! Compression with " + algoText(algorithm, true)
+                + " was successful, and your new and tiny file is located at '"
+                + importantText(targetPath) + "'.");
     }
+
+    /**
+     * Prints the difference in size (input file, output file) in kilobytes.
+     *
+     * @param sourceBytes The input file's size.
+     * @param targetBytes The output file's size.
+     * @param difference  The difference (as a percentage). Should be pre-calculated
+     *                    as this is only an UI class and shouldn't handle calculations
+     *                    like that.
+     */
     public void printDifference(long sourceBytes, long targetBytes, double difference) {
-        System.out.println("Your source file was " + sourceBytes + " kB, and your target file came out at " + targetBytes + " kB, which is a " + difference + " % difference!");
+        System.out.println("Your source file was " + importantText(sourceBytes)
+                + " kB, and your target file came out at " + importantText(targetBytes)
+                + " kB, which is a " + importantText(new DecimalFormat("#.##").format(difference))
+                + " % difference!");
     }
 
+    /**
+     * Prints how long the operation took, in milliseconds.
+     *
+     * @param milliseconds A long value containing the operation time.
+     */
     public void printOperationTime(long milliseconds) {
-        System.out.println("This operation took " + milliseconds + " milliseconds in total.");
+        System.out.println("This operation took " + importantText(milliseconds) + " milliseconds in total.");
     }
 
+    /**
+     * Prints info that we're going to be benchmarking the two algorithms together.
+     */
     public void printBenchmarking() {
-        System.out.println("We'll benchmark Huffman against LZW using your chosen file. No new files will be created.");
+        System.out.println("We'll benchmark " + algoText(Algorithms.HUFFMAN, true)
+                + " against " + algoText(Algorithms.LZW, true)
+                + " using your chosen file. No new files will be left as residue.");
+
+        System.out.println(
+                "Consider choose a file that is not already compressed, as compressed files do not compress very well."
+        );
     }
 
+    /**
+     * When the app can't write to the output file, we'll report it.
+     */
     public void printCannotWrite() {
-        System.out.println("Cannot write to that output location. Is the file in use, and do you have the necessary permissions?");
+        System.out.println(
+                "Cannot write to that output location. Is the file in use, and do you have the necessary permissions?"
+        );
     }
 
+    /**
+     * If the user has chosen the same file as both the input and output,
+     * we'll report that this cannot happen.
+     */
     public void printFilesCannotBeTheSame() {
         System.out.println("Your input and output files cannot be the same.");
     }
 
+    /**
+     * Inform the user that we have detected the used algorithm.
+     *
+     * @param algorithm The algorithm that was used.
+     */
+    public void printAlgorithmDetected(Algorithms algorithm) {
+        System.out.println("It seems that this file was compressed with " + algoText(algorithm, true) + ".");
+    }
 
-    public void printAlgorithmDetected(String name) {
-        System.out.println("It seems that this file was compressed with " + name.trim() + ".");
+    /**
+     * Print the amount of data written when the compressed file is decompressed.
+     *
+     * @param decompressedDataLength Amount in kilobytes.
+     */
+    public void printDecompressedDataLength(int decompressedDataLength) {
+        System.out.println("We'll write exactly " + importantText(decompressedDataLength) + " kB to disk.");
+    }
+
+    /**
+     * If the user starts this app with arguments, tell them that they are not used.
+     *
+     * @param argsAsString Arguments the user passed.
+     */
+    public void printArgumentsNotSupported(String argsAsString) {
+        System.out.println("Started with arguments: " + importantText(argsAsString));
+        System.out.println("Please note that arguments are currently not supported!");
+    }
+
+    public void printCompressionBenchmarkResults(Algorithms algorithm, long compressionTime) {
+        System.out.println(fourSpaces + algoText(algorithm, true)
+                + " took " + importantText(compressionTime) + " ms to compress");
+    }
+
+    public void printDecompressionBenchmarkResults(Algorithms algorithm, long decompressionTime) {
+        System.out.println(fourSpaces + algoText(algorithm, true)
+                + " took " + importantText(decompressionTime) + " ms to decompress");
+    }
+
+    public void printCompressedFileSize(Algorithms algorithm, long compressedFileSize, double difference) {
+        System.out.println(fourSpaces + algoText(algorithm, true)
+                + " compressed it to " + importantText(compressedFileSize)
+                + " kB (a " + importantText(new DecimalFormat("#.##").format(difference))
+                + " % difference)");
+    }
+
+    public void printOriginalFileSize(long originalFileSize) {
+        System.out.println(twoSpaces + "Compression size results (the original file was "
+                + importantText(originalFileSize) + " kB):");
+    }
+
+    public void printEqualCompressionSize() {
+        System.out.println(fourSpaces
+                + "Incredible! Both algorithms produced a compressed file of the exact same size!");
+    }
+
+    public void printCompressionSizeWinner(Algorithms algorithm) {
+        System.out.println(fourSpaces
+                + "Regarding file size, the winner is " + algoText(algorithm, true) + "!");
+    }
+
+    public void printCompressionTimeWinner(Algorithms algorithm) {
+        System.out.println(fourSpaces
+                + "Regarding compression time, the winner is " + algoText(algorithm, true) + "!");
+    }
+
+    public void printDecompressionTimeWinner(Algorithms algorithm) {
+        System.out.println(fourSpaces
+                + "Regarding decompression time, the winner is " + algoText(algorithm, true) + "!");
+    }
+
+    public void printEqualCompressionTime() {
+        System.out.println(fourSpaces
+                + "Incredible! Both algorithms took the exact same time to compress that file!");
+    }
+
+    public void printEqualDecompressionTime() {
+        System.out.println(fourSpaces
+                + "Incredible! Both algorithms took the exact same time to decompress that file!");
+    }
+
+    public void printCompressionResultsHeader() {
+        System.out.println(twoSpaces + "Compression time results:");
+    }
+
+    public void printDecompressionResultsHeader() {
+        System.out.println(twoSpaces + "Decompression time results:");
     }
 }

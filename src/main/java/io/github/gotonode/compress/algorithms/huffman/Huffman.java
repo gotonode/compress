@@ -6,17 +6,17 @@ import io.github.gotonode.compress.io.BinaryWriteTool;
 import io.github.gotonode.compress.main.Main;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
  * This class contains my personal Huffman coding implementation.
- * <p>
+ *
  * This section will eventually contain more info.
- * <p>
+ *
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
- * <p>
+ *
  * Sources:
  * • <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a> (Wikipedia)
  *
@@ -40,12 +40,19 @@ public class Huffman implements CompressAlgorithm {
 
         this.source = source;
         this.target = target;
+
         try {
             this.binaryReadTool = new BinaryReadTool(source);
-            this.binaryWriteTool = new BinaryWriteTool(target);
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+
+        try {
+            this.binaryWriteTool = new BinaryWriteTool(target);
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     @Override
@@ -65,19 +72,7 @@ public class Huffman implements CompressAlgorithm {
     @Override
     public boolean compress() {
 
-        String input = null;
-        try {
-            input = binaryReadTool.readData();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-
-        int dataLength = input.length();
-
-        if (dataLength <= 0) {
-            throw new RuntimeException("That file was empty. Try another one?");
-        }
+        int dataLength = 0;
 
         // Write a bit to indicate that this file is Huffman coded.
         try {
@@ -87,6 +82,22 @@ public class Huffman implements CompressAlgorithm {
             return false;
         }
 
+        int[] weights = new int[Main.ALPHABET_SIZE];
+
+        // While the stream (file) has data to read, read one character
+        // at a time, increase its weight by one and update how
+        // many bytes we have read thus far.
+        while (binaryReadTool.streamHasData()) {
+            try {
+                char character = binaryReadTool.readChar();
+                weights[character]++;
+                dataLength++; // One more byte was read in.
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        }
+
         // Write the length of the data into the output file. This
         // is measured in bytes (8 bits).
         try {
@@ -94,21 +105,6 @@ public class Huffman implements CompressAlgorithm {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             return false;
-        }
-
-        char[] characters = input.toCharArray();
-
-        if (Main.DEBUG) {
-            System.out.println("Current characters:");
-            System.out.println(Arrays.toString(characters));
-        }
-
-        int[] weights = new int[Main.ALPHABET_SIZE];
-
-        for (char character : characters) {
-            // For each character with the same code, we'll increase
-            // its weight.
-            weights[character]++;
         }
 
         // We'll build and assign the Huffman root node. This will
@@ -147,6 +143,12 @@ public class Huffman implements CompressAlgorithm {
             return false;
         }
 
+        try {
+            binaryReadTool.reset();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // Iterate over each character in the input data, looking up the binary
         // representation of it and writing it to the output stream.
         //
@@ -157,7 +159,12 @@ public class Huffman implements CompressAlgorithm {
         for (int index = 0; index < dataLength; index++) {
 
             // The current character from the input stream.
-            char character = characters[index];
+            char character = 0;
+            try {
+                character = binaryReadTool.readChar();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             // The binary representation of the current character. This value
             // varies from file to file, and is based on the character's respective
@@ -187,6 +194,7 @@ public class Huffman implements CompressAlgorithm {
         try {
             // Write the bits to the file and close the stream. It cannot be reused.
             binaryWriteTool.flushAndClose();
+            binaryReadTool.close();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
             return false;
@@ -209,7 +217,7 @@ public class Huffman implements CompressAlgorithm {
         }
 
         // We'll read (as a 32-bit integer) the data area's length from
-        // the file. A compressed file always begins with this byte.
+        // the file. A compressed file always has this byte.
         Integer dataLength = null;
 
         try {
@@ -258,6 +266,7 @@ public class Huffman implements CompressAlgorithm {
 
         try {
             binaryWriteTool.flushAndClose();
+            binaryReadTool.close();
         } catch (IOException ex) {
             ex.printStackTrace();
             return false;
@@ -272,6 +281,7 @@ public class Huffman implements CompressAlgorithm {
      * This recursive method reads binary data from the input file and constructs a
      * Huffman tree based on it. First bit tells if it's a leaf node or not, then
      * we'll read additional data such as the character itself.
+     *
      * @return The fully constructed Huffman tree.
      * @throws IOException If there's an error reading or constructing the tree.
      */
@@ -328,7 +338,7 @@ public class Huffman implements CompressAlgorithm {
             int leftNodeWeight = leftNode.getWeight();
             int rightNodeWeight = rightNode.getWeight();
 
-            int combinedNodeWeight = (leftNodeWeight + rightNodeWeight);
+            int combinedNodeWeight = leftNodeWeight + rightNodeWeight;
 
             HuffmanNode newNode = new HuffmanNode(null, combinedNodeWeight, leftNode, rightNode);
 
@@ -346,12 +356,12 @@ public class Huffman implements CompressAlgorithm {
     /**
      * This is a recursive function which builds a table (array of Strings) that indicates what
      * character is represented by what binary sequence (as a String).
-     * <p>
+     *
      * Here's an example entry of the output:
-     * <p>
+     *
      * 65 = 1010 (ASCII code for the character 'A' is 65)
      * 66 = 101111 (ASCII code the the character 'B' is 66)
-     * <p>
+     *
      * We'll using the character's code (ASCII or UTF-8 or otherwise) to indicate the position
      * (index) in the table. Then at that position, a String value is stored. This String value
      * represents the binary sequence of 0's and 1's which is used by Huffman coding.
@@ -388,7 +398,7 @@ public class Huffman implements CompressAlgorithm {
             // We reached a leaf, meaning it has no child nodes.
 
             char character = rootHuffmanNode.getValue();
-            int charCode = (int)character; // For debugging.
+            int charCode = (int) character; // For debugging.
 
             // Writes a '1'.
             binaryWriteTool.writeOneBit();

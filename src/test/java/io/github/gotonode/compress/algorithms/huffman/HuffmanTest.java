@@ -37,7 +37,6 @@ public class HuffmanTest {
 //        assertTrue(huffman.decompress());
 //    }
 
-    @Test
     public void huffmanCompressionTest() throws IOException {
         _Generic generic = new _Generic();
         File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
@@ -58,20 +57,21 @@ public class HuffmanTest {
     /**
      * This is a very verbose test on the Huffman coding. It's now easy to
      * change the code and run this test to see if it broke it somehow.
+     *
      * @throws IOException Only when IO fails somehow.
      */
     @Test
     public void huffmanTestVerbose() throws IOException {
 
-        for (int i = 0; i < 10; i++) {
+        _Generic generic = new _Generic();
 
-            _Generic generic = new _Generic();
+        System.out.println("Working directory: " + tempFolder.getRoot());
 
-            System.out.println("Working directory: " + tempFolder.getRoot());
+        for (int i = 0; i < 10000; i++) {
 
             File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
 
-            generic.generateTextFile(input);
+            generic.generateBinaryFile(input);
 
             System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
 
