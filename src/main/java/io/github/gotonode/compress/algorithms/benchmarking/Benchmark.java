@@ -1,4 +1,4 @@
-package io.github.gotonode.compress.app;
+package io.github.gotonode.compress.algorithms.benchmarking;
 
 import io.github.gotonode.compress.algorithms.CompressAlgorithm;
 import io.github.gotonode.compress.algorithms.huffman.Huffman;
@@ -10,7 +10,7 @@ import java.io.File;
 /**
  *
  */
-final class Benchmark {
+public final class Benchmark {
 
     private Benchmark() {
         // Cannot create an instance of this class by purpose.
@@ -22,12 +22,12 @@ final class Benchmark {
      * @param algorithm
      * @return
      */
-    static long[] runBenchmark(final File sourceFile, Algorithms algorithm) {
+    public static Results runBenchmark(final File sourceFile, Algorithms algorithm) {
+
+        Results output = null;
 
         long start;
         long end;
-
-        long[] output = new long[3];
 
         File compressedFile = new File(sourceFile.getAbsolutePath() + ".COMPRESSED");
         File decompressedFile = new File(sourceFile.getAbsolutePath() + ".DECOMPRESSED");
@@ -46,7 +46,7 @@ final class Benchmark {
 
         end = System.currentTimeMillis();
 
-        output[0] = end - start;
+        long compressionTime = end - start;
 
         if (algorithm == Algorithms.HUFFMAN) {
             compressAlgorithm = new Huffman(compressedFile, decompressedFile);
@@ -60,15 +60,14 @@ final class Benchmark {
 
         end = System.currentTimeMillis();
 
-        output[1] = end - start;
+        long decompressionTime = end - start;
 
-        long min = Math.min(sourceFile.length(), compressedFile.length());
-        long max = Math.max(sourceFile.length(), compressedFile.length());
-
-        output[2] = max - min;
+        long compressedSize = compressedFile.length();
 
         compressedFile.delete();
         decompressedFile.delete();
+
+        output = new Results(compressionTime, decompressionTime, compressedSize);
 
         return output;
     }

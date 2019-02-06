@@ -256,8 +256,8 @@ public class UiController {
      */
     public void printDifference(long sourceBytes, long targetBytes, double difference) {
         System.out.println("Your source file was " + importantText(sourceBytes)
-                + " kB, and your target file came out at " + importantText(targetBytes)
-                + " kB, which is a " + importantText(new DecimalFormat("#.##").format(difference))
+                + " bytes, and your target file came out at " + importantText(targetBytes)
+                + " bytes, which is a " + importantText(formatTwoDecimals(difference))
                 + " % difference!");
     }
 
@@ -315,7 +315,7 @@ public class UiController {
      * @param decompressedDataLength Amount in kilobytes.
      */
     public void printDecompressedDataLength(int decompressedDataLength) {
-        System.out.println("We'll write exactly " + importantText(decompressedDataLength) + " kB to disk.");
+        System.out.println("We'll write exactly " + importantText(decompressedDataLength) + " bytes to disk.");
     }
 
     /**
@@ -358,10 +358,18 @@ public class UiController {
      * @param difference         The difference, as a percentage.
      */
     public void printCompressedFileSize(Algorithms algorithm, long compressedFileSize, double difference) {
+
+        String change = "reduction";
+
+        if (difference < 0d) {
+            difference = Math.abs(difference);
+            change = "increase; TAKE NOTE";
+        }
+
         System.out.println(fourSpaces + algoText(algorithm, true)
                 + " compressed it to " + importantText(compressedFileSize)
-                + " kB (a " + importantText(new DecimalFormat("#.##").format(difference))
-                + " % difference)");
+                + " bytes (a " + importantText(formatTwoDecimals(difference))
+                + " % " + change + ")");
     }
 
     /**
@@ -371,7 +379,7 @@ public class UiController {
      */
     public void printOriginalFileSize(long originalFileSize) {
         System.out.println(twoSpaces + "Compression size results (the original file was "
-                + importantText(originalFileSize) + " kB):");
+                + importantText(originalFileSize) + " bytes):");
     }
 
     /**
@@ -440,5 +448,9 @@ public class UiController {
      */
     public void printDecompressionResultsHeader() {
         System.out.println(twoSpaces + "Decompression time results:");
+    }
+
+    private String formatTwoDecimals(Object data) {
+        return new DecimalFormat("#.##").format(data);
     }
 }

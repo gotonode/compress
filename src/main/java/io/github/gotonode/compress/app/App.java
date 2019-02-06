@@ -1,5 +1,7 @@
 package io.github.gotonode.compress.app;
 
+import io.github.gotonode.compress.algorithms.benchmarking.Benchmark;
+import io.github.gotonode.compress.algorithms.benchmarking.Results;
 import io.github.gotonode.compress.algorithms.huffman.Huffman;
 import io.github.gotonode.compress.algorithms.lzw.LZW;
 import io.github.gotonode.compress.enums.Algorithms;
@@ -152,8 +154,8 @@ public class App {
 
         uiController.printCompressionSuccessful(algorithm, targetFile.getName());
 
-        long sourceFileSize = sourceFile.length() / 1024; // In kilobytes.
-        long targetFileSize = targetFile.length() / 1024;
+        long sourceFileSize = sourceFile.length();
+        long targetFileSize = targetFile.length();
 
         double difference = calculateDifference(sourceFileSize, targetFileSize);
 
@@ -195,7 +197,7 @@ public class App {
         }
 
         uiController.printAlgorithmDetected(algorithm);
-        uiController.printDecompressedDataLength(decompressedDataLength / Main.BITS_IN_A_KILOBYTE);
+        uiController.printDecompressedDataLength(decompressedDataLength);
 
         File targetFile = io.askForTargetFile(uiController);
 
@@ -228,8 +230,8 @@ public class App {
 
         uiController.printDecompressionSuccessful(algorithm, targetFile.getName());
 
-        long sourceFileSize = sourceFile.length() / Main.BITS_IN_A_KILOBYTE;
-        long targetFileSize = targetFile.length() / Main.BITS_IN_A_KILOBYTE;
+        long sourceFileSize = sourceFile.length();
+        long targetFileSize = targetFile.length();
 
         double difference = calculateDifference(sourceFileSize, targetFileSize);
 
@@ -248,6 +250,8 @@ public class App {
 
         File sourceFile = io.askForSourceFile(uiController);
 
+        long originalSize = sourceFile.length();
+
         if (sourceFile == null) {
             uiController.printFileError();
             return;
@@ -255,26 +259,17 @@ public class App {
 
         uiController.printEmptyLine();
 
-        long[] huffmanBenchmarkResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
-        long[] lzwBenchmarkResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
-
-        long huffmanCompressionTime = huffmanBenchmarkResults[0];
-        long lzwCompressionTime = lzwBenchmarkResults[0];
-
-        long huffmanDecompressionTime = huffmanBenchmarkResults[1];
-        long lzwDecompressionTime = lzwBenchmarkResults[1];
-
-        double compressionDifference = calculateDifference(huffmanCompressionTime, lzwCompressionTime);
-        double decompressionDifference = calculateDifference(huffmanDecompressionTime, lzwDecompressionTime);
+        Results huffmanResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
+        Results lzwResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
 
         uiController.printCompressionResultsHeader();
 
-        uiController.printCompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanCompressionTime);
-        uiController.printCompressionBenchmarkResults(Algorithms.LZW, lzwCompressionTime);
+        uiController.printCompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanResults.getCompressionTime());
+        uiController.printCompressionBenchmarkResults(Algorithms.LZW, lzwResults.getCompressionTime());
 
-        if (huffmanCompressionTime < lzwCompressionTime) {
+        if (huffmanResults.getCompressionTime() < lzwResults.getCompressionTime()) {
             uiController.printCompressionTimeWinner(Algorithms.HUFFMAN);
-        } else if (huffmanCompressionTime > lzwCompressionTime) {
+        } else if (huffmanResults.getCompressionTime() > lzwResults.getCompressionTime()) {
             uiController.printCompressionTimeWinner(Algorithms.LZW);
         } else {
             uiController.printEqualCompressionTime();
@@ -284,12 +279,12 @@ public class App {
 
         uiController.printDecompressionResultsHeader();
 
-        uiController.printDecompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanDecompressionTime);
-        uiController.printDecompressionBenchmarkResults(Algorithms.LZW, lzwDecompressionTime);
+        uiController.printDecompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanResults.getDecompressionTime());
+        uiController.printDecompressionBenchmarkResults(Algorithms.LZW, lzwResults.getDecompressionTime());
 
-        if (huffmanDecompressionTime < lzwDecompressionTime) {
+        if (huffmanResults.getDecompressionTime() < lzwResults.getDecompressionTime()) {
             uiController.printDecompressionTimeWinner(Algorithms.HUFFMAN);
-        } else if (huffmanDecompressionTime > lzwDecompressionTime) {
+        } else if (huffmanResults.getDecompressionTime() > lzwResults.getDecompressionTime()) {
             uiController.printDecompressionTimeWinner(Algorithms.LZW);
         } else {
             uiController.printEqualDecompressionTime();
@@ -297,22 +292,17 @@ public class App {
 
         uiController.printEmptyLine();
 
-        long originalFileSize = sourceFile.length() / Main.BITS_IN_A_KILOBYTE;
+        uiController.printOriginalFileSize(originalSize);
 
-        long huffmanCompressedFileSize = huffmanBenchmarkResults[2] / Main.BITS_IN_A_KILOBYTE;
-        long lzwCompressedFileSize = lzwBenchmarkResults[2] / Main.BITS_IN_A_KILOBYTE;
+        double huffmanReduction = calculateReduction(huffmanResults.getCompressedSize(), originalSize);
+        double lzwReduction = calculateReduction(lzwResults.getCompressedSize(), originalSize);
 
-        double huffmanDifference = calculateDifference(huffmanCompressedFileSize, originalFileSize);
-        double lzwDifference = calculateDifference(lzwCompressedFileSize, originalFileSize);
+        uiController.printCompressedFileSize(Algorithms.HUFFMAN, huffmanResults.getCompressedSize(), huffmanReduction);
+        uiController.printCompressedFileSize(Algorithms.LZW, lzwResults.getCompressedSize(), lzwReduction);
 
-        uiController.printOriginalFileSize(originalFileSize);
-
-        uiController.printCompressedFileSize(Algorithms.HUFFMAN, huffmanCompressedFileSize, huffmanDifference);
-        uiController.printCompressedFileSize(Algorithms.LZW, lzwCompressedFileSize, lzwDifference);
-
-        if (huffmanDifference < lzwDifference) {
+        if (huffmanResults.getCompressedSize() < lzwResults.getCompressedSize()) {
             uiController.printCompressionSizeWinner(Algorithms.HUFFMAN);
-        } else if (huffmanDifference > lzwDifference) {
+        } else if (huffmanResults.getCompressedSize() > lzwResults.getCompressedSize()) {
             uiController.printCompressionSizeWinner(Algorithms.LZW);
         } else {
             uiController.printEqualCompressionSize();
@@ -326,12 +316,24 @@ public class App {
      * @param size2 The other file's size.
      * @return The percentage difference (as a double).
      */
-    private double calculateDifference(long size1, long size2) {
+    private double calculateDifference(double size1, double size2) {
 
-        long bigger = Math.max(size1, size2);
-        long smaller = Math.min(size1, size2);
+        double bigger = Math.max(size1, size2);
+        double smaller = Math.min(size1, size2);
 
         return (smaller * 100.0d) / bigger;
+    }
+
+    /**
+     * Simply calculates the difference of the two files, as a percentage.
+     *
+     * @return The percentage difference (as a double).
+     */
+    private double calculateReduction(double originalFileSize, double compressedFileSize) {
+
+        double difference = compressedFileSize - originalFileSize;
+
+        return (difference * 100.0d) / compressedFileSize;
     }
 
 }
