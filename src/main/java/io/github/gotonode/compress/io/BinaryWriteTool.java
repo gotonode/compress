@@ -176,7 +176,7 @@ public class BinaryWriteTool {
     private void clear() throws IOException {
 
         if (slots == 0) {
-            // This was causing issues. It shouldn't do anything if its empty.
+            // This was causing issues. It shouldn't do anything if it's empty.
             return;
         }
 
