@@ -2,7 +2,6 @@ package io.github.gotonode.compress.ui;
 
 import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
-import io.github.gotonode.compress.enums.TextStyles;
 import io.github.gotonode.compress.main.Main;
 
 import java.text.DecimalFormat;
@@ -282,7 +281,8 @@ public class UiController {
                 + " using your chosen file. No new files will be left as residue.");
 
         System.out.println(
-                "Consider choosing a file that is not already compressed, as compressed files do not compress very well."
+                "Consider choosing a file that is not already compressed, "
+                        + "as compressed files do not compress very well."
         );
     }
 
