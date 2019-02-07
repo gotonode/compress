@@ -23,7 +23,7 @@ Geek interest:
 * [Week 1 Report](docs/WEEK1.md)
 * [Week 2 Report](docs/WEEK2.md)
 * [Week 3 Report](docs/WEEK3.md)
-* [Week 4 Report](docs/WEEK3.md)
+* [Week 4 Report](docs/WEEK4.md)
 
 #### The problem
 
