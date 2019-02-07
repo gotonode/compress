@@ -10,7 +10,7 @@ import java.util.Scanner;
  * This is the main class for the program. It has a static function that will be called
  * when the program starts. This static function creates a non-static (instanced)
  * object which runs the actual engine.
- *
+ * <p>
  * NOTICE: This file is ignored in code coverage.
  */
 public class Main {

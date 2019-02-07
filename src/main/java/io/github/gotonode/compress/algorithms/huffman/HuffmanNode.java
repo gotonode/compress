@@ -4,10 +4,10 @@ package io.github.gotonode.compress.algorithms.huffman;
  * This is a node in the Huffman tree. Each node contains the character in question,
  * which is unique to the tree, the amount of times this character appears in the data
  * (its weight or frequency of appearance), and possibly left and right child nodes.
- *
+ * <p>
  * To compress data with Huffman, we start at the specific character's leaf and traverse
  * the tree up to the root and print the bits in reverse order.
- *
+ * <p>
  * To decompress data with Huffman, we start at the root, traverse to left child node
  * if the bit is 0, and traverse to right child node if the bit is 1, and once we
  * reach a leaf node, we'll output the character.

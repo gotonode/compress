@@ -4,7 +4,7 @@ import io.github.gotonode.compress.main.Main;
 
 /**
  * Used to color the output in the console. May not work on all systems.
- *
+ * <p>
  * If console output is not looking right, refer to the static final boolean
  * in the Main class to disable text formatting altogether.
  */

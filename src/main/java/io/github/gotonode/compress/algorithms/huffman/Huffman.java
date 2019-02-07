@@ -5,19 +5,19 @@ import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.BinaryWriteTool;
 import io.github.gotonode.compress.main.Main;
 import io.github.gotonode.compress.ui.UiController;
+import io.github.gotonode.compress.utils.MinQueue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.PriorityQueue;
 
 /**
  * This class contains my personal Huffman coding implementation.
- *
+ * <p>
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
- *
+ * <p>
  * Uses {@link HuffmanNode} internally.
- *
+ * <p>
  * Sources:
  * • <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman coding</a> (Wikipedia)
  *
@@ -315,8 +315,8 @@ public class Huffman implements CompressAlgorithm {
      */
     private HuffmanNode buildTree(int[] weights) {
 
-        // TODO: Replace this PriorityQueue with my own implementation.
-        PriorityQueue<HuffmanNode> nodes = new PriorityQueue<>();
+        // This is my own minimum priority queue.
+        MinQueue<HuffmanNode> nodes = new MinQueue<>();
 
         // Loop through the alphabet (default size is 256).
         for (char index = 0; index < Main.ALPHABET_SIZE; index++) {
@@ -362,12 +362,12 @@ public class Huffman implements CompressAlgorithm {
     /**
      * This is a recursive function which builds a table (array of Strings) that indicates what
      * character is represented by what binary sequence (as a String).
-     *
+     * <p>
      * Here's an example entry of the output:
-     *
+     * <p>
      * 65 = 1010 (ASCII code for the character 'A' is 65)
      * 66 = 101111 (ASCII code the the character 'B' is 66)
-     *
+     * <p>
      * We'll using the character's code (ASCII or UTF-8 or otherwise) to indicate the position
      * (index) in the table. Then at that position, a String value is stored. This String value
      * represents the binary sequence of 0's and 1's which is used by Huffman coding.

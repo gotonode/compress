@@ -2,10 +2,10 @@ package io.github.gotonode.compress.algorithms.lzw;
 
 /**
  * Represents a node in the LZW compression scheme.
- *
+ * <p>
  * Each node will contain a character, an integer value and a left child
  * node, a middle child node, and a right child node.
- *
+ * <p>
  * Please refer to {@link LZWTree} for more information.
  */
 class LZWNode {

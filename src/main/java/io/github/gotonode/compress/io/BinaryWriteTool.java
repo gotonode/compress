@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * This tool is used to write in binary data. Used by both Huffman and LZW.
- *
+ * <p>
  * Helper methods have been created to write in the specified amount of
  * data at once (1 bit, 32 bits, 1 byte etc).
  */
@@ -197,7 +197,7 @@ public class BinaryWriteTool {
     /**
      * Clears the buffer (writes the bytes into the stream), flushes the stream
      * into the output file (actual disk I/O operation) and closes the streams.
-     *
+     * <p>
      * After this method has been called, this class should not be reused.
      *
      * @throws IOException If we can't write to the stream or to the file.

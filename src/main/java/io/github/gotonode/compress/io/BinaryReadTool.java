@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * This binary reading tool is used by both Huffman and LZW to read in
  * bytes from the stream (the file).
- *
+ * <p>
  * Helper methods have been created to read the specified amount of
  * data at once (1 bit, 32 bits, 1 byte etc).
  */
@@ -147,7 +147,7 @@ public class BinaryReadTool {
 
     /**
      * Reads a codeword of the specified length (12-bit) from the stream.
-     *
+     * <p>
      * Used by LZW, and not used by Huffman.
      *
      * @return The codeword as an integer (this is a representation).

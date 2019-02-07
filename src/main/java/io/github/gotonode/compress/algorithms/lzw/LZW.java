@@ -12,11 +12,11 @@ import java.io.IOException;
 
 /**
  * This class contains my personal Lempel–Ziv–Welch implementation.
- *
+ * <p>
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
- *
+ * <p>
  * Uses {@link LZWNode} and {@link LZWTree} internally.
- *
+ * <p>
  * Sources:
  * • <a href="https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch">Lempel–Ziv–Welch</a> (Wikipedia)
  *

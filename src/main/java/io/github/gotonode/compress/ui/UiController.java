@@ -14,7 +14,7 @@ import static io.github.gotonode.compress.enums.TextStyles.importantText;
 
 /**
  * This class handles printing to the console and reading from it.
- *
+ * <p>
  * It is not tested and because of this it is ignored in code coverage.
  */
 public class UiController {

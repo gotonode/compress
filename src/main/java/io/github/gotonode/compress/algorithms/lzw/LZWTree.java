@@ -2,12 +2,12 @@ package io.github.gotonode.compress.algorithms.lzw;
 
 /**
  * This class presents a ternary search trie structure.
- *
+ * <p>
  * It's primary function is to traverse itself finding the longest prefix in
  * the given data.
- *
+ * <p>
  * Keys are of type String and values are of type 32-bit integer.
- *
+ * <p>
  * For more information, please see the following URL:
  * <a href="https://en.wikipedia.org/wiki/Ternary_search_tree">Ternary search tree</a> (Wikipedia)
  */

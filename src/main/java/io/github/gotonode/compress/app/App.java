@@ -12,12 +12,11 @@ import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * This is a non-static class which acts as the "engine" for the project. It is created and
  * called in the Main-class.
- *
+ * <p>
  * This is not tested as it simply asks the user for commands and executes them. Unit testing
  * is done directly without referencing this class.
  */
@@ -40,7 +39,7 @@ public class App {
 
     /**
      * Actually run the app. Once execution returns from this method, the app will exit.
-     *
+     * <p>
      * Contains a permanent loop that runs until the user has asked the app to exit.
      */
     public void run() {
@@ -53,7 +52,7 @@ public class App {
         uiController.printInstructions();
 
         // Get a list of available commands from the enum.
-        Character[] availableCommands = Arrays.stream(
+        Character[] availableCommands = java.util.Arrays.stream(
                 Commands.values()).map(Commands::getCommand).toArray(Character[]::new);
 
         // This is the main loop for the app. It won't break until explicitly told to do so via the EXIT-command.
@@ -66,7 +65,7 @@ public class App {
 
             // This line of code returns a "Commands" enum, as dictated by "character". For an example, 'L' returns
             // a Commands.LIST and so forth.
-            Commands command = Arrays.stream(Commands.values())
+            Commands command = java.util.Arrays.stream(Commands.values())
                     .filter(a -> a.getCommand() == character)
                     .findFirst()
                     .get();
