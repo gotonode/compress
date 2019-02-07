@@ -17,7 +17,7 @@ public class _Generic {
     private static final int MEGABYTE = 1048576;
 
     // When creating test files, how big should they be.
-    private static final int FILE_SIZE = 512;
+    private static final int FILE_SIZE = 1024;
 
     private Random random;
 

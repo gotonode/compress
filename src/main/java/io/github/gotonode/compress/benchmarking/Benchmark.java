@@ -21,7 +21,7 @@ public final class Benchmark {
      * Runs the benchmark and returns the results.
      *
      * @param sourceFile The file to be used in the benchmarking.
-     * @param algorithm Which algorithm to use. Currently at least Huffman and LZW are available.
+     * @param algorithm  Which algorithm to use. Currently at least Huffman and LZW are available.
      * @return The results as a {@link BenchmarkResult} object.
      */
     public static BenchmarkResult runBenchmark(final File sourceFile, Algorithms algorithm) {

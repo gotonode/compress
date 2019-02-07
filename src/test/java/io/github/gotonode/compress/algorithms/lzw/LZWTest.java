@@ -8,10 +8,8 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import static junit.framework.TestCase.assertNotNull;
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 public class LZWTest {
@@ -85,7 +83,7 @@ public class LZWTest {
         }
 
         String prefix = lzwTree.prefix(firstChar.toString());
-        
+
         assertEquals(1, prefix.length());
     }
 
@@ -106,5 +104,44 @@ public class LZWTest {
     public void lzwTreeToStringTest() {
         LZWTree lzwTree = new LZWTree();
         assertFalse(lzwTree.toString().isEmpty());
+    }
+
+    @Test
+    public void lzwCompressionTest() {
+        File outputFile = new File(tempFolder.getRoot() + "/lzw.COMPRESSED");
+
+        LZW lzw = new LZW(inputFile, outputFile);
+
+        boolean result = lzw.compress();
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void lzwDecompressionTest() {
+        File compressedFile = getCompressedFile();
+
+        File outputFile = new File(tempFolder.getRoot() + "/lzw.DECOMPRESSED");
+
+        LZW lzw = new LZW(compressedFile, outputFile);
+
+        boolean result = lzw.decompress();
+
+        assertTrue(result);
+    }
+
+    /**
+     * This private method returns a LZW-compressed file for use in tests.
+     *
+     * @return The compressed file.
+     */
+    private File getCompressedFile() {
+        File outputFile = new File(tempFolder.getRoot() + "/lzw.COMPRESSED");
+
+        LZW lzw = new LZW(inputFile, outputFile);
+
+        lzw.compress();
+
+        return outputFile;
     }
 }

@@ -73,4 +73,43 @@ public class HuffmanTest {
         assertFalse(huffmanNode.toString().isEmpty());
     }
 
+    @Test
+    public void huffmanCompressionTest() {
+        File outputFile = new File(tempFolder.getRoot() + "/huffman.COMPRESSED");
+
+        Huffman huffman = new Huffman(inputFile, outputFile);
+
+        boolean result = huffman.compress();
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void huffmanDecompressionTest() {
+        File compressedFile = getCompressedFile();
+
+        File outputFile = new File(tempFolder.getRoot() + "/lzw.DECOMPRESSED");
+
+        Huffman huffman = new Huffman(compressedFile, outputFile);
+
+        boolean result = huffman.decompress();
+
+        assertTrue(result);
+    }
+
+    /**
+     * This private method returns a Huffman-compressed file for use in tests.
+     *
+     * @return The compressed file.
+     */
+    private File getCompressedFile() {
+        File outputFile = new File(tempFolder.getRoot() + "/lzw.COMPRESSED");
+
+        Huffman huffman = new Huffman(inputFile, outputFile);
+
+        huffman.compress();
+
+        return outputFile;
+    }
+
 }

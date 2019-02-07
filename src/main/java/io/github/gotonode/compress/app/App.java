@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 /**
- * This is a non-static class which acts as the "engine" for the project. It is created and called in the Main-class.
+ * This is a non-static class which acts as the "engine" for the project. It is created and
+ * called in the Main-class.
+ *
+ * This is not tested as it simply asks the user for commands and executes them. Unit testing
+ * is done directly without referencing this class.
  */
 public class App {
 

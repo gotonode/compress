@@ -11,13 +11,9 @@ import io.github.gotonode.compress.main.Main;
 public enum TextStyles {
 
     // Available colors. There are more, just do a Web search on them.
-    Green("\u001b[32m"),
-    Blue("\u001b[34m"),
     Magenta("\u001b[35m"),
-    White("\u001b[37m"),
     WhiteBold("\u001B[1m"),
     Red("\u001b[31m"),
-    Cyan("\u001b[36m"),
     Default("\u001b[0m");
 
     // Feel free to change these to get the UI to look even prettier.
@@ -72,6 +68,7 @@ public enum TextStyles {
         } else if (algorithm == Algorithms.LZW) {
             color = TextStyles.lzwColor;
         } else {
+            // This is here just in case new algorithms are added.
             throw new IllegalArgumentException();
         }
 
