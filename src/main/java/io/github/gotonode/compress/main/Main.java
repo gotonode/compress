@@ -36,7 +36,7 @@ public class Main {
     public static final int BITS_IN_A_BYTE = 8;
 
     // Pretty self-explanatory.
-    public static final int BITS_IN_A_KILOBYTE = 1024;
+    public static final int BYTES_IN_A_KILOBYTE = 1024;
 
     // We're using a codeword of 12, as that's the most common one.
     public static final int CODEWORD_WIDTH = 12;

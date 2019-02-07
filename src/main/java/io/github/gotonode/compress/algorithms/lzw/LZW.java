@@ -4,6 +4,7 @@ import io.github.gotonode.compress.algorithms.CompressAlgorithm;
 import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.BinaryWriteTool;
 import io.github.gotonode.compress.main.Main;
+import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,13 +43,15 @@ public class LZW implements CompressAlgorithm {
         try {
             this.binaryReadTool = new BinaryReadTool(source);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
+            return;
         }
 
         try {
             this.binaryWriteTool = new BinaryWriteTool(target);
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
+            return;
         }
 
     }
@@ -72,7 +75,7 @@ public class LZW implements CompressAlgorithm {
         try {
             binaryWriteTool.writeOneBit();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -80,8 +83,8 @@ public class LZW implements CompressAlgorithm {
 
         try {
             data = binaryReadTool.readData();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -92,7 +95,7 @@ public class LZW implements CompressAlgorithm {
         try {
             binaryWriteTool.writeInt(dataLength);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -108,8 +111,9 @@ public class LZW implements CompressAlgorithm {
 
             try {
                 binaryWriteTool.writeCodeword(lzwTree.get(prefix));
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                UiController.printErrorMessage(ex);
+                return false;
             }
 
             int temp = prefix.length();
@@ -126,16 +130,16 @@ public class LZW implements CompressAlgorithm {
 
         try {
             binaryWriteTool.writeCodeword(Main.ALPHABET_SIZE);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
         try {
             binaryWriteTool.flushAndClose();
             binaryReadTool.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -150,8 +154,9 @@ public class LZW implements CompressAlgorithm {
         // file.
         try {
             binaryReadTool.readBool();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
+            return false;
         }
 
         // We'll read (as a 32-bit integer) the data area's length from
@@ -160,8 +165,8 @@ public class LZW implements CompressAlgorithm {
         // forget about it.
         try {
             binaryReadTool.readInt();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -179,8 +184,8 @@ public class LZW implements CompressAlgorithm {
 
         try {
             codeword = binaryReadTool.readCodeword();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -191,8 +196,8 @@ public class LZW implements CompressAlgorithm {
             try {
                 binaryWriteTool.writeString(value);
                 codeword = binaryReadTool.readCodeword();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                UiController.printErrorMessage(ex);
                 return false;
             }
 
@@ -217,8 +222,8 @@ public class LZW implements CompressAlgorithm {
         try {
             binaryWriteTool.flushAndClose();
             binaryReadTool.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 

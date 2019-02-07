@@ -1,4 +1,4 @@
-package io.github.gotonode.compress.algorithms._generic;
+package io.github.gotonode.compress._generic;
 
 import java.io.*;
 import java.util.Random;
@@ -46,6 +46,14 @@ public class _Generic {
         bufferedWriter.close();
     }
 
+    public File generateTextFile(String path) throws IOException {
+        File file = new File(path);
+
+        generateTextFile(file);
+
+        return file;
+    }
+
     /**
      * This method generates a deterministic binary file.
      *
@@ -65,11 +73,23 @@ public class _Generic {
         bufferedOutputStream.close();
     }
 
+    public File generateBinaryFile(String path) throws IOException {
+        File file = new File(path);
+
+        generateBinaryFile(file);
+
+        return file;
+    }
+
     private int getRandomByte() {
         return random.nextInt();
     }
 
-    private char getRandomChar() {
+    public int getRandomInt() {
+        return random.nextInt();
+    }
+
+    public char getRandomChar() {
 
         double d = random.nextDouble();
 

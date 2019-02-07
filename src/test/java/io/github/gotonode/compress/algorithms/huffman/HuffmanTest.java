@@ -1,6 +1,7 @@
 package io.github.gotonode.compress.algorithms.huffman;
 
-import io.github.gotonode.compress.algorithms._generic._Generic;
+import io.github.gotonode.compress._generic._Generic;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -9,10 +10,14 @@ import java.io.File;
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class HuffmanTest {
 
+    private File inputFile;
     private static TemporaryFolder tempFolder;
+    private _Generic _generic;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
@@ -20,90 +25,52 @@ public class HuffmanTest {
         tempFolder.create();
     }
 
-//    public void huffmanCompressionTest() {
-//        File input = new File("data/lorem_ipsum.txt");
-//        File output = new File("data/lorem_ipsum.huffman"); // This file is ignored in source control.
-//
-//        Huffman huffman = new Huffman(input, output);
-//        boolean a = huffman.compress();
-//        assertTrue(a);
-//    }
-//
-//    public void huffmanDecompressionTest() {
-//        File input = new File("data/lorem_ipsum.huffman");
-//        File output = new File("data/lorem_ipsum (temp).txt"); // This file is ignored in source control.
-//
-//        Huffman huffman = new Huffman(input, output);
-//        assertTrue(huffman.decompress());
-//    }
-
-    public void huffmanCompressionTest() throws IOException {
-        _Generic generic = new _Generic();
-        File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
-        generic.generateTextFile(input);
-        System.out.println("Wrote a deterministic TXT file to " + input.getAbsolutePath());
-
-        File output = new File(input.getAbsolutePath() + ".huffman");
-
-        Huffman huffman = new Huffman(input, output);
-
-        System.out.println("Compressing the TXT file into " + output.getAbsolutePath());
-
-        boolean result = huffman.compress();
-
-        assertTrue(result);
-    }
-
-    /**
-     * This is a very verbose test on the Huffman coding. It's now easy to
-     * change the code and run this test to see if it broke it somehow.
-     *
-     * This is not run automatically.
-     *
-     * @throws IOException Only when IO fails.
-     */
-    public void huffmanTestVerbose() throws IOException {
-
-        _Generic generic = new _Generic();
-
-        System.out.println("Working directory: " + tempFolder.getRoot());
-
-        for (int i = 0; i < 1; i++) {
-
-            File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
-
-            generic.generateTextFile(input);
-
-            System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
-
-            File output = new File(input.getAbsolutePath() + ".huffman");
-
-            Huffman huffmanCompression = new Huffman(input, output);
-
-            huffmanCompression.compress();
-
-            System.out.println("Compressed the TXT file into " + output.getAbsolutePath());
-
-            File finalOutput = new File(input.getAbsolutePath() + ".txt");
-
-            Huffman huffmanDecompression = new Huffman(output, finalOutput);
-
-            huffmanDecompression.decompress();
-
-            System.out.println("Decompressed the compressed TXT file into " + finalOutput.getAbsolutePath());
-
-            boolean filesIdentical = generic.checkIdenticalFiles(input, finalOutput);
-
-            System.out.print("The original and the decompressed files are: ");
-
-            if (filesIdentical) {
-                System.out.println("IDENTICAL (this is a good thing)");
-            } else {
-                System.out.println("DIFFERENT (something's not working right)");
-            }
-
-            assertTrue(filesIdentical);
-
+    @Before
+    public void before() throws IOException {
+        _generic = new _Generic();
+        if (inputFile == null) {
+            inputFile = _generic.generateBinaryFile(tempFolder.getRoot() + "/huffman.bin");
         }
     }
+
+    @Test
+    public void huffmanNodeValueTest() {
+        HuffmanNode huffmanNode = new HuffmanNode('a', 0);
+        huffmanNode.setValue('b');
+        assertEquals('b', huffmanNode.getValue());
+    }
+
+    @Test
+    public void huffmanNodeLeftChildTest() {
+
+        HuffmanNode rootHuffmanNode = new HuffmanNode('a', 0);
+
+        HuffmanNode leftHuffmanNode = new HuffmanNode('b', null);
+        rootHuffmanNode.setLeftNode(leftHuffmanNode);
+        assertEquals(leftHuffmanNode, rootHuffmanNode.getLeftNode());
+    }
+
+    @Test
+    public void huffmanNodeRightChildTest() {
+
+        HuffmanNode rootHuffmanNode = new HuffmanNode('a', 0);
+
+        HuffmanNode rightHuffmanNode = new HuffmanNode('b', null);
+        rootHuffmanNode.setRightNode(rightHuffmanNode);
+        assertEquals(rightHuffmanNode, rootHuffmanNode.getRightNode());
+    }
+
+    @Test
+    public void huffmanToStringTest() {
+        File outputFile = new File(tempFolder.getRoot() + "/huffman.COMPRESSED");
+        Huffman huffman = new Huffman(inputFile, outputFile);
+        assertFalse(huffman.toString().isEmpty());
+    }
+
+    @Test
+    public void huffmanNodeToStringTest() {
+        HuffmanNode huffmanNode = new HuffmanNode('a', 0);
+        assertFalse(huffmanNode.toString().isEmpty());
+    }
+
 }

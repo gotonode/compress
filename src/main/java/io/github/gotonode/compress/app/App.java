@@ -1,7 +1,7 @@
 package io.github.gotonode.compress.app;
 
-import io.github.gotonode.compress.algorithms.benchmarking.Benchmark;
-import io.github.gotonode.compress.algorithms.benchmarking.BenchmarkResult;
+import io.github.gotonode.compress.benchmarking.Benchmark;
+import io.github.gotonode.compress.benchmarking.BenchmarkResult;
 import io.github.gotonode.compress.algorithms.huffman.Huffman;
 import io.github.gotonode.compress.algorithms.lzw.LZW;
 import io.github.gotonode.compress.enums.Algorithms;
@@ -249,12 +249,12 @@ public class App {
 
         File sourceFile = io.askForSourceFile(uiController);
 
-        long originalSize = sourceFile.length();
-
         if (sourceFile == null) {
             uiController.printFileError();
             return;
         }
+
+        long originalSize = sourceFile.length();
 
         uiController.printEmptyLine();
 

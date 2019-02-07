@@ -1,7 +1,5 @@
 package io.github.gotonode.compress.algorithms.huffman;
 
-import java.util.Objects;
-
 /**
  * This is a node in the Huffman tree. Each node contains the character in question,
  * which is unique to the tree, the amount of times this character appears in the data
@@ -78,15 +76,11 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
         this.value = value;
     }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public void setLeftNode(HuffmanNode leftNode) {
+    void setLeftNode(HuffmanNode leftNode) {
         this.leftNode = leftNode;
     }
 
-    public void setRightNode(HuffmanNode rightNode) {
+    void setRightNode(HuffmanNode rightNode) {
         this.rightNode = rightNode;
     }
 
@@ -97,33 +91,11 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      * @return True if this is a leaf node, false otherwise.
      */
     boolean isLeafNode() {
-        return leftNode == null && rightNode == null;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+        if (leftNode == null && rightNode == null) {
             return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
+        } else {
             return false;
         }
-
-        HuffmanNode that = (HuffmanNode) o;
-
-        return value == that.value &&
-                Objects.equals(weight, that.weight) &&
-                Objects.equals(leftNode, that.leftNode) &&
-                Objects.equals(rightNode, that.rightNode);
-    }
-
-    @Override
-    public int hashCode() {
-        // This is potentially an expensive, recursive call since all
-        // child nodes need to be hashed before this method can return
-        // its own hash code. Remove if this is not needed.
-        return Objects.hash(value, weight, leftNode, rightNode);
     }
 
     /**

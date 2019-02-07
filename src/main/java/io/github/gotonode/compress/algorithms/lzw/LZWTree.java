@@ -150,4 +150,10 @@ class LZWTree {
         return node;
     }
 
+    @Override
+    public String toString() {
+        return "LZWTree{" +
+                "rootLzwNode=" + rootLzwNode +
+                '}';
+    }
 }

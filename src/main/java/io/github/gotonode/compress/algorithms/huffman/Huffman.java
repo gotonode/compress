@@ -4,6 +4,7 @@ import io.github.gotonode.compress.algorithms.CompressAlgorithm;
 import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.BinaryWriteTool;
 import io.github.gotonode.compress.main.Main;
+import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,13 +45,15 @@ public class Huffman implements CompressAlgorithm {
         try {
             this.binaryReadTool = new BinaryReadTool(source);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
+            return;
         }
 
         try {
             this.binaryWriteTool = new BinaryWriteTool(target);
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
+            return;
         }
 
     }
@@ -78,7 +81,7 @@ public class Huffman implements CompressAlgorithm {
         try {
             binaryWriteTool.writeZeroBit();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -93,7 +96,7 @@ public class Huffman implements CompressAlgorithm {
                 weights[character]++;
                 dataLength++; // One more byte was read in.
             } catch (IOException ex) {
-                ex.printStackTrace();
+                UiController.printErrorMessage(ex);
                 return false;
             }
         }
@@ -103,7 +106,7 @@ public class Huffman implements CompressAlgorithm {
         try {
             binaryWriteTool.writeInt(dataLength);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -139,14 +142,15 @@ public class Huffman implements CompressAlgorithm {
         try {
             writeTree(rootHuffmanNode);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
             return false;
         }
 
         try {
             binaryReadTool.reset();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
+            return false;
         }
 
         // Iterate over each character in the input data, looking up the binary
@@ -162,8 +166,9 @@ public class Huffman implements CompressAlgorithm {
             char character = 0;
             try {
                 character = binaryReadTool.readChar();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                UiController.printErrorMessage(ex);
+                return false;
             }
 
             // The binary representation of the current character. This value
@@ -185,7 +190,7 @@ public class Huffman implements CompressAlgorithm {
                         binaryWriteTool.writeOneBit();
                     }
                 } catch (IOException ex) {
-                    System.out.println(ex.getMessage());
+                    UiController.printErrorMessage(ex);
                     return false;
                 }
             }
@@ -196,7 +201,7 @@ public class Huffman implements CompressAlgorithm {
             binaryWriteTool.flushAndClose();
             binaryReadTool.close();
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -212,8 +217,9 @@ public class Huffman implements CompressAlgorithm {
         // file.
         try {
             binaryReadTool.readBool();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
+            return false;
         }
 
         // We'll read (as a 32-bit integer) the data area's length from
@@ -222,8 +228,8 @@ public class Huffman implements CompressAlgorithm {
 
         try {
             dataLength = binaryReadTool.readInt();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -233,8 +239,8 @@ public class Huffman implements CompressAlgorithm {
         // from the compressed file.
         try {
             huffmanRootNode = readTreeFromFile();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -260,7 +266,7 @@ public class Huffman implements CompressAlgorithm {
 
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            UiController.printErrorMessage(ex);
             return false;
         }
 
@@ -268,7 +274,7 @@ public class Huffman implements CompressAlgorithm {
             binaryWriteTool.flushAndClose();
             binaryReadTool.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            UiController.printErrorMessage(ex);
             return false;
         }
 

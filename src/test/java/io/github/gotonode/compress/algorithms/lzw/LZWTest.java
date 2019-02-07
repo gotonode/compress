@@ -1,19 +1,24 @@
 package io.github.gotonode.compress.algorithms.lzw;
 
-import io.github.gotonode.compress.algorithms._generic._Generic;
+import io.github.gotonode.compress._generic._Generic;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
+import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class LZWTest {
 
+    private File inputFile;
     private static TemporaryFolder tempFolder;
+    private _Generic _generic;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
@@ -21,73 +26,85 @@ public class LZWTest {
         tempFolder.create();
     }
 
-    public void huffmanCompressionTest() {
-        File input = new File("data/lorem_ipsum.txt");
-        File output = new File("data/lorem_ipsum.lzw"); // This file is ignored in source control.
-
-        LZW lzw = new LZW(input, output);
-        assertFalse(lzw.compress());
+    @Before
+    public void before() throws IOException {
+        _generic = new _Generic();
+        if (inputFile == null) {
+            inputFile = _generic.generateBinaryFile(tempFolder.getRoot() + "/lzw.bin");
+        }
     }
 
-    public void huffmanDecompressionTest() {
-        File input = new File("data/lorem_ipsum.lzw");
-        File output = new File("data/lorem_ipsum (temp).txt"); // This file is ignored in source control.
-
-        LZW lzw = new LZW(input, output);
-        assertFalse(lzw.decompress());
-    }
-
-    /**
-     * This is a very verbose test on the LZW coding. It's now easy to
-     * change the code and run this test to see if it broke it somehow.
-     *
-     * This is not run automatically.
-     *
-     * @throws IOException Only when IO fails.
-     */
     @Test
-    public void lzwTestVerbose() throws IOException {
+    public void lzwNodeNotNullTest() {
+        LZWNode lzwNode = new LZWNode();
+        assertNotNull(lzwNode);
+    }
 
-        _Generic generic = new _Generic();
+    @Test
+    public void lzwTreeValueTest() {
+        LZWTree lzwTree = new LZWTree();
+        lzwTree.add('a', 0);
+        int value = lzwTree.get("a");
+        assertEquals(0, value);
+    }
 
-        System.out.println("Working directory: " + tempFolder.getRoot());
+    @Test
+    public void lzwTreePrefixTest() {
+        LZWTree lzwTree = new LZWTree();
+        lzwTree.add("a", 0);
+        String prefix = lzwTree.prefix("a");
+        assertEquals("a", prefix);
+    }
 
-        for (int i = 0; i < 1; i++) {
+    @Test
+    public void lzwTreeZeroLengthNullTest() {
+        LZWTree lzwTree = new LZWTree();
+        assertNull(lzwTree.prefix(""));
+    }
 
-            File input = new File(tempFolder.getRoot() + "/" + "textFile.txt");
+    @Test
+    public void lzwTreeEmptyTest() {
+        LZWTree lzwTree = new LZWTree();
+        assertEquals(-1, lzwTree.get("a"));
+    }
 
-            generic.generateTextFile(input);
+    @Test
+    public void lzwTreeForestTest() {
+        LZWTree lzwTree = new LZWTree();
 
-            System.out.println("Created a deterministic TXT file to " + input.getAbsolutePath());
+        Character firstChar = null;
 
-            File output = new File(input.getAbsolutePath() + ".lzw");
+        for (int i = 0; i < 1000; i++) {
+            char c = _generic.getRandomChar();
 
-            LZW lzwCompression = new LZW(input, output);
-
-            lzwCompression.compress();
-
-            System.out.println("Compressed the TXT file into " + output.getAbsolutePath());
-
-            File finalOutput = new File(input.getAbsolutePath() + ".txt");
-
-            LZW lzwDecompression = new LZW(output, finalOutput);
-
-            lzwDecompression.decompress();
-
-            System.out.println("Decompressed the compressed TXT file into " + finalOutput.getAbsolutePath());
-
-            boolean filesIdentical = generic.checkIdenticalFiles(input, finalOutput);
-
-            System.out.print("The original and the decompressed files are: ");
-
-            if (filesIdentical) {
-                System.out.println("IDENTICAL (this is a good thing)");
-            } else {
-                System.out.println("DIFFERENT (something's not working right)");
+            if (firstChar == null) {
+                firstChar = c;
             }
 
-            assertTrue(filesIdentical);
-
+            lzwTree.add(c, _generic.getRandomInt());
         }
+
+        String prefix = lzwTree.prefix(firstChar.toString());
+        
+        assertEquals(1, prefix.length());
+    }
+
+    @Test
+    public void lzwToStringTest() {
+        File outputFile = new File(tempFolder.getRoot() + "/lzw.COMPRESSED");
+        LZW lzw = new LZW(inputFile, outputFile);
+        assertFalse(lzw.toString().isEmpty());
+    }
+
+    @Test
+    public void lzwNodeToStringTest() {
+        LZWNode lzwNode = new LZWNode();
+        assertFalse(lzwNode.toString().isEmpty());
+    }
+
+    @Test
+    public void lzwTreeToStringTest() {
+        LZWTree lzwTree = new LZWTree();
+        assertFalse(lzwTree.toString().isEmpty());
     }
 }

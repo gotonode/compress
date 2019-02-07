@@ -1,4 +1,4 @@
-package io.github.gotonode.compress.algorithms.benchmarking;
+package io.github.gotonode.compress.benchmarking;
 
 import io.github.gotonode.compress.algorithms.CompressAlgorithm;
 import io.github.gotonode.compress.algorithms.huffman.Huffman;

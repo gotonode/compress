@@ -2,6 +2,7 @@ package io.github.gotonode.compress.ui;
 
 import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
+import io.github.gotonode.compress.enums.TextStyles;
 import io.github.gotonode.compress.main.Main;
 
 import java.text.DecimalFormat;
@@ -14,6 +15,8 @@ import static io.github.gotonode.compress.enums.TextStyles.importantText;
 
 /**
  * This class handles printing to the console and reading from it.
+ *
+ * It is not tested and because of this it is ignored in code coverage.
  */
 public class UiController {
 
@@ -218,7 +221,7 @@ public class UiController {
      */
     public void printFileError() {
         System.out.println("An error occurred trying to access that file."
-                + "Maybe it doesn't exist or you don't have the necessary permissions?");
+                + " Maybe it doesn't exist or you don't have the necessary permissions?");
     }
 
     /**
@@ -279,7 +282,7 @@ public class UiController {
                 + " using your chosen file. No new files will be left as residue.");
 
         System.out.println(
-                "Consider choose a file that is not already compressed, as compressed files do not compress very well."
+                "Consider choosing a file that is not already compressed, as compressed files do not compress very well."
         );
     }
 
@@ -470,5 +473,17 @@ public class UiController {
 
     private String formatTwoDecimals(Object data) {
         return new DecimalFormat("#.##").format(data);
+    }
+
+    /**
+     * A static method callable from anywhere to print out an exception message.
+     *
+     * @param exception Pass the exception directly, and nothing else.
+     */
+    public static void printErrorMessage(Exception exception) {
+        System.out.println("An error occurred. Here's the exact error message for your (in)convenience:");
+        System.out.println(exception.getMessage());
+        System.out.println("We'll defer from printing the stack trace since nobody likes to see that.");
+        System.out.println("Please note that residual files might have been left behind.");
     }
 }

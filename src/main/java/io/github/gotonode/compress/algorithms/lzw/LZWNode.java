@@ -64,4 +64,15 @@ class LZWNode {
     public void setValue(int value) {
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "LZWNode{" +
+                "character=" + character +
+                ", leftNode=" + leftNode +
+                ", middleNode=" + middleNode +
+                ", rightNode=" + rightNode +
+                ", value=" + value +
+                '}';
+    }
 }

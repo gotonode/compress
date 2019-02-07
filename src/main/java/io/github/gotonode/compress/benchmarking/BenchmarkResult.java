@@ -1,4 +1,4 @@
-package io.github.gotonode.compress.algorithms.benchmarking;
+package io.github.gotonode.compress.benchmarking;
 
 /**
  * Holds the results from a benchmarking run.

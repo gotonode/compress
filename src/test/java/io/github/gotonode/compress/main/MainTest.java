@@ -2,22 +2,9 @@ package io.github.gotonode.compress.main;
 
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class MainTest {
-	
-	// MORE TESTS COMING SOON! Once I've got something that can actually be tested
-	// in a meaningful way. I'll expect week 4 to introduce real unit tests.
-
-    /**
-     * A sample test.
-     */
-    @Test
-    public void genericTest() {
-        assertTrue(true);
-    }
 
     /**
      * Tests that the app's name is correct.
@@ -34,6 +21,13 @@ public class MainTest {
     @Test
     public void mainTest() {
         Main main = new Main();
+        assertNotNull(main);
+    }
+
+    @Test
+    public void mainToStringTest() {
+        Main main = new Main();
+        assertNotNull(main.toString());
         assertFalse(main.toString().isEmpty());
     }
 }
