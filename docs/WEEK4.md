@@ -18,10 +18,6 @@ That I shouldn't implement features that might be needed unless they are actuall
 
 #### What is unclear
 
-When trying to decompress a file that hasn't been compressed, my app continously keeps writing to the output file. How exactly to detect if a file is compressed or not? Or is this just an issue that the user has to be careful about.
-
-I added a notice when trying to decompress a file of how many kilobytes are going to be written to disk.
-
 #### What I'll do next
 
 #### Hours used
