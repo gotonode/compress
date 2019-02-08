@@ -203,6 +203,11 @@ public class App {
 
         File targetFile = io.askForTargetFile(uiController);
 
+        if (sourceFile.equals(targetFile)) {
+            uiController.printFilesCannotBeTheSame();
+            return;
+        }
+
         if (targetFile.exists() && !targetFile.canWrite()) {
             uiController.printCannotWrite();
             return;

@@ -194,24 +194,24 @@ public class UiController {
     public void printInstructions() {
         System.out.println("Please choose a command from the following:");
 
-        System.out.println(commandText('H')
+        System.out.println(twoSpaces + commandText(Commands.COMPRESS_HUFFMAN.getCommand())
                 + ": Compress a file using " + algoText(Algorithms.HUFFMAN, true));
 
-        System.out.println(commandText('L')
+        System.out.println(twoSpaces + commandText(Commands.COMPRESS_LZW.getCommand())
                 + ": Compress a file using " + algoText(Algorithms.LZW, true));
 
-        System.out.println(commandText('D')
+        System.out.println(twoSpaces + commandText(Commands.DECOMPRESS.getCommand())
                 + ": Decompress a previously compressed file");
 
-        System.out.println(commandText('B')
+        System.out.println(twoSpaces + commandText(Commands.BENCHMARK.getCommand())
                 + ": Benchmark "
                 + algoText(Algorithms.HUFFMAN, true)
                 + " against " + algoText(Algorithms.LZW, true));
 
-        System.out.println(commandText('X')
+        System.out.println(twoSpaces + commandText(Commands.COMMANDS.getCommand())
                 + ": Print these instructions again");
 
-        System.out.println(commandText('E')
+        System.out.println(twoSpaces + commandText(Commands.EXIT.getCommand())
                 + ": Exit from the program");
     }
 

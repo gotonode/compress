@@ -144,6 +144,6 @@ Alternatively, the `[CTRL] + [Z]` shortcut will work.
 
 This app accepts any binary file as input. You can compress (and decompress), amongst other things, images, text documents, videos, music and even archives.
 
-As output, you'll specify the name of the file you want to contain the compressed/decompressed data. See the [Manual](MANUAL.md) for more information.
+As output, you'll specify the name of the file you want to contain the compressed/decompressed data.
 
 Notice! If your chosen output file exists, it will be overwritten without confirmation. The app will inform you about this.
