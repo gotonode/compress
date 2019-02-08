@@ -52,9 +52,9 @@ An infinite loop is used to repeatedly ask the user for commands, processing the
 
 Benchmarking Huffman against LZW is done by utilising `Benchmark.java` from this package.
 
-It takes as input a file to be used in the benchmarking process, and produces, as output, a `BenchmarkResult.java` file.
+It takes as input a file to be used in the benchmarking process, and produces, as output, a BenchmarkResult-object from the `BenchmarkResult.java` file.
 
-The aforementioned results file is a simple "struct" that contains three pieces of information; compression time (in milliseconds), decompression time (in milliseconds), and the file size of the compressed file (in bytes). All of these values are of the type long.
+The aforementioned results object is a simple "struct" that contains three pieces of information; compression time (in milliseconds), decompression time (in milliseconds), and the file size of the compressed file (in bytes). All of these values are of the type long.
 
 This functionality is called by the App-object. First, it runs the benchmarking code on the Huffman algorithm, and stores the results in a local variable. Then, it runs the same code, using the exact same input file, on LZW and stores the results.
 
@@ -94,7 +94,7 @@ This file is not tested and is ignored in code coverage.
 
 The purpose of this class is to instantiate the App-object. Before that, it creates UiController and IO -objects which it passes to the App-object via its constructor.
 
-Once that's done, it call's the App-object's run-method which contains an infinite loop. Once that loop is exited (by user request), control is returned to this file and the app will exit. 
+Once that's done, it calls the App-object's run-method which contains an infinite loop. Once that loop is exited (by user request), control is returned to this file and the program will terminate. 
 
 `Main.java` also has a lot of static final variables, such as:
 
@@ -131,15 +131,41 @@ When this class is used to ask for string values, they are primarily used to ind
 
 ##### Package "utils"
 
-Data structures in this project are implemented from scratch, and the only one of general function (apart from the Binary Search Tree used by LZW) is the minimum priority queue.
+Data structures in this project are implemented from scratch, and the only one of general function (apart from the trees and nodes used by Huffmand and LZW) is the minimum priority queue.
 
-`MinQueue.java` acts as that minimum queue data structure. It has the following functionality:
-* `offer` which adds an object into the queue, arranging the queue as necessary
-* `poll` returns the next object from the queue (with the minimum value)
-* `size` returns an integer indicating how many objects are present in this queue
+`MinQueue.java` acts as that minimum priority queue data structure. It has the following functionality:
+* `offer(Type type)` adds an object into the queue, arranging the queue as necessary
+* `poll()` returns the next object from the queue (with the minimum value)
+* `size()` returns an integer indicating how many objects are present in this queue
 
 It also has a constructor that takes no parameters. The size is defined dynamically and does not need to be defined in advance.
 
 #### Shortcomings
 
+If the output file exists, it will be overwritten without asking the user if they want to overwrite it. However, in the UI, information that this will happen is presented, so it shouldn't come as a surprise.
+
+LZW is working fine in regards to decompression and output file size. But currently it's compression time is way too long. Much bigger files can't be compressed at all, or the time it would take to do so would be too great. I'll see if I can fix this by the end of the course.
+
+On some systems, if the console (terminal, shell) doesn't interpret the ANSI escape sequences properly, they might be printed in with the normal output text. This creates a mess. But on most systems this shouldn't be an issue.
+
+Here's how it would look if the ANSI escaping doesn't work.
+
+```text
+Normal text here, and \u001B[1mHIGHLIGHTED TEXT HERE\u001b[0m, and again normal text here.
+```
+
 #### Sources
+
+Please see the following for more information.
+
+Generic (both):
+* [Algorithms, Part II](https://www.coursera.org/learn/algorithms-part2) (Coursera)
+* [Compression Algorithms: Huffman and Lempel-Ziv-Welch (LZW)](http://web.mit.edu/6.02/www/s2012/handouts/3.pdf) (MIT)
+
+Huffman:
+* [Huffman coding](https://en.wikipedia.org/wiki/Huffman_coding) (Wikipedia)
+* [Huffman Code](https://brilliant.org/wiki/huffman-encoding/) (Brilliant.org)
+
+Lempel-Ziv-Welch:
+* [Lempel–Ziv–Welch](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) (Wikipedia)
+* [LZW (Lempel-Ziv-Welch) Compression technique](https://www.geeksforgeeks.org/lzw-lempel-ziv-welch-compression-technique/) (GeeksforGeeks)
