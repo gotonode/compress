@@ -50,6 +50,12 @@ public class Main {
     // Make it look nice! Or disable console colors if they don't work.
     public static final boolean CONSOLE_COLORS = true;
 
+    // These codes are added at the beginning of compressed files, and checked
+    // when decompressing a file. If the file chosen for decompression doesn't
+    // start with either of these, an error is thrown.
+    public static final int HUFFMAN_CODE = 0xFFFFFFFF;
+    public static final int LZW_CODE = 0x80000000;
+
     /**
      * This is the main entry point for the program.
      *

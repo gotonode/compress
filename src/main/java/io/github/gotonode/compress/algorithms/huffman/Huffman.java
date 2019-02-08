@@ -77,9 +77,9 @@ public class Huffman implements CompressAlgorithm {
 
         int dataLength = 0;
 
-        // Write a bit to indicate that this file is Huffman coded.
+        // Write an integer to indicate that this file is Huffman coded.
         try {
-            binaryWriteTool.writeZeroBit();
+            binaryWriteTool.writeInt(Main.HUFFMAN_CODE);
         } catch (IOException ex) {
             UiController.printErrorMessage(ex);
             return false;
@@ -212,11 +212,11 @@ public class Huffman implements CompressAlgorithm {
     @Override
     public boolean decompress() {
 
-        // Read the first bit in. We don't do anything with it here. It
+        // Read the first integer in. We don't do anything with it here. It
         // was used to determine what algorithm was used to compress this
         // file.
         try {
-            binaryReadTool.readBool();
+            binaryReadTool.readInt();
         } catch (IOException ex) {
             UiController.printErrorMessage(ex);
             return false;

@@ -8,6 +8,7 @@ import io.github.gotonode.compress.enums.Algorithms;
 import io.github.gotonode.compress.enums.Commands;
 import io.github.gotonode.compress.io.BinaryReadTool;
 import io.github.gotonode.compress.io.IO;
+import io.github.gotonode.compress.main.Main;
 import io.github.gotonode.compress.ui.UiController;
 
 import java.io.File;
@@ -179,23 +180,30 @@ public class App {
             return;
         }
 
-        boolean algorithmBitCode = false;
+        // The first integer of a compressed file is used to identify the file
+        // as either Huffman- or LZW-coded. Incorrect integer values result in an error.
+        int algorithmCode = 0;
         int decompressedDataLength = 0;
 
         try {
             BinaryReadTool binaryReadTool = new BinaryReadTool(sourceFile);
-            algorithmBitCode = binaryReadTool.readBool();
+            algorithmCode = binaryReadTool.readInt();
             decompressedDataLength = binaryReadTool.readInt();
-        } catch (IOException e) {
-            e.printStackTrace();
+            binaryReadTool.close();
+        } catch (IOException ex) {
+            UiController.printErrorMessage(ex);
+            return;
         }
 
         Algorithms algorithm;
 
-        if (algorithmBitCode) {
+        if (algorithmCode == Main.LZW_CODE) {
             algorithm = Algorithms.LZW;
-        } else {
+        } else if (algorithmCode == Main.HUFFMAN_CODE) {
             algorithm = Algorithms.HUFFMAN;
+        } else {
+            uiController.printFileCorrupted();
+            return;
         }
 
         uiController.printAlgorithmDetected(algorithm);

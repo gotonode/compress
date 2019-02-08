@@ -486,4 +486,13 @@ public class UiController {
         System.out.println("We'll defer from printing the stack trace since nobody likes to see that.");
         System.out.println("Please note that residual files might have been left behind.");
     }
+
+    /**
+     * If a file chosen for decompression doesn't have a proper integer value
+     * at the beginning, print an error message.
+     */
+    public void printFileCorrupted() {
+        System.out.println("It seems that this file hasn't been compressed with either Huffman nor LZW via this app.");
+        System.out.println("Perhaps the file has been corrupted.");
+    }
 }
