@@ -7,6 +7,8 @@
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/app01.png)
 
+> Please notice! The current LZW implementation works, but is very slow when using larger files. The app will become unresponsive for the longest time if you try to compress a large file with LZW or use a large file with the benchmarking functionality. Thus, consider using smaller files (for now).
+
 In this project, you can compress files using either **Huffman coding** or **LZW (Lempel-Ziv-Welch)**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
 You can download a pre-built `JAR`-file from [here](https://github.com/gotonode/compress/releases).
