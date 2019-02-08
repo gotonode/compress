@@ -8,7 +8,7 @@ I'll be doing a comparison between the **Huffman coding** and **LZW** algorithms
 
 #### The problem
 
-The smaller the files, the faster they can be trasnferred over a network. Likewise the less storage space they occupy while being stored on a client or a server somewhere. Both Huffman coding and LZW work in binary mode to compress files of any type, so that they take up less space.
+The smaller the files, the faster they can be transferred over a network. Likewise the less storage space they occupy while being stored on a client or a server somewhere. Both Huffman coding and LZW work in binary mode to compress files of any type, so that they take up less space.
 
 #### How to use
 
@@ -36,7 +36,7 @@ Currently planned data:
 
 * Completely random ("pseudorandom") sequence of bits
 * "Lorem ipsum" text in the order of a few megabytes
-* Uncompresseable sequence of zero's
+* Incompressible sequence of zero's
 * An audio file (personally recorded)
 * A video file (personally recorded)
 * A PDF document (personally created)
@@ -47,10 +47,10 @@ I'll probably implement a feature which tests all of the files in a special `dat
 
 The time complexity for Huffman coding is O(n) and the same time complexity applies for LZW.
 
-It'll be interesting to see how these two algorithms fare up against each other. Obvisouly implementation matters, and the type and quality of it. A LZW done will could be 10 times as fast as a Huffman done wrong.
+It'll be interesting to see how these two algorithms fare up against each other. Obviously implementation matters, and the type and quality of it. Huffman done well could be 10 times as fast as LZW done poorly.
 
 #### Sources
 
-* [Huffman coding on Wikipedia](https://en.wikipedia.org/wiki/Huffman_coding) (used as a strating point for reference)
+* [Huffman coding on Wikipedia](https://en.wikipedia.org/wiki/Huffman_coding) (used as a starting point for reference)
 * [Huffman Code on Brilliant.org](https://brilliant.org/wiki/huffman-encoding/)
-* [Lempel–Ziv–Welch on Wikipedia](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) (used as a strating point for reference)
+* [Lempel–Ziv–Welch on Wikipedia](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) (used as a starting point for reference)
