@@ -34,6 +34,8 @@ My code coverage is about 80 % due to exceptions not being tested, and binary re
 
 Is 80 % acceptable, or should I find a way to suppress exceptions to increase code coverage?
 
+The biggest problem that I have currently is the poor performance of LZW compression. Next week I'll see if I can't improve it, but if I can't, I'm still okay with it as it is now.
+
 #### What I'll do next
 
 Fully and carefully evaluate my peer review project. I intend on being exhaustive because that's also a learning experience.

@@ -2,3 +2,4 @@ ignore:
  - "**/main/Main.java"
  - "**/ui/UiController.java"
  - "**/app/App.java"
+ - "**/io/IO.java"

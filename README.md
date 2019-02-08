@@ -7,6 +7,8 @@
 
 In this project, you can compress files using either **Huffman coding** or **LZW (Lempel-Ziv-Welch)**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
+You can download a pre-built `JAR`-file from [here](https://github.com/gotonode/compress/releases).
+
 #### App documentation
 General interest:
 * [Manual](docs/MANUAL.md) (how to use)
