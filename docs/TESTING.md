@@ -8,6 +8,22 @@ Source code for tests available on [GitHub](https://github.com/gotonode/compress
 
 A new file, [PERFORMANCE.md](PERFORMANCE.md), has been spawned (for clarity).
 
+#### How to run the tests
+
+Run the following command on your favorite shell/terminal/console/command prompt:
+
+```
+gradlew test --console verbose
+```
+
+If that doesn't work, try this one (especially on Windows):
+
+```
+gradlew.bat test --console verbose
+```
+
+If you don't want verbose output, you can remove `--console verbose` from the command.
+
 #### What has been tested and how
 
 `JUnit` was chosen as the testing framework. It had just got a new release, version 5, but its use was purposefully deferred within this project. So version 4.12 was used instead.
@@ -37,7 +53,7 @@ The Main-class as well as the UI components have been ignored in code coverage.
 
 The functionality provided by the app is tested directly without using any UI components.
 
-#### What hasn't been tested
+#### What hasn't been tested and why
 
 One might wonder why the code coverage isn't 100 %. I've set a soft target of 80 % for this project, due to the following reasons.
 
