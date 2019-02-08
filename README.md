@@ -22,7 +22,7 @@ Advanced interest:
 Geek interest:
 * [Javadoc](https://gotonode.github.io/compress) (code documentation, updated manually)
 
-#### Weekly reports:
+#### Weekly reports
 * [Week 1 Report](docs/WEEK1.md)
 * [Week 2 Report](docs/WEEK2.md)
 * [Week 3 Report](docs/WEEK3.md)
