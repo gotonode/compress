@@ -134,7 +134,7 @@ In case you forget about the commands, you can ask for them again.
 
 Simple as that.
 
-##### Command 'X', exit
+##### Command 'E', exit
 
 Once you're done with the app, use this command to exit.
 
