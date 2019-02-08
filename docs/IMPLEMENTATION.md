@@ -154,6 +154,10 @@ Here's how it would look if the ANSI escaping doesn't work.
 Normal text here, and \u001B[1mHIGHLIGHTED TEXT HERE\u001b[0m, and again normal text here.
 ```
 
+Each file compressed via this app has identification information at the beginning to indicate which compression algorithm was used to compress it. If that information is missing or invalid, the app won't attempt to decompress that file. However, it is feasible that a file not compressed by this app has data such that it matches the identification information, in which case the resulting decompressed file is not what the user would expect. Furthermore, and this is especially true with Huffman coding, when the app reads the data's length from the compressed file, that value might be really big and so the decompressed mangled file would also end up being very large. Potentially, the new file might cause the user's storage space to run out within minutes.
+
+At first, I was using a simple bit to indicate the algorithm (0 = Huffman, 1 = LZW), but later decided to change to a complete 32-bit integer. This is to make it even less likely that the app would accept a non-compressed file for decompression. Huffman will get 0x‭FFFFFFFF‬ (‭4294967295‬) and LZW will get 0x‭80000000‬ (‭2147483648‬) as their identification integers. This of course creates more overhead (8 bytes), which makes compressing very small files less productive. But it might still be worth it.
+
 #### Sources
 
 Please see the following for more information.
