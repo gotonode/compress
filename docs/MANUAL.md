@@ -59,12 +59,12 @@ Welcome to Compress (version 4)!
 You can find the latest version here: https://github.com/gotonode/compress/
 
 Please choose a command from the following:
-H: Compress a file using Huffman
-L: Compress a file using LZW
-D: Decompress a previously compressed file
-B: Benchmark Huffman against LZW
-X: Print these instructions again
-E: Exit from the program
+  H: Compress a file using Huffman
+  L: Compress a file using LZW
+  D: Decompress a previously compressed file
+  B: Benchmark Huffman against LZW
+  X: Print these instructions again
+  E: Exit from the program
 
 Command:
 ```
