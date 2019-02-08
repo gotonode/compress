@@ -1,5 +1,5 @@
 # Compress
-*Compare Huffman coding and LZW*
+*Compress, decompress and benchmark using Huffman coding and LZW*
 
 | Travis CI | Codacy | Codecov |
 | :-: | :-: | :-: |
