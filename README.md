@@ -15,6 +15,7 @@ Advanced interest:
 * [Definition](docs/DEFINITION.md) (what was planned)
 * [Implementation](docs/IMPLEMENTATION.md) (how it turned out)
 * [Testing](docs/TESTING.md) (how testing was done)
+* [Performance](docs/PERFORMANCE.md) (how the algorithms stack up)
 
 Geek interest:
 * [Javadoc](https://gotonode.github.io/compress) (code documentation, updated manually)

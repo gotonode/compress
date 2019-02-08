@@ -1,8 +1,12 @@
 # Testing
 
+Soft target for code coverage: **80 %**
+
 This document goes over the testing of this app.
 
-To browse the source code for the tests, follow [this](https://github.com/gotonode/compress/tree/master/src/test/java/io/github/gotonode/compress) link.
+Source code for tests available on [GitHub](https://github.com/gotonode/compress/tree/master/src/test/java/io/github/gotonode/compress).
+
+A new file, [PERFORMANCE.md](PERFORMANCE.md), has been spawned (for clarity).
 
 #### What has been tested and how
 
@@ -33,8 +37,21 @@ The Main-class as well as the UI components have been ignored in code coverage.
 
 The functionality provided by the app is tested directly without using any UI components.
 
-#### Performance
+#### What hasn't been tested
 
-Here you'll find performance testing results for both of the algorithms.
+One might wonder why the code coverage isn't 100 %. I've set a soft target of 80 % for this project, due to the following reasons.
 
-Soon.
+Exceptions are currently not being tested and, as far as I know, they cannot be ignored in the code coverage reports.
+
+Here's an example of an exception (Java):
+
+```java
+try {
+    this.binaryReadTool = new BinaryReadTool(source);
+} catch (IOException ex) {
+    UiController.printErrorMessage(ex);
+    return;
+}
+```
+
+Code in the `try`-section is tested, but the code in the `catch`-block is not.
