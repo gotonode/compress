@@ -8,8 +8,8 @@ package io.github.gotonode.compress.algorithms.lzw;
  * <p>
  * Keys are of type String and values are of type 32-bit integer.
  * <p>
- * For more information, please see the following URL:
- * <a href="https://en.wikipedia.org/wiki/Ternary_search_tree">Ternary search tree</a> (Wikipedia)
+ * For more information, please refer to the following sources:
+ * • <a href="https://en.wikipedia.org/wiki/Ternary_search_tree">Ternary search tree</a> (Wikipedia)
  */
 class LZWTree {
 

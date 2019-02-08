@@ -3,7 +3,8 @@ package io.github.gotonode.compress.utils;
 import java.util.PriorityQueue;
 
 /**
- * This is my own minimum priority queue. Work in progress.
+ * This is my own minimum priority queue. Work in progress. Currently
+ * it only encapsulates Java's PriorityQueue.
  *
  * @param <Type> What type should this queue consist of.
  */

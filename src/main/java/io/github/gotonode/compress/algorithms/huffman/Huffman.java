@@ -245,7 +245,7 @@ public class Huffman implements CompressAlgorithm {
         }
 
         // Now that we have the tree, we can start decompressing the
-        // the data and writing the characters to output as we go.
+        // data and writing the characters to output as we go.
         try {
             for (int i = 0; i < dataLength; i++) {
                 // Start from the root node.

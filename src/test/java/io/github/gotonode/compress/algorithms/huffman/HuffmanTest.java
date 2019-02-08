@@ -88,7 +88,7 @@ public class HuffmanTest {
     public void huffmanDecompressionTest() {
         File compressedFile = getCompressedFile();
 
-        File outputFile = new File(tempFolder.getRoot() + "/lzw.DECOMPRESSED");
+        File outputFile = new File(tempFolder.getRoot() + "/huffman.DECOMPRESSED");
 
         Huffman huffman = new Huffman(compressedFile, outputFile);
 
@@ -103,7 +103,7 @@ public class HuffmanTest {
      * @return The compressed file.
      */
     private File getCompressedFile() {
-        File outputFile = new File(tempFolder.getRoot() + "/lzw.COMPRESSED");
+        File outputFile = new File(tempFolder.getRoot() + "/huffman.COMPRESSED");
 
         Huffman huffman = new Huffman(inputFile, outputFile);
 
