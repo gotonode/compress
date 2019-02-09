@@ -53,8 +53,8 @@ public class Main {
     // These codes are added at the beginning of compressed files, and checked
     // when decompressing a file. If the file chosen for decompression doesn't
     // start with either of these, an error is thrown.
-    public static final int HUFFMAN_CODE = 0xFFFFFFFF;
-    public static final int LZW_CODE = 0x80000000;
+    public static final int HUFFMAN_CODE = 0xAAAAAAAA; // ‭2863311530‬
+    public static final int LZW_CODE = 0xBBBBBBBB; // ‭3149642683‬
 
     /**
      * This is the main entry point for the program.
