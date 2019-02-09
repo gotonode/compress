@@ -5,7 +5,7 @@
 | :-: | :-: | :-: |
 |[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) | [![codecov](https://codecov.io/gh/gotonode/compress/branch/master/graph/badge.svg)](https://codecov.io/gh/gotonode/compress) |
 
-![App](https://github.com/gotonode/compress/blob/master/docs/images/app01.png)
+![App](https://github.com/gotonode/compress/blob/master/docs/images/app02.png)
 
 > Please notice! The current LZW implementation works, but is very slow when using larger files. The app will become unresponsive for the longest time if you try to compress a large file with LZW or use a large file with the benchmarking functionality. Thus, consider using smaller files (for now).
 
