@@ -56,12 +56,12 @@ You'll find sample data that you can use in the [data](data) folder. The content
 
 More data (not created by me) can be found online with search query "`data compression corpora`".
 
-| name | type | format | size | contents |
-| :- | :- | :- | :-| :-|
-| [lorem_ipsum.txt](data/lorem_ipsum.txt) | TXT | text file | 92,6 KB | Lorem Ipsum |
-| [lorem_ipsum.docx](data/lorem_ipsum.docx) | DOCX | Word document | 41,2 KB | Lorem Ipsum |
-| [lorem_ipsum.pdf](data/lorem_ipsum.pdf) | PDF | PDF document | 199 KB | Lorem Ipsum |
-| [nice_picture.jpeg](data/nice_picture.jpeg) | JPEG† | JPEG picture | 1042 KB | an old picture of my keychain |
-| [just_an_image.png](data/just_an_image.png) | PNG | PNG image | 44,3 KB | image of some code |
+| name | type | format | size | contents | compresses |
+| :- | :- | :- | :- | :- | :- |
+| [lorem_ipsum.txt](data/lorem_ipsum.txt) | TXT | text file | 17,2 KB | Lorem Ipsum | very well |
+| [lorem_ipsum.docx](data/lorem_ipsum.docx) | DOCX | Word document | 19,6 KB | Lorem Ipsum | poorly |
+| [lorem_ipsum.pdf](data/lorem_ipsum.pdf) | PDF | PDF document | 95,4 KB | Lorem Ipsum | poorly |
+| [nice_picture.jpeg](data/nice_picture.jpeg) | JPEG† | JPEG picture | 83,9 KB | an old picture of my keychain | very poorly |
+| [just_an_image.png](data/just_an_image.png) | PNG | PNG image | 44,3 KB | image of some code | poorly |
 
 † the real name of a JPEG file is with the E ("Experts"), not just JPG without it (this was due to the 8.3 limit of older systems)
