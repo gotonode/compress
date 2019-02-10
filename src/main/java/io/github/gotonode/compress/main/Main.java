@@ -38,7 +38,7 @@ public class Main {
     // Pretty self-explanatory.
     public static final int BYTES_IN_A_KILOBYTE = 1024;
 
-    // We're using a codeword of 12, as that's the most common one.
+    // We're using a codeword of size 12, as that's the most common one.
     public static final int CODEWORD_WIDTH = 12;
 
     // We'll use 2 to the power of CODEWORD_WIDTH codewords in total (2^12 = 4096).

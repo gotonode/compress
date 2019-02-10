@@ -34,6 +34,18 @@ public class UiController {
     }
 
     /**
+     * A static method callable from anywhere to print out an exception message.
+     *
+     * @param exception Pass the exception directly, and nothing else.
+     */
+    public static void printErrorMessage(Exception exception) {
+        System.out.println("An error occurred. Here's the exact error message for your (in)convenience:");
+        System.out.println(exception.getMessage());
+        System.out.println("We'll defer from printing the stack trace since nobody likes to see that.");
+        System.out.println("Please note that residual files might have been left behind.");
+    }
+
+    /**
      * Prints a greeting message along with the app's name and version.
      */
     public void printGreetings() {
@@ -471,20 +483,8 @@ public class UiController {
         System.out.println(twoSpaces + "Decompression time results:");
     }
 
-    private String formatTwoDecimals(Object data) {
-        return new DecimalFormat("#.##").format(data);
-    }
-
-    /**
-     * A static method callable from anywhere to print out an exception message.
-     *
-     * @param exception Pass the exception directly, and nothing else.
-     */
-    public static void printErrorMessage(Exception exception) {
-        System.out.println("An error occurred. Here's the exact error message for your (in)convenience:");
-        System.out.println(exception.getMessage());
-        System.out.println("We'll defer from printing the stack trace since nobody likes to see that.");
-        System.out.println("Please note that residual files might have been left behind.");
+    public void printBenchmarkStart(Algorithms algorithm) {
+        System.out.println("Benchmarking with " + algorithm.getName() + "...");
     }
 
     /**
@@ -496,5 +496,9 @@ public class UiController {
                 algoText(Algorithms.HUFFMAN, true) + " nor "
                 + algoText(Algorithms.LZW, true) + " via this app.");
         System.out.println("Perhaps the file has been corrupted?");
+    }
+
+    private String formatTwoDecimals(Object data) {
+        return new DecimalFormat("#.##").format(data);
     }
 }

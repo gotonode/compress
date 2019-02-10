@@ -101,10 +101,14 @@ public class LZW implements CompressAlgorithm {
 
         LZWTree lzwTree = new LZWTree();
 
+        // Create the tree by first populating it with single characters
+        // through the alphabet (A to Z, 0 to 9 and so forth).
         for (int index = 0; index < Main.ALPHABET_SIZE; index++) {
             lzwTree.add((char) index, index);
         }
 
+        // Then create prefixed codewords for longer substrings. Optimally,
+        // a longer substring will get a shorter key.
         while (data.length() > 0) {
 
             String prefix = lzwTree.prefix(data);
@@ -128,6 +132,7 @@ public class LZW implements CompressAlgorithm {
             data = data.substring(temp);
         }
 
+        // Once the dictionary is done, write the ending character.
         try {
             binaryWriteTool.writeCodeword(Main.ALPHABET_SIZE);
         } catch (IOException ex) {

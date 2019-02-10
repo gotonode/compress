@@ -272,10 +272,13 @@ public class App {
 
         long originalSize = sourceFile.length();
 
-        uiController.printEmptyLine();
-
+        uiController.printBenchmarkStart(Algorithms.HUFFMAN);
         BenchmarkResult huffmanResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
+
+        uiController.printBenchmarkStart(Algorithms.LZW);
         BenchmarkResult lzwResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
+
+        uiController.printEmptyLine();
 
         uiController.printCompressionResultsHeader();
 

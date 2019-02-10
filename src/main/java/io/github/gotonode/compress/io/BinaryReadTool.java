@@ -176,15 +176,15 @@ public class BinaryReadTool {
      * @throws IOException If we can't read from the stream.
      */
     public String readData() throws IOException {
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         // Read characters until the buffer is emptied out.
         while (bitBuffer != -1) {
             char character = readChar();
-            output += character;
+            output.append(character);
         }
 
-        return output;
+        return output.toString();
     }
 
     /**
