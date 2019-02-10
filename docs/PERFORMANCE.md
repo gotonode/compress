@@ -24,7 +24,7 @@ The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
 | nice_picture.jpeg | 85959 | 86172 (+ 0,25 %) | 120040 (+ 39,65 %) |
 | just_an_image.png | 45412 | 44994 (- 0,92 %) | 64896 (+ 42,9 %) |
 
-Here's an illustrive image. Continue reading this file for Q&A.
+Here's an illustrive image. The sizes are in bytes and a lower value is better.
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/results01.png)
 
