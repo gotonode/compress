@@ -56,6 +56,10 @@ public class Main {
     public static final int HUFFMAN_CODE = 0xAAAAAAAA; // ‭2863311530‬
     public static final int LZW_CODE = 0xBBBBBBBB; // ‭3149642683‬
 
+    // Multiply the size of the priority queue by this amount, and also
+    // divide the size with the same amount. Usually no need to change.
+    public static final int PRIORITY_QUEUE_SCALE_FACTOR = 2;
+
     /**
      * This is the main entry point for the program.
      *

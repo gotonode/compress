@@ -333,7 +333,7 @@ public class Huffman implements CompressAlgorithm {
 
         // Repeatedly combines two trees of the smallest size together, until
         // only one tree is left.
-        while (nodes.size() > 1) {
+        while (nodes.getSize() > 1) {
 
             // The ordering here is important! Do not swap the right node
             // in front of the left node.
