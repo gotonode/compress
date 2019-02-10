@@ -3,10 +3,6 @@ package io.github.gotonode.compress.utils;
 import io.github.gotonode.compress.algorithms.huffman.HuffmanNode;
 import io.github.gotonode.compress.main.Main;
 
-// As I understood, these are okay to be used as-is.
-import java.util.Comparator;
-import java.util.Iterator;
-
 /**
  * This is my own minimum priority queue. Makes use of Java's
  * Iterable-functionality.
@@ -17,7 +13,7 @@ import java.util.Iterator;
  *
  * @param <Type> What type should this queue consist of.
  */
-public class MinQueue<Type> implements Iterable<Type> {
+public class MinQueue<Type> {
 
     // This array will hold the objects (between 0 and n).
     private Type[] array;
@@ -25,28 +21,11 @@ public class MinQueue<Type> implements Iterable<Type> {
     // Number of items on this queue.
     private int count; // Starts at 0, or empty.
 
-    // We use this to compare objects to each other.
-    private Comparator<Type> comparator;
-
-    // How much it can store initially. This class is dynamic, changing sizes as needed.
-    private int initialCapacity;
-
     /**
      * Create a new MinQueue. Initial capacity is set to 1.
      */
     public MinQueue() {
-        this.initialCapacity = 1;
-        this.array = (Type[]) new Object[initialCapacity + 1];
-    }
-
-    /**
-     * Create a new MinQueue with the specified initial capacity.
-     *
-     * @param initialCapacity The default is 1. You can set a different one.
-     */
-    private MinQueue(int initialCapacity) {
-        this.initialCapacity = initialCapacity;
-        this.array = (Type[]) new Object[initialCapacity + 1];
+        this.array = (Type[]) new Object[2];
     }
 
     /**
@@ -56,19 +35,6 @@ public class MinQueue<Type> implements Iterable<Type> {
      */
     public int getSize() {
         return count;
-    }
-
-    /**
-     * Checks to see if this queue is empty (has a size of 0).
-     *
-     * @return True if it's empty, false if it has elements in it.
-     */
-    private boolean isEmpty() {
-        if (getSize() == 0) {
-            return true;
-        }
-
-        return true;
     }
 
     /**
@@ -102,6 +68,7 @@ public class MinQueue<Type> implements Iterable<Type> {
     public void offer(Type type) {
 
         if (count == array.length - 1) {
+
             // Create a new array of double the size and replace the
             // old array with the new one.
             int newSize = array.length * Main.PRIORITY_QUEUE_SCALE_FACTOR;
@@ -131,16 +98,15 @@ public class MinQueue<Type> implements Iterable<Type> {
         // Ensure that the minimum queue validity remains.
         down();
 
-        if (count > 0) {
+        /*if (count > 0) {
             if (count == (array.length - 1 / 4)) {
 
                 // The old array is now too big, so we'll resize it by
                 // creating a new array and replacing the old one.
-
                 int newSize = array.length / Main.PRIORITY_QUEUE_SCALE_FACTOR;
                 resize(newSize);
             }
-        }
+        }*/
 
         return next;
     }
@@ -152,7 +118,8 @@ public class MinQueue<Type> implements Iterable<Type> {
      * @param amount Change by this amount.
      */
     private void up(int amount) {
-        while (amount > 1 && greater(amount / 2, amount)) {
+
+        while (amount > 1 && greaterThan(amount / 2, amount)) {
             swap(amount, amount / 2);
             amount = amount / 2;
         }
@@ -170,12 +137,12 @@ public class MinQueue<Type> implements Iterable<Type> {
             int j = 2 * amount;
 
             if (j < count) {
-                if (greater(j, j + 1)) {
+                if (greaterThan(j, j + 1)) {
                     j++;
                 }
             }
 
-            if (!greater(amount, j)) {
+            if (!greaterThan(amount, j)) {
                 break;
             }
 
@@ -191,12 +158,13 @@ public class MinQueue<Type> implements Iterable<Type> {
      * @param second Item from the array with this index.
      * @return True if the first is greater than the second, false otherwise.
      */
-    private boolean greater(int first, int second) {
-        if (comparator == null) {
-            return ((Comparable<Type>) array[first]).compareTo(array[second]) > 0;
-        } else {
-            return comparator.compare(array[first], array[second]) > 0;
-        }
+    private boolean greaterThan(int first, int second) {
+
+        Comparable<Type> comparable = (Comparable<Type>) array[first];
+
+        int result = comparable.compareTo(array[second]);
+
+        return result > 0;
     }
 
     /**
@@ -211,43 +179,4 @@ public class MinQueue<Type> implements Iterable<Type> {
         array[first] = array[second];
         array[second] = temp;
     }
-
-    /**
-     * Returns an iterator over elements of the MinQueue's type.
-     *
-     * @return The new iterator.
-     */
-    @Override
-    public Iterator<Type> iterator() {
-        return new HeapIterator();
-    }
-
-    /**
-     * This encapsulates Java's Iterator.
-     */
-    private class HeapIterator implements Iterator<Type> {
-
-        private MinQueue<Type> temp;
-
-        HeapIterator() {
-            temp = new MinQueue<>(count);
-
-            for (int i = 1; i <= count; i++) {
-                temp.offer(array[i]);
-            }
-        }
-
-        public boolean hasNext() {
-            if (temp.isEmpty()) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        public Type next() {
-            return temp.poll();
-        }
-    }
-
 }
