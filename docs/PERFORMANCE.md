@@ -8,6 +8,8 @@ Because we are primarily interested in the size of the compressed file, we'll fo
 
 All of the files that we benchmarked (compression) were also decompressed to verify that the compression actually worked. The decompressed file was then compared with the original to see that they were an exact (100 %) match, and that not a single bit went missing or got corrupted.
 
+Please note! These tests have been run on 2019-02-10. If your results differ using the same data, it's most likely because the algorithms have changed from that date. You can always get a version of this app from the past to confirm these are actual benchmarking results. The test data is not updated after each new version.
+
 #### Results
 
 In the following table we list the original and compressed sizes for the files found in the [data](../data) folder.
@@ -35,6 +37,8 @@ Here's an illustrive image. Continue reading this file for Q&A.
   * Compressing an already compressed file usually results in a compressed file that is about the same size, or perhaps a little bit bigger or smaller. The new compressed file might be bigger than the original because of the overhead involved. Overhead is data added to the input data for processing purposes.
   
   * It would seem that with LZW it isn't wise to compress files that are already compressed. With Huffman, there's a chance that the new file is actually a little bit smaller, so it might be worth it to give it a shot.
+  
+  * It's common knowledge that JPEG files are compressed out of the world, and even Huffman couldn't bring the test file's size down but managed to increase it a bit (due to overhead and other issues).
   
 * Any further observations?
 
