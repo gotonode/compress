@@ -35,3 +35,7 @@ The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
   * Just as one would expect, only the TXT file compresses well.
   
   * Huffman doesn't create much overhead, but LZW can in some cases because of the dictionary that it builds. This causes LZW-compressed files to get much bigger than the original, when that original doesn't compress very well.
+  
+  * LZW performs very well on the Lorem Ipsum text because it contains a lot of word repetitions (meaning that the same word appears many times within the file). In LZW's dictionary, such longer words would get a shorter codeword to represent them, saving space.
+  
+  * Huffman's performance on the files that were already heavily compressed comes as a minor surprise. Because of the way Huffman works, it is interesting to see that it can squeeze even more out of the files.
