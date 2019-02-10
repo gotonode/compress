@@ -22,8 +22,16 @@ The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/results01.png)
 
-Why did the size increase in some of the cases?
+#### Q&A
 
-Some files are already pretty well compressed, such as PDF files and JPEG files. Others, like TXT files, are not.
+* Why did the size increase in some of the cases?
 
-Compressing an already compressed file usually results in a compressed file that is about the same size, or perhaps a little bit bigger or smaller. The new compressed file might be bigger than the original because of the overhead involved. Overhead is data added to the input data for processing purposes.
+  * Some files are already pretty well compressed, such as PDF files and JPEG files. Others, like TXT files, are not.
+
+  * Compressing an already compressed file usually results in a compressed file that is about the same size, or perhaps a little bit bigger or smaller. The new compressed file might be bigger than the original because of the overhead involved. Overhead is data added to the input data for processing purposes.
+  
+* Any further observations?
+
+  * Just as one would expect, only the TXT file compresses well.
+  
+  * Huffman doesn't create much overhead, but LZW can in some cases because of the dictionary that it builds. This causes LZW-compressed files to get much bigger than the original, when that original doesn't compress very well.
