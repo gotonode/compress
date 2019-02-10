@@ -492,7 +492,9 @@ public class UiController {
      * at the beginning, print an error message.
      */
     public void printFileCorrupted() {
-        System.out.println("It seems that this file hasn't been compressed with either Huffman nor LZW via this app.");
-        System.out.println("Perhaps the file has been corrupted.");
+        System.out.println("It seems that this file hasn't been compressed with either " +
+                algoText(Algorithms.HUFFMAN, true) + " nor "
+                + algoText(Algorithms.LZW, true) + " via this app.");
+        System.out.println("Perhaps the file has been corrupted?");
     }
 }

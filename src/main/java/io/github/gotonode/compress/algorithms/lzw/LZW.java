@@ -136,6 +136,7 @@ public class LZW implements CompressAlgorithm {
         }
 
         try {
+            // Write the bits to the file and close the stream. It cannot be reused.
             binaryWriteTool.flushAndClose();
             binaryReadTool.close();
         } catch (IOException ex) {
@@ -143,20 +144,26 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // The compression operation succeeded, so a true is returned.
         return true;
     }
 
     @Override
     public boolean decompress() {
 
-        // Read the first integer in. We don't do anything with it here. It
-        // was used to determine what algorithm was used to compress this
-        // file.
+        // Read the first integer in. It is used to determine what algorithm
+        // was used to compress this file.
+        int code;
+
         try {
-            binaryReadTool.readInt();
+            code = binaryReadTool.readInt();
         } catch (IOException ex) {
             UiController.printErrorMessage(ex);
             return false;
+        }
+
+        if (code != Main.LZW_CODE) {
+            throw new RuntimeException("Corrupted file.");
         }
 
         // We'll read (as a 32-bit integer) the data area's length from
@@ -216,10 +223,10 @@ public class LZW implements CompressAlgorithm {
             }
 
             value = s;
-
         }
 
         try {
+            // Write the bits to the file and close the stream. It cannot be reused.
             binaryWriteTool.flushAndClose();
             binaryReadTool.close();
         } catch (IOException ex) {
@@ -227,6 +234,8 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // At this point, everything went well and we can return
+        // a true boolean value to mark the success.
         return true;
     }
 

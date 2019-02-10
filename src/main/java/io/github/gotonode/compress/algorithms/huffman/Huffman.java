@@ -212,14 +212,19 @@ public class Huffman implements CompressAlgorithm {
     @Override
     public boolean decompress() {
 
-        // Read the first integer in. We don't do anything with it here. It
-        // was used to determine what algorithm was used to compress this
-        // file.
+        // Read the first integer in. It is used to determine what algorithm
+        // was used to compress this file.
+        int code;
+
         try {
-            binaryReadTool.readInt();
+            code = binaryReadTool.readInt();
         } catch (IOException ex) {
             UiController.printErrorMessage(ex);
             return false;
+        }
+
+        if (code != Main.HUFFMAN_CODE) {
+            throw new RuntimeException("Corrupted file.");
         }
 
         // We'll read (as a 32-bit integer) the data area's length from
