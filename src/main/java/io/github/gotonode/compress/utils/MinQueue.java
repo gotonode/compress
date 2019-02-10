@@ -222,6 +222,9 @@ public class MinQueue<Type> implements Iterable<Type> {
         return new HeapIterator();
     }
 
+    /**
+     * This encapsulates Java's Iterator.
+     */
     private class HeapIterator implements Iterator<Type> {
 
         private MinQueue<Type> temp;
