@@ -16,13 +16,13 @@ In the following table we list the original and compressed sizes for the files f
 
 The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
 
-| | original | Huffman | LZW |
-| :- | :- | :- | :- |
-| lorem_ipsum.txt | 17638 | 9519 (- 46,03 %) | 7400 (- 58,05 %) |
-| lorem_ipsum.docx | 20164 | 19418 (- 3,7 %) | 25267 (+ 25,31 %) |
-| lorem_ipsum.pdf | 97786 | 96221 (- 1,6 %) | 129392 (+ 32,32 %) |
-| nice_picture.jpeg | 85959 | 86172 (+ 0,25 %) | 120040 (+ 39,65 %) |
-| just_an_image.png | 45412 | 44994 (- 0,92 %) | 64896 (+ 42,9 %) |
+| file | original | Huffman | LZW | winner |
+| :- | :- | :- | :- | :- |
+| lorem_ipsum.txt | 17638 | 9519 (- 46,03 %) | 7400 (- 58,05 %) | x |
+| lorem_ipsum.docx | 20164 | 19418 (- 3,7 %) | 25267 (+ 25,31 %) | x |
+| lorem_ipsum.pdf | 97786 | 96221 (- 1,6 %) | 129392 (+ 32,32 %) | x |
+| nice_picture.jpeg | 85959 | 86172 (+ 0,25 %) | 120040 (+ 39,65 %) | x |
+| just_an_image.png | 45412 | 44994 (- 0,92 %) | 64896 (+ 42,9 %) | x |
 
 Here's an illustrive image. The sizes are in bytes and a lower value is better.
 
