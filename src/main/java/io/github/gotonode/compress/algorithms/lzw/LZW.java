@@ -119,6 +119,8 @@ public class LZW implements CompressAlgorithm {
 
         long start;
 
+        int offset = 0;
+
         // Then create prefixed codewords for longer substrings. Optimally,
         // a longer substring will get a shorter key.
         while (data.length() > 0) {
@@ -186,6 +188,8 @@ public class LZW implements CompressAlgorithm {
 
             // It seems that the substring-part of this loop takes about
             // 86 % of the total time. Biggest gains can be won here.
+
+            offset += prefixLength;
 
             // For testing purposes. Ignore the following.
             timeSpentSeekingForward += System.currentTimeMillis() - start;
