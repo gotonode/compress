@@ -152,7 +152,7 @@ Data structures in this project are implemented from scratch, and the only one o
 `MinQueue.java` acts as that minimum priority queue data structure. It has the following functionality:
 * `offer(Type type)` adds an object into the queue, arranging the queue as necessary
 * `poll()` returns the next object from the queue (with the minimum value)
-* `size()` returns an integer indicating how many objects are present in this queue
+* `getSize()` returns an integer indicating how many objects are present in this queue
 
 It also has a constructor that takes no parameters. The size is defined dynamically and does not need to be defined in advance.
 
