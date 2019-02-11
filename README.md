@@ -58,11 +58,11 @@ More data (not created by me) can be found online with search query "`data compr
 
 | name | type | format | size | contents | compresses |
 | :- | :- | :- | :- | :- | :- |
-| [lorem_ipsum.txt](data/lorem_ipsum.txt) | TXT | text file | 17,2 KB | Lorem Ipsum | very well |
+| [binary_search_tree.java](data/binary_search_tree.java) | JAVA | Java source code | 12,8 KB | sampling of my code | very well |
+| [keychain.jpeg](data/keychain.jpeg) | JPEG† | JPEG picture | 83,9 KB | an old picture of my keychain | very poorly |
 | [lorem_ipsum.docx](data/lorem_ipsum.docx) | DOCX | Word document | 19,6 KB | Lorem Ipsum | poorly |
 | [lorem_ipsum.pdf](data/lorem_ipsum.pdf) | PDF | PDF document | 95,4 KB | Lorem Ipsum | poorly |
-| [nice_picture.jpeg](data/nice_picture.jpeg) | JPEG† | JPEG picture | 83,9 KB | an old picture of my keychain | very poorly |
-| [just_an_image.png](data/just_an_image.png) | PNG | PNG image | 44,3 KB | image of some code | poorly |
-| [binary_search_tree.java](data/binary_search_tree.java) | JAVA | Java source code | 12,8 KB | sampling of my code | very well |
+| [lorem_ipsum.txt](data/lorem_ipsum.txt) | TXT | text file | 17,2 KB | Lorem Ipsum | very well |
+| [screenshot.png](data/screenshot.png) | PNG | PNG image | 53,6 KB | screenshot from Windows | poorly |
 
 † the real name of a JPEG file is with the E ("Experts"), not just JPG without it (this was due to the 8.3 limit of older systems)
