@@ -1,7 +1,5 @@
 # Performance
 
-I chose to split this document from [TESTING.md](TESTING.md) for clarity reasons.
-
 Here you can read about the performance benchmarking run on the two algorithms (Huffman, LZW).
 
 Because we are primarily interested in the size of the compressed file, we'll focus on that here. Compression and decompression speeds are of lesser concern in this case.
