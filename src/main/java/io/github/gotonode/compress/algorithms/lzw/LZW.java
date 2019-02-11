@@ -120,6 +120,7 @@ public class LZW implements CompressAlgorithm {
         long start;
 
         int offset = 0;
+        int itemsInTree = 0;
 
         // Then create prefixed codewords for longer substrings. Optimally,
         // a longer substring will get a shorter key.
@@ -174,6 +175,7 @@ public class LZW implements CompressAlgorithm {
             // we'll add it to the tree for further processing.
             if (prefixLength < data.length() && Main.CODEWORD_COUNT > endOfFile) {
                 lzwTree.add(data.substring(0, prefixLength + 1), endOfFile);
+                itemsInTree++;
                 endOfFile++;
             }
 
