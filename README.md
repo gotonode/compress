@@ -59,6 +59,7 @@ More data (not created by me) can be found online with search query "`data compr
 | name | type | format | size | contents | compresses |
 | :- | :- | :- | :- | :- | :- |
 | [binary_search_tree.java](data/binary_search_tree.java) | JAVA | Java source code | 12,8 KB | sampling of my code | very well |
+| [creatures.py](data/binary_search_tree.java) | PY | Python source code | 12,3 KB | an entire Python app | very well |
 | [keychain.jpeg](data/keychain.jpeg) | JPEG† | JPEG picture | 83,9 KB | an old picture of my keychain | very poorly |
 | [lorem_ipsum.docx](data/lorem_ipsum.docx) | DOCX | Word document | 19,6 KB | Lorem Ipsum | poorly |
 | [lorem_ipsum.pdf](data/lorem_ipsum.pdf) | PDF | PDF document | 95,4 KB | Lorem Ipsum | poorly |
