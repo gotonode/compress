@@ -79,6 +79,10 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // Contains all of the data. Not practical with larger files. If
+        // a file is larger than available physical memory, virtual memory
+        // is used and that means HDD/SDD reading and writing which is a
+        // lot slower than pure-RAM processing.
         String data;
 
         try {
@@ -107,11 +111,43 @@ public class LZW implements CompressAlgorithm {
             lzwTree.add((char) index, index);
         }
 
+        // These are used to test where the biggest performance gains can be gained.
+        long timeSpentFetchingPrefixes = 0;
+        long timeSpentWritingCodewords = 0;
+        long timeSpentAddingNodesToTree = 0;
+        long timeSpentSeekingForward = 0;
+
+        long start;
+
         // Then create prefixed codewords for longer substrings. Optimally,
         // a longer substring will get a shorter key.
         while (data.length() > 0) {
 
+            // TODO: This whole function is quite slow.
+
+            // It contains measuring code. Go to the Main-class to turn verbose
+            // debug logging on to see the results.
+
+            // I do believe it's quite effective at what it does (in finding
+            // the prefixes), but this comes at a performance/memory cost.
+
+            // Possible remedies:
+            // - empty the dictionary (tree) intermittently
+            // - don't read the full data as a String
+            // - read the full data, but as an array of characters
+            // - write in a different loop
+
+            // For testing purposes. Ignore the following.
+            start = System.currentTimeMillis();
+            // For testing purposes. Ignore the previous.
+
             String prefix = lzwTree.prefix(data);
+
+            // For testing purposes. Ignore the following.
+            timeSpentFetchingPrefixes += System.currentTimeMillis() - start;
+
+            start = System.currentTimeMillis();
+            // For testing purposes. Ignore the previous.
 
             try {
                 binaryWriteTool.writeCodeword(lzwTree.get(prefix));
@@ -120,16 +156,52 @@ public class LZW implements CompressAlgorithm {
                 return false;
             }
 
-            int temp = prefix.length();
+            // For testing purposes. Ignore the following.
+            timeSpentWritingCodewords += System.currentTimeMillis() - start;
+            // For testing purposes. Ignore the previous.
 
-            if (temp < data.length()) {
-                if (Main.CODEWORD_COUNT > endOfFile) {
-                    lzwTree.add(data.substring(0, temp + 1), endOfFile++);
-                }
+            // Cached for debugging purposes (so we don't need to constantly
+            // pop into the method to fetch the value).
+            int prefixLength = prefix.length();
+
+            // For testing purposes. Ignore the following.
+            start = System.currentTimeMillis();
+            // For testing purposes. Ignore the previous.
+
+            // If the prefixes length is less than of the remaining data's length,
+            // we'll add it to the tree for further processing.
+            if (prefixLength < data.length() && Main.CODEWORD_COUNT > endOfFile) {
+                lzwTree.add(data.substring(0, prefixLength + 1), endOfFile);
+                endOfFile++;
             }
 
+            // For testing purposes. Ignore the following.
+            timeSpentAddingNodesToTree += System.currentTimeMillis() - start;
+
+            start = System.currentTimeMillis();
+            // For testing purposes. Ignore the previous.
+
             // Seek forward by how much progress we just made.
-            data = data.substring(temp);
+            data = data.substring(prefixLength);
+
+            // It seems that the substring-part of this loop takes about
+            // 86 % of the total time. Biggest gains can be won here.
+
+            // For testing purposes. Ignore the following.
+            timeSpentSeekingForward += System.currentTimeMillis() - start;
+            // For testing purposes. Ignore the previous.
+        }
+
+        if (Main.DEBUG) {
+            System.out.println("Time spent finding prefixes (ms): " + timeSpentFetchingPrefixes);
+            System.out.println("Time spent writing codewords (ms): " + timeSpentWritingCodewords);
+            System.out.println("Time spent adding nodes to tree (ms): " + timeSpentAddingNodesToTree);
+            System.out.println("Time spent seeking forward (ms): " + timeSpentSeekingForward);
+
+            long total = timeSpentAddingNodesToTree + timeSpentFetchingPrefixes
+                    + timeSpentSeekingForward + timeSpentWritingCodewords;
+
+            System.out.println("Total time spent (ms): " + total);
         }
 
         // Once the dictionary is done, write the ending character.
@@ -182,18 +254,25 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // Create a table of Strings that contains all of our codewords.
         String[] table = new String[Main.CODEWORD_COUNT];
 
+        // This index is used past the following loop. That's why it's
+        // defined here and not in the loop itself.
         int index;
 
+        // Creates the dictionary (table) with single-byte characters.
         for (index = 0; index < Main.ALPHABET_SIZE; index++) {
             table[index] = String.valueOf((char) index);
         }
 
+        // We'll start here (next step from index). Set it to empty.
         table[index++] = "";
 
+        // Stores the codeword we're processing. Useful for debugging.
         int codeword;
 
+        // Read in the very first codeword.
         try {
             codeword = binaryReadTool.readCodeword();
         } catch (IOException ex) {
@@ -201,8 +280,13 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // Used to hold the codeword value from the table. Updated with
+        // new values from the table with added characters from the input stream.
         String value = table[codeword];
 
+        // Read in data from the compressed file (codewords) and write them
+        // to the output file. Once we have exhausted the codeword-base
+        // exit the loop.
         while (true) {
 
             try {
@@ -213,21 +297,28 @@ public class LZW implements CompressAlgorithm {
                 return false;
             }
 
+            // We have it all. Time to exit the loop.
             if (codeword == Main.ALPHABET_SIZE) {
                 break;
             }
 
-            String s = table[codeword];
+            // Read in the next value from the table. Store it for convenience.
+            String current = table[codeword];
 
+            // If our index matches the current codeword, prepare for
+            // the value to be changed. Add the first character of it.
             if (index == codeword) {
-                s = value + value.charAt(0);
+                current = value + value.charAt(0);
             }
 
+            // If we can, place the newly-generated value into the next
+            // available slot on the table.
             if (index < Main.CODEWORD_COUNT) {
-                table[index++] = value + s.charAt(0);
+                table[index++] = value + current.charAt(0);
             }
 
-            value = s;
+            // Move on the process the next value, replacing the old one.
+            value = current;
         }
 
         try {

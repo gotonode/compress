@@ -158,6 +158,29 @@ Each file compressed via this app has identification information at the beginnin
 
 At first, I was using a simple bit to indicate the algorithm (0 = Huffman, 1 = LZW), but later decided to change to a complete 32-bit integer. This is to make it even less likely that the app would accept a non-compressed file for decompression. Huffman will get 0x‭AAAAAAAA (‭‭2863311530‬) and LZW will get 0x‭‭BBBBBBBB (‬‭3149642683‬) as their identification integers. This of course creates more overhead (8 bytes), which makes compressing very small files less productive. But it might still be worth it. Choosing integers such as 0 or 2^32 - 1 for the ID is not optimal due to them being so common.
 
+The biggest shortcoming, however, is LZW compression performance. Here's some sample output from my tests:
+
+```text
+Name of your source file (must already exist): data/nice_picture.jpeg
+Name of your target file (will be overwritten if it exists): nice_picture.lzw
+Time spent finding prefixes (ms): 175
+Time spent writing codewords (ms): 82
+Time spent adding nodes to tree (ms): 11
+Time spent seeking forward (ms): 1633
+Total time spent (ms): 1901
+Done! Compression with LZW was successful, and your new and tiny file is located at 'nice_picture.lzw'.
+```
+
+As can be seen, about 86 % of the total operation time (compression) is taken up by what I chose to call seeking forward. Essentially it's this part of the code:
+
+```java
+data = data.substring(prefixLength);
+```
+
+For the next iteration of the loop, we use a subset of the data for finding prefixes for the codewords. It would seem that, in Java at least, this internal algorithm isn't the most effective for what we're trying to accomplish.
+
+Finding a better way to do this (perhaps with just an index integer) would net the greatest compression performance gains.
+
 #### Sources
 
 Please see the following for more information.

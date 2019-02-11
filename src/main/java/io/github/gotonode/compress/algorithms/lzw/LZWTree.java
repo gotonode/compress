@@ -24,15 +24,26 @@ class LZWTree {
      */
     int get(String key) {
 
+        // Start with displacement 0 (no displacement).
         LZWNode lzwNode = getNode(rootLzwNode, key, 0);
 
         if (lzwNode == null) {
+            // Returns -1 if no node is found.
             return -1;
         } else {
+            // Returns a non-negative value if it is found.
             return lzwNode.getValue();
         }
     }
 
+    /**
+     * Retrieves a node that has the specific key. Uses a displacement integer.
+     *
+     * @param node         The node to start from (either recursively or from the root).
+     * @param key          The key (String) to search for.
+     * @param displacement Also called an offset.
+     * @return A new node with the given parameters.
+     */
     private LZWNode getNode(LZWNode node, String key, int displacement) {
 
         if (node == null) {
@@ -40,6 +51,9 @@ class LZWTree {
         }
 
         char character = key.charAt(displacement);
+
+        // Recurse through the tree, choosing either the left, middle or right
+        // child node to go to depending on the character value and the displacement.
 
         if (character < node.getCharacter()) {
             return getNode(node.getLeftNode(), key, displacement);
@@ -66,10 +80,12 @@ class LZWTree {
      */
     String prefix(String data) {
 
+        // Return null if our data is exhausted (empty).
         if (data.length() == 0) {
             return null;
         }
 
+        // This is used when returning data. Keep an eye out for it in debugging.
         int length = 0;
 
         // Start at the root.
@@ -77,6 +93,10 @@ class LZWTree {
 
         int index = 0;
 
+        // Go through the tree in a non-recursive way. Depending on the
+        // character, choose either the left, middle or right child node
+        // and continue from there unless we arrive at an empty node or
+        // our index goes over the data's length.
         while (lzwNode != null && index < data.length()) {
 
             char character = data.charAt(index);
@@ -92,6 +112,7 @@ class LZWTree {
                 index++;
 
                 if (lzwNode.getValue() != -1) {
+                    // If the value is non-negative, update the length.
                     length = index;
                 }
 
@@ -122,6 +143,15 @@ class LZWTree {
         rootLzwNode = addNode(rootLzwNode, key, value, 0);
     }
 
+    /**
+     * Adds a node into the ternary search trie.
+     *
+     * @param node         The node (usually the root) to add the new node into.
+     * @param key          The String key for this specific node.
+     * @param value        Used for relational management.
+     * @param displacement May also be called an offset. Used with the key.
+     * @return Returns the new node.
+     */
     private LZWNode addNode(LZWNode node, String key, int value, int displacement) {
 
         char character = key.charAt(displacement);
