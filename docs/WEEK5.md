@@ -25,14 +25,14 @@ I'll return to this project at a later time during my studies, if there are stil
 Update! I identified the issue. Here's a snapshot of my test results:
 
 ```text
-Name of your source file (must already exist): data/nice_picture.jpeg
-Name of your target file (will be overwritten if it exists): nice_picture.lzw
+Name of your source file (must already exist): data/keychain.jpeg
+Name of your target file (will be overwritten if it exists): keychain.lzw
 Time spent finding prefixes (ms): 175
 Time spent writing codewords (ms): 82
 Time spent adding nodes to tree (ms): 11
 Time spent seeking forward (ms): 1633
 Total time spent (ms): 1901
-Done! Compression with LZW was successful, and your new and tiny file is located at 'nice_picture.lzw'.
+Done! Compression with LZW was successful, and your new and tiny file is located at 'keychain.lzw'.
 ```
 
 Now I know which part is taking 86 % of the time (LZW compression). That was the easy part. For the final week, well, I'll see if it can't be made at least somewhat faster.
