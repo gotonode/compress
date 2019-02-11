@@ -18,6 +18,22 @@ Software design philosophies & techniques in use include:
 * single-purpose principle
 * interface segregation principle
 
+#### File structure
+
+Compressed file contents are showcased here.
+
+For Huffman:
+
+| 32 bits | 32 bits | varies | varies |
+| :-: | :-: | :-: | :-: |
+| identification | data's length | Huffman table | Huffman data |
+
+For LZW:
+
+| 32 bits | 32 bits | varies | 8 bits |
+| :-: | :-: | :-: | :-: |
+| identification | data's length | LZW dictionary | ending codeword |
+
 #### Package structure
 
 Here we'll go over the different packages and what they contain.
