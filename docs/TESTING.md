@@ -1,12 +1,10 @@
 # Testing
 
-Soft target for code coverage: **80 %**
+Soft target for code coverage: **80 %** (with exceptions not being tested)
 
 This document goes over the testing of this app.
 
 Source code for tests available on [GitHub](https://github.com/gotonode/compress/tree/master/src/test/java/io/github/gotonode/compress).
-
-A new file, [PERFORMANCE.md](PERFORMANCE.md), has been spawned (for clarity).
 
 #### How to run the tests
 
