@@ -7,7 +7,7 @@
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/app02.png)
 
-> Please notice! The current LZW implementation works, but is very slow when using larger files (over 256 kB). The app will become unresponsive for the longest time if you try to compress a large file with LZW or use a large file with the benchmarking functionality. Thus, consider using smaller files (for now).
+> Please notice! The current LZW implementation works, but is very slow when using larger files (over 256 kB). The app will become unresponsive for the longest time if you try to compress a large file with LZW or use a large file with the benchmarking functionality. Thus, consider using smaller files (for now). Update! I have identified the issue. The loop in question can be found on [GitHub](https://github.com/gotonode/compress/blob/517a857048fa58e3ab633f0eb4c0ec63c45b3b33/src/main/java/io/github/gotonode/compress/algorithms/lzw/LZW.java#L126). And the part that's causing 86 % of the compression time is [here](https://github.com/gotonode/compress/blob/517a857048fa58e3ab633f0eb4c0ec63c45b3b33/src/main/java/io/github/gotonode/compress/algorithms/lzw/LZW.java#L187).
 
 In this project, you can compress files using either **Huffman coding** or **LZW (Lempel-Ziv-Welch)**. Decompression, as well as comparisons between the two algorithms, are also possible.
 
