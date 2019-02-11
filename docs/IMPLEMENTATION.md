@@ -177,14 +177,14 @@ At first, I was using a simple bit to indicate the algorithm (0 = Huffman, 1 = L
 The biggest shortcoming, however, is LZW compression performance. Here's some sample output from my tests:
 
 ```text
-Name of your source file (must already exist): data/nice_picture.jpeg
-Name of your target file (will be overwritten if it exists): nice_picture.lzw
+Name of your source file (must already exist): data/keychain.jpeg
+Name of your target file (will be overwritten if it exists): keychain.lzw
 Time spent finding prefixes (ms): 175
 Time spent writing codewords (ms): 82
 Time spent adding nodes to tree (ms): 11
 Time spent seeking forward (ms): 1633
 Total time spent (ms): 1901
-Done! Compression with LZW was successful, and your new and tiny file is located at 'nice_picture.lzw'.
+Done! Compression with LZW was successful, and your new and tiny file is located at 'keychain.lzw'.
 ```
 
 As can be seen, about 86 % of the total operation time (compression) is taken up by what I chose to call seeking forward. Essentially it's this part of the code:
