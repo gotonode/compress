@@ -36,16 +36,20 @@ Here's an illustrive image. The sizes are in bytes and a lower value is better.
 
   * Compressing an already compressed file usually results in a compressed file that is about the same size, or perhaps a little bit bigger or smaller. The new compressed file might be bigger than the original because of the overhead involved. Overhead is data added to the input data for processing purposes.
   
-  * It would seem that with LZW it isn't wise to compress files that are already compressed. With Huffman, there's a chance that the new file is actually a little bit smaller, so it might be worth it to give it a shot.
+  * It would seem that with LZW it isn't wise to compress files that are already compressed. With Huffman, there's a chance that the new file is actually a little bit smaller, so it might be worth it to give it a shot. But with all of the tested files that already employ some sort of compression, applying LZW compression only makes them a lot bigger.
   
-  * It's common knowledge that JPEG files are compressed out of the world, and even Huffman couldn't bring the test file's size down but managed to increase it a bit (due to overhead and other issues).
+  * It's common knowledge that JPEG files are compressed out of the world, and even Huffman couldn't bring the test file's size down but managed to increase it a bit (due to overhead and other issues). It is the only file type that, with Huffman, resulted in a larger file than the original.
+  
+  * Huffman doesn't create much overhead, but LZW can in some cases because of the dictionary that it builds. This causes LZW-compressed files to get much bigger than the original, when that original doesn't compress very well.
+  
+  * So the optimal thing to do with pre-compressed files is to leave them as is rather than try to use LZW. Huffman can bring their sizes down a bit, but we must also consider the fact that compression/decompression takes CPU time, memory and storage space (some for the compressed file, some for the decompressed original). So, perhaps it is optimal to not compress pre-compressed files, even with Huffman.
   
 * Any further observations?
-
-  * Huffman doesn't create much overhead, but LZW can in some cases because of the dictionary that it builds. This causes LZW-compressed files to get much bigger than the original, when that original doesn't compress very well.
   
   * LZW performs very well on the Lorem Ipsum text because it contains a lot of word repetitions (meaning that the same word appears many times within the file). In LZW's dictionary, such longer words would get a shorter codeword to represent them, saving space.
   
-  * Huffman compresses TXT files very well also, because more often than not they don't consist of the entire available character space (all ASCII or extended ASCII characters), but a small subset of those (primarily letters, numbers, dots, question marks and the like).
+  * The same is true with Python ja Java source code files. LZW performs much better than Huffman.
+  
+  * Huffman compresses text files very well also, because more often than not they don't consist of the entire available character space (all ASCII or extended ASCII characters), but a small subset of those (primarily letters, numbers, dots, question marks and the like).
   
   * Huffman's performance on the files that were already heavily compressed comes as a minor surprise. Because of the way Huffman works, it is interesting to see that it can squeeze even more out of the files.
