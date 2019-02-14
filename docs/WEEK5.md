@@ -16,6 +16,8 @@ How useful it is to measure algorithms to see which parts are taking the most ti
 
 I almost didn't measure the part that uses Java's `substring`-method, but I'm glad I did because that was the root cause of my problems. So I learned that I shouldn't assume that something's not the problem when I don't have previous knowledge that that's the case (or could be the case).
 
+What's unclear is what files aren't needed in my repository. I'm including the Gradle wrapper and other Gradle files.
+
 #### What is unclear
 
 How to make LZW compression faster. I'll work on that for the final week, but if I'm unable to make it any faster, I'm still happy about the way it came out.
