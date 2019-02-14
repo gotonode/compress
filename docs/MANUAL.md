@@ -14,7 +14,7 @@ You can always get the latest version of this app from [GitHub](https://github.c
 
 If you'd like a pre-built version, go [here](https://github.com/gotonode/compress/releases) to download a `JAR`-file.
 
-To clone this project, issue this command:
+To clone this project (must have [Git](https://git-scm.com/) installed), issue this command:
 
 ```
 git clone https://github.com/gotonode/compress.git
