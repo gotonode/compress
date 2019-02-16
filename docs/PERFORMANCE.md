@@ -8,7 +8,7 @@ All of the files that we benchmarked (compression) were also decompressed to ver
 
 Please note! These tests have been run on 2019-02-10. If your results differ using the same data, it's most likely because the algorithms have changed from that date. You can always get a version of this app from the past to confirm these are actual benchmarking results. The test data is not updated after each new version.
 
-#### Results
+#### Results (own data)
 
 In the following table we list the original and compressed sizes for the files found in the [data](../data) folder.
 
@@ -24,9 +24,18 @@ The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
 | lorem_ipsum.txt | 17638 | 9519 (- 46,03 %) | 7400 (- 58,05 %) | LZW |
 | screenshot.png | 54984 | 54499 bytes (- 0,88 %) | 72928 (+ 32,63 %) | Huffman |
 
-Here's an illustrive image. The sizes are in bytes and a lower value is better.
+Here's an illustrative image. The sizes are in bytes and a lower value is better.
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/results01.png)
+
+#### Results (external data)
+
+| file | original | Huffman | LZW | winner |
+| :- | :- | :- | :- | :- |
+| bib | 111261 | 72870 (- 34,51 %) | 53852 (- 51,6 %) | LZW |
+| book1 | 768771 | 438484 (- 42,96 %) | 390818 (- 49,16 %) | LZW |
+| book2 | 610856 | 368428 (- 39,69 %) | 346538 (- 43,27 %) | LZW |
+| geo | 102400 | 72884 (- 28,82 %) | 78763 (- 23,08 %) | Huffman |
 
 #### Q&A
 
