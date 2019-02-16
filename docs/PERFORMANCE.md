@@ -18,7 +18,7 @@ Please note! These tests have been run on 2019-02-17. If your results differ usi
 | geo | 102400 | 72884 (- 28,82 %) | 78763 (- 23,08 %) | Huffman |
 | news | 377109 | 246524 (- 34,63 %) | 232819 (- 38,26 %) | LZW |
 | obj1 | 21504 | 16379 (- 23,83 %) | 16934 (- 21,25 %) | Huffman |
-| obj2 | 246814 | 194424 (- 21,23 %) | 302551 (- 22,58 %) | Huffman |
+| obj2 | 246814 | 194424 (- 21,23 %) | 302551 (+ 22,58 %) | Huffman |
 | paper1 | 53161 | 33464 (- 37,05 %) | 31190 (- 41,33 %) | LZW |
 | paper2 | 82199 | 47737 (- 41,93 %) | 47737 (- 49,30 %) | LZW |
 | pic | 513216 | 106758 (- 79,20 %) | 70235 (- 86,31 %) | LZW |
@@ -42,7 +42,7 @@ The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
 | lorem_ipsum.docx | 20164 | 19418 (- 3,70 %) | 25267 (+ 25,31 %) | Huffman |
 | lorem_ipsum.pdf | 97786 | 96221 (- 1,60 %) | 129392 (+ 32,32 %) | Huffman |
 | lorem_ipsum.txt | 17638 | 9519 (- 46,03 %) | 7400 (- 58,05 %) | LZW |
-| screenshot.png | 54984 | 54499 bytes (- 0,88 %) | 72928 (+ 32,63 %) | Huffman |
+| screenshot.png | 54984 | 54499 (- 0,88 %) | 72928 (+ 32,63 %) | Huffman |
 
 Here's an illustrative image. The sizes are in bytes and a lower value is better.
 
