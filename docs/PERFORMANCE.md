@@ -6,7 +6,21 @@ Because we are primarily interested in the size of the compressed file, we'll fo
 
 All of the files that we benchmarked (compression) were also decompressed to verify that the compression actually worked. The decompressed file was then compared with the original to see that they were an exact (100 %) match, and that not a single bit went missing or got corrupted.
 
-Please note! These tests have been run on 2019-02-10. If your results differ using the same data, it's most likely because the algorithms have changed from that date. You can always get a version of this app from the past to confirm these are actual benchmarking results. The test data is not updated after each new version.
+Please note! These tests have been run on 2019-02-17. If your results differ using the same data, it's most likely because the algorithms have changed from that date. The test data is not updated after each new version.
+
+#### Results (external data)
+
+| file | original | Huffman | LZW | winner |
+| :- | :- | :- | :- | :- |
+| bib | 111261 | 72870 (- 34,51 %) | 53852 (- 51,6 %) | LZW |
+| book1 | 768771 | 438484 (- 42,96 %) | 390818 (- 49,16 %) | LZW |
+| book2 | 610856 | 368428 (- 39,69 %) | 346538 (- 43,27 %) | LZW |
+| geo | 102400 | 72884 (- 28,82 %) | 78763 (- 23,08 %) | Huffman |
+| pic | 513216 | 106758 (- 79,20 %) | 70235 (- 86,31 %) | LZW |
+| news | 377109 | 246524 (- 34,63 %) | 232819 (- 38,26 %) | LZW |
+| obj1 | 21504 | 16379 (- 23,83 %) | 16934 (- 21,25 %) | Huffman |
+
+![App](https://github.com/gotonode/compress/blob/master/docs/images/results01.png)
 
 #### Results (own data)
 
@@ -28,15 +42,6 @@ Here's an illustrative image. The sizes are in bytes and a lower value is better
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/results01.png)
 
-#### Results (external data)
-
-| file | original | Huffman | LZW | winner |
-| :- | :- | :- | :- | :- |
-| bib | 111261 | 72870 (- 34,51 %) | 53852 (- 51,6 %) | LZW |
-| book1 | 768771 | 438484 (- 42,96 %) | 390818 (- 49,16 %) | LZW |
-| book2 | 610856 | 368428 (- 39,69 %) | 346538 (- 43,27 %) | LZW |
-| geo | 102400 | 72884 (- 28,82 %) | 78763 (- 23,08 %) | Huffman |
-
 #### Q&A
 
 * Why did the size increase in some of the cases?
@@ -57,8 +62,8 @@ Here's an illustrative image. The sizes are in bytes and a lower value is better
   
   * LZW performs very well on the Lorem Ipsum text because it contains a lot of word repetitions (meaning that the same word appears many times within the file). In LZW's dictionary, such longer words would get a shorter codeword to represent them, saving space.
   
-  * The same is true with Python ja Java source code files. LZW performs much better than Huffman.
+  * The same is true with the Java source code file. LZW performs much better than Huffman.
   
   * Huffman compresses text files very well also, because more often than not they don't consist of the entire available character space (all ASCII or extended ASCII characters), but a small subset of those (primarily letters, numbers, dots, question marks and the like).
   
-  * Huffman's performance on the files that were already heavily compressed comes as a minor surprise. Because of the way Huffman works, it is interesting to see that it can squeeze even more out of the files.
+  * Huffman's performance on the files that were already heavily compressed comes as a minor surprise. Because of the way Huffman works, it is interesting to see that it can squeeze even more out of them.
