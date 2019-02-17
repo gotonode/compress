@@ -2,6 +2,8 @@
 
 #### What I did this week
 
+Benchmarking has been completed, both with internal data made by me and with the Calgary corpus.
+
 #### Progress
 
 #### What I learned this week
