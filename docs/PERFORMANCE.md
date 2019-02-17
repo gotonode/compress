@@ -12,7 +12,7 @@ Please note! These tests have been run on 2019-02-17. If your results differ usi
 
 Here are the benchmarking results using the [Calgary corpus](https://en.wikipedia.org/wiki/Calgary_corpus).
 
-The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
+The sizes are in bytes. Divide them by 1024 to get kilobytes (kB). Sizes indicated in bold are for cases where the compressed file came out bigger than the original file.
 
 | file | original | Huffman | LZW | winner |
 | :- | :- | :- | :- | :- |
@@ -39,14 +39,14 @@ And here they are illustrated as a graph. The sizes are in bytes and a lower val
 
 In the following table we list the original and compressed sizes for the files found in the [data](../data) folder.
 
-The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
+The sizes are in bytes. Divide them by 1024 to get kilobytes (kB). Sizes indicated in bold are for cases where the compressed file came out bigger than the original file.
 
 | file | original | Huffman | LZW | winner |
 | :- | :- | :- | :- | :- |
 | binary_search_tree.java | 13204 | 7404 (- 43,93 %) | 5201 (- 60,61 %) | LZW |
 | keychain.jpeg | 85959 | **86172 (+ 0,25 %)** | **120040 (+ 39,65 %)** | Huffman |
 | lorem_ipsum.docx | 20164 | 19418 (- 3,70 %) | **25267 (+ 25,31 %)** | Huffman |
-| lorem_ipsum.pdf | 97786 | 96221 (- 1,60 %) |** 129392 (+ 32,32 %)** | Huffman |
+| lorem_ipsum.pdf | 97786 | 96221 (- 1,60 %) |**129392 (+ 32,32 %)** | Huffman |
 | lorem_ipsum.txt | 17638 | 9519 (- 46,03 %) | 7400 (- 58,05 %) | LZW |
 | screenshot.png | 54984 | 54499 (- 0,88 %) | **72928 (+ 32,63 %)** | Huffman |
 
