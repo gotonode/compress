@@ -10,6 +10,10 @@ Please note! These tests have been run on 2019-02-17. If your results differ usi
 
 #### Results (external data)
 
+Here are the benchmarking results using the [Calgary corpus](https://en.wikipedia.org/wiki/Calgary_corpus).
+
+The sizes are in bytes. Divide them by 1024 to get kilobytes (kB).
+
 | file | original | Huffman | LZW | winner |
 | :- | :- | :- | :- | :- |
 | bib | 111261 | 72870 (- 34,51 %) | 53852 (- 51,6 %) | LZW |
@@ -27,7 +31,9 @@ Please note! These tests have been run on 2019-02-17. If your results differ usi
 | progp | 49379 | 30333 (- 38,57 %) | 23296 (- 52,82 %) | LZW |
 | trans | 93695 | 65349 (- 30,25 %) | 50552 (- 46,05 %) | LZW |
 
-![App](https://github.com/gotonode/compress/blob/master/docs/images/results01.png)
+And here they are illustrated as a graph. The sizes are in bytes and a lower value is better.
+
+![App](https://github.com/gotonode/compress/blob/master/docs/images/results02.png)
 
 #### Results (own data)
 
