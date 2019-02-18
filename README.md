@@ -1,9 +1,9 @@
 # Compress
 *Compress, decompress and benchmark using Huffman coding and LZW*
 
-| Travis CI | Codacy | Codecov |
-| :-: | :-: | :-: |
-|[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) | [![codecov](https://codecov.io/gh/gotonode/compress/branch/master/graph/badge.svg)](https://codecov.io/gh/gotonode/compress) |
+| Travis CI | Codacy | Codecov | CodeFactor |
+| :-: | :-: | :-: | :-: |
+|[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) | [![codecov](https://codecov.io/gh/gotonode/compress/branch/master/graph/badge.svg)](https://codecov.io/gh/gotonode/compress) | [![CodeFactor](https://www.codefactor.io/repository/github/gotonode/compress/badge)](https://www.codefactor.io/repository/github/gotonode/compress) |
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/app02.png)
 
