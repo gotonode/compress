@@ -27,11 +27,12 @@ Geek interest:
 * [Javadoc](https://gotonode.github.io/compress) (code documentation, updated manually)
 
 #### Weekly reports
-* [Week 1 Report](docs/WEEK1.md)
+* [Week 1 Report](docs/WEEK1.md) (first week)
 * [Week 2 Report](docs/WEEK2.md)
 * [Week 3 Report](docs/WEEK3.md)
 * [Week 4 Report](docs/WEEK4.md)
 * [Week 5 Report](docs/WEEK5.md)
+* [Week 6 Report](docs/WEEK6.md) (final week)
 
 #### The problem
 
