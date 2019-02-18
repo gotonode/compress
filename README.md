@@ -1,9 +1,9 @@
 # Compress
 *Compress, decompress and benchmark using Huffman coding and LZW*
 
-| Travis CI | Better Code Hub | Codacy | Codecov | codebeat | CodeFactor |
-| :-: | :-: | :-: | :-: | :-: | :-: |
-|[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![BCH compliance](https://bettercodehub.com/edge/badge/gotonode/compress?branch=master)](https://bettercodehub.com/) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) | [![codecov](https://codecov.io/gh/gotonode/compress/branch/master/graph/badge.svg)](https://codecov.io/gh/gotonode/compress) | [![codebeat badge](https://codebeat.co/badges/2df89018-36e8-40c1-a9d2-7d229a223afa)](https://codebeat.co/projects/github-com-gotonode-compress-master) | [![CodeFactor](https://www.codefactor.io/repository/github/gotonode/compress/badge)](https://www.codefactor.io/repository/github/gotonode/compress) |
+| Travis CI | BCH | Codacy | Codecov | codebeat | CodeFactor | LGTM (alerts) |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+|[![Build Status](https://travis-ci.org/gotonode/compress.svg?branch=master)](https://travis-ci.org/gotonode/compress) | [![BCH compliance](https://bettercodehub.com/edge/badge/gotonode/compress?branch=master)](https://bettercodehub.com/) | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/89a0544739ac4db8a43db10c8668d9ce)](https://www.codacy.com/app/gotonode/compress?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gotonode/compress&amp;utm_campaign=Badge_Grade) | [![codecov](https://codecov.io/gh/gotonode/compress/branch/master/graph/badge.svg)](https://codecov.io/gh/gotonode/compress) | [![codebeat badge](https://codebeat.co/badges/2df89018-36e8-40c1-a9d2-7d229a223afa)](https://codebeat.co/projects/github-com-gotonode-compress-master) | [![CodeFactor](https://www.codefactor.io/repository/github/gotonode/compress/badge)](https://www.codefactor.io/repository/github/gotonode/compress) | [![Total alerts](https://img.shields.io/lgtm/alerts/g/gotonode/compress.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/gotonode/compress/alerts/) |
 
 ![App](https://github.com/gotonode/compress/blob/master/docs/images/app02.png)
 
