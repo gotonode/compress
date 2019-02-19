@@ -25,10 +25,14 @@ Total time spent (ms): 1901
 Done! Compression with LZW was successful, and your new and tiny file is located at 'keychain.lzw'.
 ```
 
-Now I know which part is taking 86 % of the time (LZW compression). That was the easy part. For the final week, well, I'll see if it can't be made at least somewhat faster.
+Now I know which part is taking 86 % of the time (seeking forward). That was the easy part. For the remainder of the course, well, I'll see if it can't be made at least somewhat faster.
 
 The loop in question can be found [here](https://github.com/gotonode/compress/blob/517a857048fa58e3ab633f0eb4c0ec63c45b3b33/src/main/java/io/github/gotonode/compress/algorithms/lzw/LZW.java#L126). And the part that's causing 86 % of the compression time is [here](https://github.com/gotonode/compress/blob/517a857048fa58e3ab633f0eb4c0ec63c45b3b33/src/main/java/io/github/gotonode/compress/algorithms/lzw/LZW.java#L187). Both links are permalinks to past commits on GitHub, and those commits do not reflect current code.
 
 #### What I'll do next
 
+Finishing touches, testing and documentation. LZW improvements.
+
 #### Hours used
+
+7 hours used so far. A lot of debugging.
