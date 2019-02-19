@@ -1,7 +1,7 @@
 package io.github.gotonode.compress.algorithms.lzw;
 
 /**
- * This class presents a ternary search trie structure.
+ * This class presents a ternary search trie structure used by LZW.
  * <p>
  * It's primary function is to traverse itself finding the longest prefix in
  * the given data.

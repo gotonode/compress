@@ -91,11 +91,7 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
      * @return True if this is a leaf node, false otherwise.
      */
     boolean isLeafNode() {
-        if (leftNode == null && rightNode == null) {
-            return true;
-        } else {
-            return false;
-        }
+        return leftNode == null && rightNode == null;
     }
 
     /**

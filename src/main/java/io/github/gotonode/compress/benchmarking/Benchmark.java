@@ -26,11 +26,13 @@ public final class Benchmark {
      */
     public static BenchmarkResult runBenchmark(final File sourceFile, Algorithms algorithm) {
 
-        BenchmarkResult output = null;
+        // This is populated and returned at the end.
+        BenchmarkResult output;
 
         long start;
         long end;
 
+        // Create two files. These are deleted at the end.
         File compressedFile = new File(sourceFile.getAbsolutePath() + ".COMPRESSED");
         File decompressedFile = new File(sourceFile.getAbsolutePath() + ".DECOMPRESSED");
 
@@ -44,6 +46,7 @@ public final class Benchmark {
 
         start = System.currentTimeMillis();
 
+        // Measure how long it takes to compress this file.
         compressAlgorithm.compress();
 
         end = System.currentTimeMillis();
@@ -58,14 +61,17 @@ public final class Benchmark {
 
         start = System.currentTimeMillis();
 
+        // Measure how long it takes to decompress this file.
         compressAlgorithm.decompress();
 
         end = System.currentTimeMillis();
 
         long decompressionTime = end - start;
 
+        // Take the compressed file's size before it's deleted.
         long compressedSize = compressedFile.length();
 
+        // Delete the files used in benchmarking. Preserve the original.
         compressedFile.delete();
         decompressedFile.delete();
 

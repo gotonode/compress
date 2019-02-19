@@ -22,7 +22,7 @@ public class Main {
     public static final String APP_URL = "https://github.com/gotonode/compress/";
 
     // Per week numbering. So week 3 will have a version number of 3 and so forth.
-    public static final int APP_VERSION = 5;
+    public static final int APP_VERSION = 6;
 
     // We're using the Extended ASCII alphabet here (256 instead of 128).
     public static final int ALPHABET_SIZE = 256;

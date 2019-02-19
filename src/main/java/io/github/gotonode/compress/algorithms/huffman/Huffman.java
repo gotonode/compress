@@ -16,6 +16,15 @@ import java.io.IOException;
  * <p>
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
  * <p>
+ * Huffman works by counting the instances of specific characters from the data. It
+ * then creates a tree structure that maps each character as a sequence of bits. Characters
+ * that appear more frequently get a shorter bit string representation, and
+ * uncommon/rare characters get a longer string.
+ * <p>
+ * Usually, each character is encoded with either 8 or 16 bits. For an example,
+ * the character 'A' is 01000001. Huffman coding can encode 'A' to be 01 or 0110
+ * for an example, potentially saving a lot of space.
+ * <p>
  * Uses {@link HuffmanNode} internally.
  * <p>
  * Sources:
@@ -91,10 +100,14 @@ public class Huffman implements CompressAlgorithm {
         // at a time, increase its weight by one and update how
         // many bytes we have read thus far.
         while (binaryReadTool.streamHasData()) {
+
             try {
                 char character = binaryReadTool.readChar();
+
                 weights[character]++;
+
                 dataLength++; // One more byte was read in.
+
             } catch (IOException ex) {
                 UiController.printErrorMessage(ex);
                 return false;
@@ -223,6 +236,7 @@ public class Huffman implements CompressAlgorithm {
             return false;
         }
 
+        // If the identification 32-bit integer is not what we'd expect for this algorithm.
         if (code != Main.HUFFMAN_CODE) {
             throw new RuntimeException("Corrupted file.");
         }
@@ -303,11 +317,9 @@ public class Huffman implements CompressAlgorithm {
 
         if (leafNode) {
             char character = binaryReadTool.readChar();
-            HuffmanNode huffmanNode = new HuffmanNode(character, null);
-            return huffmanNode;
+            return new HuffmanNode(character, null);
         } else {
-            HuffmanNode huffmanNode = new HuffmanNode(null, null, readTreeFromFile(), readTreeFromFile());
-            return huffmanNode;
+            return new HuffmanNode(null, null, readTreeFromFile(), readTreeFromFile());
         }
     }
 
@@ -359,9 +371,7 @@ public class Huffman implements CompressAlgorithm {
         }
 
         // We only have 1 node left, which is the root node.
-        HuffmanNode rootNode = nodes.poll();
-
-        return rootNode;
+        return nodes.poll();
     }
 
     /**

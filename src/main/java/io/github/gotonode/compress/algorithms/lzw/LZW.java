@@ -15,6 +15,14 @@ import java.io.IOException;
  * <p>
  * It has been created by following the definition from its respective Wikipedia article and other online sources.
  * <p>
+ * LZW works differently from Huffman. It creates a dictionary of strings (preferably long strings)
+ * that map to binary sequences. For an example, if textual data contains the word "welcome" many
+ * times, each entry of that word gets a binary representation that is shorter than the original
+ * (in the optimal scenario).
+ * <p>
+ * Thus, LZW works best with data that has many long, repeating strings containing the same
+ * data. Usually this is the case with text files, but not the case with binary files.
+ * <p>
  * Uses {@link LZWNode} and {@link LZWTree} internally.
  * <p>
  * Sources:
@@ -245,6 +253,7 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // If the identification 32-bit integer is not what we'd expect for this algorithm.
         if (code != Main.LZW_CODE) {
             throw new RuntimeException("Corrupted file.");
         }

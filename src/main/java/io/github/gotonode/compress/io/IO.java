@@ -9,7 +9,7 @@ import java.io.File;
  */
 public class IO {
 
-    private boolean checkFileExistsAndCanRead(String path) {
+    private boolean fileExistsAndIsReadable(String path) {
         File file = new File(path);
 
         return file.exists() && file.canRead();
@@ -25,7 +25,7 @@ public class IO {
 
         String path = uiController.askForSourceFilePath();
 
-        boolean okay = checkFileExistsAndCanRead(path);
+        boolean okay = fileExistsAndIsReadable(path);
 
         if (!okay) {
             return null;

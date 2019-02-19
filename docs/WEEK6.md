@@ -10,6 +10,8 @@ I took the hints & tips from the peer review that I got into consideration and i
 
 #### What I learned this week
 
+How most of the time in a project can go into fixing seemingly small things. At least the big picture is working, but minor adjustments could make it work more optimally. Algorithms which look at a quick glance to be identical can actually have performance implications of several orders of magnitude or more.
+
 #### What is unclear
 
 I identified the issue with LZW compression performance.
@@ -35,6 +37,19 @@ The loop in question can be found [here](https://github.com/gotonode/compress/bl
 
 Finishing touches, testing and documentation. LZW improvements.
 
+If I'm unable to make LZW any faster, I'll return the project as-is for grading.
+
 #### Hours used
 
 7 hours used so far. A lot of debugging.
+
+Considering past weeks, here are the total use hours:
+
+* Week 1: 11 hours
+* Week 2: 23 hours
+* Week 3: 22 hours
+* Week 4: 25 hours
+* Week 5: 19 hours
+* Week 6: 7 hours
+
+Total: 117 hours

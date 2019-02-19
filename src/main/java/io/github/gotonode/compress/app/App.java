@@ -25,7 +25,6 @@ public class App {
 
     private final UiController uiController;
     private final IO io;
-    private boolean appRunning;
 
     /**
      * Initializes a new App-object. This is the engine for the project.
@@ -44,7 +43,9 @@ public class App {
      * Contains a permanent loop that runs until the user has asked the app to exit.
      */
     public void run() {
-        appRunning = true;
+        boolean appRunning = true;
+
+        // UiController is used to print data to the console, and read data from it.
 
         uiController.printGreetings();
         uiController.printUrl();
@@ -71,34 +72,43 @@ public class App {
                     .findFirst()
                     .get();
 
+            // The user has entered a command. Refer to the actual methods for comments.
             switch (command) {
 
                 case EXIT:
+                    // User wants to exit from the app.
                     appRunning = false;
                     uiController.printGoodbye();
                     return;
 
                 case COMPRESS_HUFFMAN:
+                    // User wants to compress a file with Huffman.
                     processCompression(Algorithms.HUFFMAN);
                     break;
 
                 case COMPRESS_LZW:
+                    // User wants to compress a file with LZW.
                     processCompression(Algorithms.LZW);
                     break;
 
                 case BENCHMARK:
+                    // User wants to benchmark Huffman against LZW.
                     benchmark();
                     break;
 
                 case DECOMPRESS:
+                    // User wants to decompress a previously-compressed file.
                     processDecompression();
                     break;
 
                 case COMMANDS:
+                    // User has forgotten the commands and asks for them again.
                     uiController.printInstructions();
                     break;
 
                 default:
+                    // Happens only when new commands are added, and this method
+                    // is called with any of them.
                     throw new IllegalArgumentException();
             }
         }
@@ -113,20 +123,25 @@ public class App {
 
         uiController.printUsing(algorithm);
 
+        // What file to use as the source (is never modified).
         File sourceFile = io.askForSourceFile(uiController);
 
+        // The source file must exist, otherwise we cannot continue.
         if (sourceFile == null) {
             uiController.printFileError();
             return;
         }
 
+        // Where to write the compressed file.
         File targetFile = io.askForTargetFile(uiController);
 
+        // Source and target must not be the same file.
         if (sourceFile.equals(targetFile)) {
             uiController.printFilesCannotBeTheSame();
             return;
         }
 
+        // If we cannot write to the target file, abort the operation.
         if (targetFile.exists() && !targetFile.canWrite()) {
             uiController.printCannotWrite();
             return;
@@ -136,6 +151,7 @@ public class App {
 
         long current = System.currentTimeMillis();
 
+        // This method was called with the chosen algorithm, to be used for compression.
         switch (algorithm) {
 
             case HUFFMAN:
@@ -155,15 +171,19 @@ public class App {
 
         long time = next - current;
 
+        // If the compression succeeds, inform the user about it.
         uiController.printCompressionSuccessful(algorithm, targetFile.getName());
 
         long sourceFileSize = sourceFile.length();
         long targetFileSize = targetFile.length();
 
+        // Calculate the difference between the original file's length and
+        // the compressed file's length as a percentage.
         double difference = calculateDifference(sourceFileSize, targetFileSize);
 
         uiController.printDifference(sourceFileSize, targetFileSize, difference);
 
+        // Finally, we are done with compression. Print how long it took.
         uiController.printOperationTime(time);
     }
 
@@ -173,8 +193,10 @@ public class App {
      */
     private void processDecompression() {
 
+        // What file to decompress.
         File sourceFile = io.askForSourceFile(uiController);
 
+        // The source file must, obviously, exist to be able to be decompressed.
         if (sourceFile == null) {
             uiController.printFileError();
             return;
@@ -187,9 +209,15 @@ public class App {
 
         try {
             BinaryReadTool binaryReadTool = new BinaryReadTool(sourceFile);
+
+            // The first integer is the identifier (or should be).
             algorithmCode = binaryReadTool.readInt();
+
+            // How big was the original file.
             decompressedDataLength = binaryReadTool.readInt();
+
             binaryReadTool.close();
+
         } catch (IOException ex) {
             UiController.printErrorMessage(ex);
             return;
@@ -197,25 +225,36 @@ public class App {
 
         Algorithms algorithm;
 
+        // We compare the code we got from the file with the predefined one's.
         if (algorithmCode == Main.LZW_CODE) {
             algorithm = Algorithms.LZW;
         } else if (algorithmCode == Main.HUFFMAN_CODE) {
             algorithm = Algorithms.HUFFMAN;
         } else {
+
+            // The code didn't match either Huffman nor LZW, so the file is most likely
+            // not compressed via those methods via this app.
             uiController.printFileCorrupted();
             return;
         }
 
+        // Acknowledge the detected algorithm.
         uiController.printAlgorithmDetected(algorithm);
+
+        // Print out how big was the original file, i.e. how many bytes we are going
+        // to be writing for decompression.
         uiController.printDecompressedDataLength(decompressedDataLength);
 
+        // Where to save the decompressed file.
         File targetFile = io.askForTargetFile(uiController);
 
+        // Source and target must differ.
         if (sourceFile.equals(targetFile)) {
             uiController.printFilesCannotBeTheSame();
             return;
         }
 
+        // In the case we cannot write to the output location.
         if (targetFile.exists() && !targetFile.canWrite()) {
             uiController.printCannotWrite();
             return;
@@ -225,6 +264,7 @@ public class App {
 
         long current = System.currentTimeMillis();
 
+        // This method was called with the chosen algorithm.
         switch (algorithm) {
 
             case HUFFMAN:
@@ -236,6 +276,10 @@ public class App {
                 lzw.decompress();
                 break;
             default:
+
+                // This should actually never happen, as you can only call this method
+                // with any from the enum. Only when this app is extended with more algorithms
+                // can this exception be thrown.
                 throw new IllegalArgumentException();
         }
 
@@ -243,14 +287,19 @@ public class App {
 
         long time = next - current;
 
+        // Decompression was a success.
         uiController.printDecompressionSuccessful(algorithm, targetFile.getName());
 
         long sourceFileSize = sourceFile.length();
         long targetFileSize = targetFile.length();
 
+        // Get the difference, as a percentage, of the original when compared to
+        // the compressed version.
         double difference = calculateDifference(sourceFileSize, targetFileSize);
 
         uiController.printDifference(sourceFileSize, targetFileSize, difference);
+
+        // Decompression succeeded. Print how long it took.
         uiController.printOperationTime(time);
     }
 
@@ -263,8 +312,10 @@ public class App {
 
         uiController.printBenchmarking();
 
+        // We benchmark Huffman against LZW using the user's chosen file.
         File sourceFile = io.askForSourceFile(uiController);
 
+        // The source file must exist.
         if (sourceFile == null) {
             uiController.printFileError();
             return;
@@ -272,19 +323,26 @@ public class App {
 
         long originalSize = sourceFile.length();
 
+        // Benchmark using Huffman and store the results.
         uiController.printBenchmarkStart(Algorithms.HUFFMAN);
         BenchmarkResult huffmanResults = Benchmark.runBenchmark(sourceFile, Algorithms.HUFFMAN);
 
+        // And the same with LZW, storing the results.
         uiController.printBenchmarkStart(Algorithms.LZW);
         BenchmarkResult lzwResults = Benchmark.runBenchmark(sourceFile, Algorithms.LZW);
 
+        uiController.printBenchmarkComplete();
+
         uiController.printEmptyLine();
 
+        // Just some fancy UI stuff.
         uiController.printCompressionResultsHeader();
 
+        // How long compression took on each of the algorithms.
         uiController.printCompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanResults.getCompressionTime());
         uiController.printCompressionBenchmarkResults(Algorithms.LZW, lzwResults.getCompressionTime());
 
+        // Print out the winner (faster compression time).
         if (huffmanResults.getCompressionTime() < lzwResults.getCompressionTime()) {
             uiController.printCompressionTimeWinner(Algorithms.HUFFMAN);
         } else if (huffmanResults.getCompressionTime() > lzwResults.getCompressionTime()) {
@@ -297,9 +355,11 @@ public class App {
 
         uiController.printDecompressionResultsHeader();
 
+        // How long decompression took.
         uiController.printDecompressionBenchmarkResults(Algorithms.HUFFMAN, huffmanResults.getDecompressionTime());
         uiController.printDecompressionBenchmarkResults(Algorithms.LZW, lzwResults.getDecompressionTime());
 
+        // Print the winner (faster decompression time).
         if (huffmanResults.getDecompressionTime() < lzwResults.getDecompressionTime()) {
             uiController.printDecompressionTimeWinner(Algorithms.HUFFMAN);
         } else if (huffmanResults.getDecompressionTime() > lzwResults.getDecompressionTime()) {
@@ -310,8 +370,11 @@ public class App {
 
         uiController.printEmptyLine();
 
+        // Show how big the original file was.
         uiController.printOriginalFileSize(originalSize);
 
+        // Calculate, as a percentage, the difference between the original file
+        // and the compressed file. This is important.
         double huffmanReduction = calculateReduction(huffmanResults.getCompressedSize(), originalSize);
         double lzwReduction = calculateReduction(lzwResults.getCompressedSize(), originalSize);
 
@@ -335,6 +398,7 @@ public class App {
             uiController.printIncreasedFileSize(Algorithms.LZW, lzwResults.getCompressedSize(), lzwIncrease);
         }
 
+        // Finally, print out the winner in regards to file size.
         if (huffmanResults.getCompressedSize() < lzwResults.getCompressedSize()) {
             uiController.printCompressionSizeWinner(Algorithms.HUFFMAN);
         } else if (huffmanResults.getCompressedSize() > lzwResults.getCompressedSize()) {

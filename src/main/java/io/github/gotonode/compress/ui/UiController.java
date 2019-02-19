@@ -488,6 +488,13 @@ public class UiController {
     }
 
     /**
+     * Printed once benchmarking is complete.
+     */
+    public void printBenchmarkComplete() {
+        System.out.println("Benchmarking complete, printing results.");
+    }
+
+    /**
      * If a file chosen for decompression doesn't have a proper integer value
      * at the beginning, print an error message.
      */

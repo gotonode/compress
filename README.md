@@ -51,6 +51,18 @@ Two different algorithms are compared in this project.
 | Huffman coding | [source](src/main/java/io/github/gotonode/compress/algorithms/huffman) | [info](https://en.wikipedia.org/wiki/Huffman_coding) | O(n) | O(n) |
 | LZW (Lempel-Ziv-Welch)| [source](src/main/java/io/github/gotonode/compress/algorithms/lzw) | [info](https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch) | O(n) | O(n) |
 
+##### Algorithm "Huffman"
+
+Huffman works by counting the instances of specific characters from the data. It then creates a tree structure that maps each character as a sequence of bits. Characters that appear more frequently get a shorter bit string representation, and uncommon/rare characters get a longer string.
+
+Usually, each character is encoded with either 8 or 16 bits. For an example, the character 'A' is 01000001. Huffman coding can encode 'A' to be 01 or 0110 for an example, potentially saving a lot of space.
+
+##### Algorithm "LZW"
+
+LZW works differently from Huffman. It creates a dictionary of strings (preferably long strings) that map to binary sequences. For an example, if textual data contains the word "welcome" many times, each entry of that word gets a binary representation that is shorter than the original (in the optimal scenario).
+
+Thus, LZW works best with data that has many long, repeating strings containing the same data. Usually this is the case with text files, but not the case with binary files.
+
 #### Sample data
 
 You'll find sample data that you can use in the [data](data) folder. The contents of that folder are in the public domain.
