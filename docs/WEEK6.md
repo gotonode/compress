@@ -6,7 +6,9 @@ Benchmarking has been completed, both with internal data made by me and with the
 
 #### Progress
 
-I took the hints & tips from the peer review that I got into consideration and implemented some of them. Project is almost complete, save for LZW compression performance improvements.
+I took the hints & tips from the peer review that I got into consideration and implemented some of them, like the descriptions on the algorithms on the main `README.md`-file.
+
+Project is almost complete, save for LZW compression performance improvements. Documentation and performance testing are done.
 
 #### What I learned this week
 
@@ -37,7 +39,7 @@ The loop in question can be found [here](https://github.com/gotonode/compress/bl
 
 #### What I'll do next
 
-Finishing touches, testing and documentation. LZW improvements.
+Finishing touches, testing and documentation. LZW improvements. I'll also mentally prepare for the demo event.
 
 If I'm unable to make LZW any faster, I'll return the project as-is for grading.
 
