@@ -43,7 +43,7 @@ The sizes are in bytes. Divide them by 1024 to get kilobytes (kB). Sizes indicat
 
 | file | original | Huffman | LZW | winner |
 | :- | :- | :- | :- | :- |
-| binary_search_tree.java | 13204 | 7404 (- 43,93 %) | 5201 (- 60,61 %) | LZW |
+| cities.sql | 6545 | 4284 (- 34,55 %) | 3091 (- 52,77 %) | LZW |
 | keychain.jpeg | 85959 | **86172 (+ 0,25 %)** | **120040 (+ 39,65 %)** | Huffman |
 | lorem_ipsum.docx | 20164 | 19418 (- 3,70 %) | **25267 (+ 25,31 %)** | Huffman |
 | lorem_ipsum.pdf | 97786 | 96221 (- 1,60 %) |**129392 (+ 32,32 %)** | Huffman |
