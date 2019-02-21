@@ -2,7 +2,7 @@
 
 #### What I did this week
 
-Benchmarking has been completed, both with internal data made by me and with the Calgary corpus.
+Benchmarking has been completed, both with internal data made by me and with the Calgary corpus. I also spent most of my time trying to improve LZW's performance, but so far have not made any progress. I re-implemented the whole algorithm, but that ended up being even slower than the current one so I scratched the code.
 
 #### Progress
 
@@ -11,6 +11,8 @@ I took the hints & tips from the peer review that I got into consideration and i
 #### What I learned this week
 
 How most of the time in a project can go into fixing seemingly small things. At least the big picture is working, but minor adjustments could make it work more optimally. Algorithms which look at a quick glance to be identical can actually have performance implications of several orders of magnitude or more.
+
+When someone truly knows about algorithms, then, I think, that's something to be admired. Algorithms can be easy and super hard at the same time.
 
 #### What is unclear
 
@@ -41,15 +43,15 @@ If I'm unable to make LZW any faster, I'll return the project as-is for grading.
 
 #### Hours used
 
-7 hours used so far. A lot of debugging.
+12 hours used so far. A lot of debugging.
 
-Considering past weeks, here are the total use hours:
+Considering past weeks, here are the total used hours:
 
 * Week 1: 11 hours
 * Week 2: 23 hours
 * Week 3: 22 hours
 * Week 4: 25 hours
 * Week 5: 19 hours
-* Week 6: 7 hours
+* Week 6: 12 hours
 
-Total: 117 hours
+Total: 122 hours
