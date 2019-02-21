@@ -6,7 +6,7 @@ Benchmarking has been completed, both with internal data made by me and with the
 
 #### Progress
 
-I took the hints & tips from the peer review that I got into consideration and implemented some of them.
+I took the hints & tips from the peer review that I got into consideration and implemented some of them. Project is almost complete, save for LZW compression performance improvements.
 
 #### What I learned this week
 
