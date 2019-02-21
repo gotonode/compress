@@ -74,7 +74,7 @@ Here's an illustrative image. The sizes are in bytes and a lower value is better
   
   * LZW performs very well on the Lorem Ipsum text because it contains a lot of word repetitions (meaning that the same word appears many times within the file). In LZW's dictionary, such longer words would get a shorter codeword to represent them, saving space.
   
-  * The same is true with the Java source code file. LZW performs much better than Huffman.
+  * The same is true with the SQL data file. LZW performs much better than Huffman.
   
   * Huffman compresses text files very well also, because more often than not they don't consist of the entire available character space (all ASCII or extended ASCII characters), but a small subset of those (primarily letters, numbers, dots, question marks and the like).
   
