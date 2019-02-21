@@ -25,6 +25,7 @@ public class App {
 
     private final UiController uiController;
     private final IO io;
+    private boolean appRunning;
 
     /**
      * Initializes a new App-object. This is the engine for the project.
@@ -43,8 +44,6 @@ public class App {
      * Contains a permanent loop that runs until the user has asked the app to exit.
      */
     public void run() {
-        boolean appRunning = true;
-
         // UiController is used to print data to the console, and read data from it.
 
         uiController.printGreetings();
@@ -56,6 +55,8 @@ public class App {
         // Get a list of available commands from the enum.
         Character[] availableCommands = java.util.Arrays.stream(
                 Commands.values()).map(Commands::getCommand).toArray(Character[]::new);
+
+        appRunning = true;
 
         // This is the main loop for the app. It won't break until explicitly told to do so via the EXIT-command.
         while (appRunning) {
