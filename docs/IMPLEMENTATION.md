@@ -30,7 +30,7 @@ For Huffman:
 
 For LZW:
 
-| 32 bits | 32 bits | varies | 8 bits |
+| 32 bits | 32 bits | varies | 8 or 16 bits |
 | :-: | :-: | :-: | :-: |
 | identification | data's length | LZW dictionary | ending codeword |
 

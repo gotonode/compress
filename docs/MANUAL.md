@@ -55,7 +55,7 @@ gradlew build
 Once you've downloaded/cloned this project, and successfully started it, you'll be greeted with a view similar to this:
 
 ```text
-Welcome to Compress (version 4)!
+Welcome to Compress (version N)!
 You can find the latest version here: https://github.com/gotonode/compress/
 
 Please choose a command from the following:
