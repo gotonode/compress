@@ -36,7 +36,7 @@ Geek interest:
 
 #### The problem
 
-To reduce the size of a file, and to be able to return the original file from the size-reduced file. This is also known as "lossless compression" (compared to "lossy comparison", which results in irrevocable data loss such as with JPEG files).
+To reduce the size of a file, and to be able to return the original file from the size-reduced file. This is also known as "lossless compression" (compared to "lossy compression", which results in irrevocable data loss such as with JPEG files).
 
 There are two main reasons to apply compression techniques. First is that of storage; smaller-size files can more easily fit onto storage media, either HDD, SSD, optical media (CD/DVD/Blu-ray) or tape drives. The second reason is that less bandwidth is needed to transfer the data.
 
