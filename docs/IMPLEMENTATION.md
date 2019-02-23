@@ -197,6 +197,12 @@ For the next iteration of the loop, we use a subset of the data for finding pref
 
 Finding a better way to do this (perhaps with just an index integer) would net the greatest compression performance gains.
 
+Here's what Java profiling found out:
+
+![App](https://github.com/gotonode/compress/blob/master/docs/images/profiling01.png)
+
+This, I believe, confirms my suspicion.
+
 #### Sources
 
 Please see the following for more information.
