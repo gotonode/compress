@@ -68,6 +68,7 @@ public class App {
 
             // This line of code returns a "Commands" enum, as dictated by "character". For an example, 'L' returns
             // a Commands.LIST and so forth.
+            @SuppressWarnings("OptionalGetWithoutIsPresent")
             Commands command = java.util.Arrays.stream(Commands.values())
                     .filter(a -> a.getCommand() == character)
                     .findFirst()
@@ -183,6 +184,10 @@ public class App {
         double difference = calculateDifference(sourceFileSize, targetFileSize);
 
         uiController.printDifference(sourceFileSize, targetFileSize, difference);
+
+        if (targetFileSize > sourceFileSize) {
+            uiController.printCompressedFileBigger();
+        }
 
         // Finally, we are done with compression. Print how long it took.
         uiController.printOperationTime(time);

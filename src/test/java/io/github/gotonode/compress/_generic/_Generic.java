@@ -17,7 +17,7 @@ public class _Generic {
     private static final int MEGABYTE = 1048576;
 
     // When creating test files, how big should they be.
-    private static final int FILE_SIZE = 1024;
+    private static final int FILE_SIZE = MEGABYTE / 128;
 
     private Random random;
 
@@ -60,7 +60,7 @@ public class _Generic {
      * @param path Where the new file will be created.
      * @throws IOException If buffers don't work.
      */
-    public void generateBinaryFile(File path) throws IOException {
+    private void generateBinaryFile(File path) throws IOException {
 
         FileOutputStream fileOutputStream = new FileOutputStream(path);
 
@@ -98,7 +98,7 @@ public class _Generic {
         } else if (d >= 0.2d && d <= 0.22d) {
             return '.';
         } else {
-            return (char) (random.nextInt(26) + 'a');
+            return (char) (random.nextInt(26) + 'A');
         }
     }
 

@@ -14,12 +14,14 @@ public enum TextStyles {
     Magenta("\u001b[35m"),
     WhiteBold("\u001B[1m"),
     Red("\u001b[31m"),
+    Blue("\u001b[34m"),
     Default("\u001b[0m");
 
     // Feel free to change these to get the UI to look even prettier.
     private static TextStyles titleColor = Red;
     private static TextStyles commandColor = Magenta;
     private static TextStyles importantColor = WhiteBold;
+    private static TextStyles urlColor = Blue;
     private static TextStyles huffmanColor = WhiteBold;
     private static TextStyles lzwColor = WhiteBold;
 
@@ -59,7 +61,7 @@ public enum TextStyles {
      * @param printFullName Whether to print the full name or the enum code.
      * @return A String containing the algorithm's name and ANSI codes.
      */
-    public static String algoText(Algorithms algorithm, boolean printFullName) {
+    public static String algorithmText(Algorithms algorithm, boolean printFullName) {
 
         TextStyles color;
 
@@ -107,5 +109,10 @@ public enum TextStyles {
     // A convenience function. Refer to the function this one calls.
     public static String importantText(double value) {
         return importantText(String.valueOf(value));
+    }
+
+    // A convenience function. Refer to the function this one calls.
+    public static String urlText(String value) {
+        return stringWithColor(value, urlColor);
     }
 }

@@ -76,28 +76,7 @@ public class BinaryWriteTool {
      * @throws IOException If we can't write to the stream.
      */
     private void writeByte(int value) throws IOException {
-
-        if (slots == 0) {
-
-            // We already have exactly 8 bits, so we can write them directly.
-            bufferedOutputStream.write(value);
-
-        } else {
-
-            // Need to do some binary magic to make it 8 bits (a byte).
-            for (int i = 0; i < Main.BITS_IN_A_BYTE; i++) {
-
-                boolean bit = ((value >> (Main.BITS_IN_A_BYTE - i - 1)) & 1) == 1;
-
-                // Write one bit (0 or 1) at a time. Will not be written to disk
-                // until flushed.
-                if (bit) {
-                    writeOneBit();
-                } else {
-                    writeZeroBit();
-                }
-            }
-        }
+        bufferedOutputStream.write(value);
     }
 
     /**
@@ -174,11 +153,6 @@ public class BinaryWriteTool {
      * @throws IOException If we can't write to the stream.
      */
     private void clear() throws IOException {
-
-        if (slots == 0) {
-            // This was causing issues. It shouldn't do anything if it's empty.
-            return;
-        }
 
         if (slots > 0) {
             // Bitwise move to make it into a byte.

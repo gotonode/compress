@@ -44,19 +44,19 @@ public class TextStylesTest {
 
     @Test
     public void textStylesHuffmanAlgoText() {
-        String commandText = TextStyles.algoText(Algorithms.HUFFMAN, true);
+        String commandText = TextStyles.algorithmText(Algorithms.HUFFMAN, true);
         assertEquals(whiteBold + Algorithms.HUFFMAN.getName() + reset, commandText);
 
-        commandText = TextStyles.algoText(Algorithms.HUFFMAN, false);
+        commandText = TextStyles.algorithmText(Algorithms.HUFFMAN, false);
         assertEquals(whiteBold + Algorithms.HUFFMAN.name() + reset, commandText);
     }
 
     @Test
     public void textStylesLzwAlgoText() {
-        String commandText = TextStyles.algoText(Algorithms.LZW, true);
+        String commandText = TextStyles.algorithmText(Algorithms.LZW, true);
         assertEquals(whiteBold + Algorithms.LZW.getName() + reset, commandText);
 
-        commandText = TextStyles.algoText(Algorithms.LZW, false);
+        commandText = TextStyles.algorithmText(Algorithms.LZW, false);
         assertEquals(whiteBold + Algorithms.LZW.name() + reset, commandText);
     }
 }

@@ -7,10 +7,11 @@ import io.github.gotonode.compress.main.Main;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-import static io.github.gotonode.compress.enums.TextStyles.algoText;
-import static io.github.gotonode.compress.enums.TextStyles.commandText;
-import static io.github.gotonode.compress.enums.TextStyles.titleText;
+import static io.github.gotonode.compress.enums.TextStyles.urlText;
 import static io.github.gotonode.compress.enums.TextStyles.importantText;
+import static io.github.gotonode.compress.enums.TextStyles.titleText;
+import static io.github.gotonode.compress.enums.TextStyles.commandText;
+import static io.github.gotonode.compress.enums.TextStyles.algorithmText;
 
 /**
  * This class handles printing to the console and reading from it.
@@ -56,7 +57,7 @@ public class UiController {
      * Prints the app's URL on GitHub. The user can download the newest version from there.
      */
     public void printUrl() {
-        System.out.println("You can find the latest version here: " + Main.APP_URL);
+        System.out.println("You can find the latest version here: " + urlText(Main.APP_URL));
     }
 
     /**
@@ -145,7 +146,7 @@ public class UiController {
      * @param algorithm The algorithm's name.
      */
     public void printUsing(Algorithms algorithm) {
-        System.out.println("Great! We'll be using the " + algoText(algorithm, true) + " algorithm.");
+        System.out.println("Great! We'll be using the " + algorithmText(algorithm, true) + " algorithm.");
     }
 
     /**
@@ -207,18 +208,18 @@ public class UiController {
         System.out.println("Please choose a command from the following:");
 
         System.out.println(twoSpaces + commandText(Commands.COMPRESS_HUFFMAN.getCommand())
-                + ": Compress a file using " + algoText(Algorithms.HUFFMAN, true));
+                + ": Compress a file using " + algorithmText(Algorithms.HUFFMAN, true));
 
         System.out.println(twoSpaces + commandText(Commands.COMPRESS_LZW.getCommand())
-                + ": Compress a file using " + algoText(Algorithms.LZW, true));
+                + ": Compress a file using " + algorithmText(Algorithms.LZW, true));
 
         System.out.println(twoSpaces + commandText(Commands.DECOMPRESS.getCommand())
                 + ": Decompress a previously compressed file");
 
         System.out.println(twoSpaces + commandText(Commands.BENCHMARK.getCommand())
                 + ": Benchmark "
-                + algoText(Algorithms.HUFFMAN, true)
-                + " against " + algoText(Algorithms.LZW, true));
+                + algorithmText(Algorithms.HUFFMAN, true)
+                + " against " + algorithmText(Algorithms.LZW, true));
 
         System.out.println(twoSpaces + commandText(Commands.COMMANDS.getCommand())
                 + ": Print these instructions again");
@@ -242,7 +243,7 @@ public class UiController {
      * @param targetPath Where the results were written to.
      */
     public void printDecompressionSuccessful(Algorithms algorithm, String targetPath) {
-        System.out.println("Done! Decompression with " + algoText(algorithm, true)
+        System.out.println("Done! Decompression with " + algorithmText(algorithm, true)
                 + " was successful, and your decompressed file is located at '"
                 + importantText(targetPath) + "'.");
     }
@@ -254,7 +255,7 @@ public class UiController {
      * @param targetPath Where the results were written to.
      */
     public void printCompressionSuccessful(Algorithms algorithm, String targetPath) {
-        System.out.println("Done! Compression with " + algoText(algorithm, true)
+        System.out.println("Done! Compression with " + algorithmText(algorithm, true)
                 + " was successful, and your new and tiny file is located at '"
                 + importantText(targetPath) + "'.");
     }
@@ -288,8 +289,8 @@ public class UiController {
      * Prints info that we're going to be benchmarking the two algorithms together.
      */
     public void printBenchmarking() {
-        System.out.println("We'll benchmark " + algoText(Algorithms.HUFFMAN, true)
-                + " against " + algoText(Algorithms.LZW, true)
+        System.out.println("We'll benchmark " + algorithmText(Algorithms.HUFFMAN, true)
+                + " against " + algorithmText(Algorithms.LZW, true)
                 + " using your chosen file. No new files will be left as residue.");
 
         System.out.println(
@@ -321,7 +322,7 @@ public class UiController {
      * @param algorithm The algorithm that was used.
      */
     public void printAlgorithmDetected(Algorithms algorithm) {
-        System.out.println("It seems that this file was compressed with " + algoText(algorithm, true) + ".");
+        System.out.println("It seems that this file was compressed with " + algorithmText(algorithm, true) + ".");
     }
 
     /**
@@ -350,7 +351,7 @@ public class UiController {
      * @param compressionTime How much time it took to compress the sample data (in milliseconds).
      */
     public void printCompressionBenchmarkResults(Algorithms algorithm, long compressionTime) {
-        System.out.println(fourSpaces + algoText(algorithm, true)
+        System.out.println(fourSpaces + algorithmText(algorithm, true)
                 + " took " + importantText(compressionTime) + " ms to compress");
     }
 
@@ -361,7 +362,7 @@ public class UiController {
      * @param decompressionTime How much time it took to decompress the sample data (in milliseconds).
      */
     public void printDecompressionBenchmarkResults(Algorithms algorithm, long decompressionTime) {
-        System.out.println(fourSpaces + algoText(algorithm, true)
+        System.out.println(fourSpaces + algorithmText(algorithm, true)
                 + " took " + importantText(decompressionTime) + " ms to decompress");
     }
 
@@ -399,7 +400,7 @@ public class UiController {
             directionText = "increase";
         }
 
-        System.out.println(fourSpaces + algoText(algorithm, true)
+        System.out.println(fourSpaces + algorithmText(algorithm, true)
                 + " compressed it to " + importantText(compressedFileSize)
                 + " bytes (a " + importantText(formatTwoDecimals(change))
                 + " % " + directionText + ")");
@@ -430,7 +431,7 @@ public class UiController {
      */
     public void printCompressionSizeWinner(Algorithms algorithm) {
         System.out.println(fourSpaces
-                + "Regarding file size, the winner is " + algoText(algorithm, true) + "!");
+                + "Regarding file size, the winner is " + algorithmText(algorithm, true) + "!");
     }
 
     /**
@@ -440,7 +441,7 @@ public class UiController {
      */
     public void printCompressionTimeWinner(Algorithms algorithm) {
         System.out.println(fourSpaces
-                + "Regarding compression time, the winner is " + algoText(algorithm, true) + "!");
+                + "Regarding compression time, the winner is " + algorithmText(algorithm, true) + "!");
     }
 
     /**
@@ -450,7 +451,7 @@ public class UiController {
      */
     public void printDecompressionTimeWinner(Algorithms algorithm) {
         System.out.println(fourSpaces
-                + "Regarding decompression time, the winner is " + algoText(algorithm, true) + "!");
+                + "Regarding decompression time, the winner is " + algorithmText(algorithm, true) + "!");
     }
 
     /**
@@ -495,13 +496,20 @@ public class UiController {
     }
 
     /**
+     * If the compressed file got bigger than the original, warn the user about it.
+     */
+    public void printCompressedFileBigger() {
+        System.out.println("Notice! The compressed file got BIGGER than the original!");
+    }
+
+    /**
      * If a file chosen for decompression doesn't have a proper integer value
      * at the beginning, print an error message.
      */
     public void printFileCorrupted() {
         System.out.println("It seems that this file hasn't been compressed with either " +
-                algoText(Algorithms.HUFFMAN, true) + " nor "
-                + algoText(Algorithms.LZW, true) + " via this app.");
+                algorithmText(Algorithms.HUFFMAN, true) + " nor "
+                + algorithmText(Algorithms.LZW, true) + " via this app.");
         System.out.println("Perhaps the file has been corrupted?");
     }
 
