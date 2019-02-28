@@ -127,7 +127,7 @@
             <property name="max" value="200" />
         </module>-->
         <module name="JavaNCSS">
-            <property name="methodMaximum" value="64" />
+            <property name="methodMaximum" value="70" />
         </module>
         <module name="ClassFanOutComplexity">
             <property name="max" value="15" />
