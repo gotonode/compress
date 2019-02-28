@@ -16,6 +16,9 @@ class LZWTree {
     // The root node. Once the tree shifts, this can change.
     private LZWNode rootLzwNode;
 
+    // How many nodes this tree has.
+    private int nodes;
+
     /**
      * Get the value from this search tree with the given key.
      *
@@ -140,6 +143,7 @@ class LZWTree {
      * @param value An integer value.
      */
     void add(String key, int value) {
+        nodes++;
         rootLzwNode = addNode(rootLzwNode, key, value, 0);
     }
 
@@ -180,10 +184,20 @@ class LZWTree {
         return node;
     }
 
+    /**
+     * Returns the node count.
+     *
+     * @return How many nodes, as an integer.
+     */
+    int getNodes() {
+        return nodes;
+    }
+
     @Override
     public String toString() {
         return "LZWTree{" +
                 "rootLzwNode=" + rootLzwNode +
+                ", nodes=" + nodes +
                 '}';
     }
 }

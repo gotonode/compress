@@ -171,6 +171,18 @@ public class LZW implements CompressAlgorithm {
             timeSpentWritingCodewords += System.currentTimeMillis() - start;
             // For testing purposes. Ignore the previous.
 
+            // The following code reduces the memory usage by a wide margin, but increases
+            // the time it takes to perform the compression by a lot. Thus is is disabled.
+            if (false) {
+                if (lzwTree.getNodes() >= 100) {
+                    lzwTree = new LZWTree();
+                    for (int index = 0; index < Main.ALPHABET_SIZE; index++) {
+                        lzwTree.add((char) index, index);
+                    }
+                    prefix = "";
+                }
+            }
+
             // Cached for debugging purposes (so we don't need to constantly
             // pop into the method to fetch the value).
             int prefixLength = prefix.length();
@@ -234,6 +246,10 @@ public class LZW implements CompressAlgorithm {
             UiController.printErrorMessage(ex);
             return false;
         }
+
+        System.gc();
+
+        data = "";
 
         // The compression operation succeeded, so a true is returned.
         return true;
