@@ -59,7 +59,7 @@ public class LZW implements CompressAlgorithm {
             this.binaryWriteTool = new BinaryWriteTool(target);
         } catch (FileNotFoundException ex) {
             UiController.printErrorMessage(ex);
-            return;
+            return; // Find a way to inform the user about a failed initialization.
         }
 
     }
@@ -173,6 +173,8 @@ public class LZW implements CompressAlgorithm {
 
             // The following code reduces the memory usage by a wide margin, but increases
             // the time it takes to perform the compression by a lot. Thus is is disabled.
+            // Perhaps the solution to this problem lies in simply clearing out the
+            // dictionary intermittently. Within the timeframe allotted, I was unable to do so.
             if (false) {
                 if (lzwTree.getNodes() >= 100) {
                     lzwTree = new LZWTree();
@@ -218,6 +220,7 @@ public class LZW implements CompressAlgorithm {
             // For testing purposes. Ignore the previous.
         }
 
+        // The following are only printed if the DEBUG constant is enabled.
         if (Main.DEBUG) {
             System.out.println("Time spent finding prefixes (ms): " + timeSpentFetchingPrefixes);
             System.out.println("Time spent writing codewords (ms): " + timeSpentWritingCodewords);
@@ -247,9 +250,8 @@ public class LZW implements CompressAlgorithm {
             return false;
         }
 
+        // This doesn't seem to have an effect on anything? More profiling necessary.
         System.gc();
-
-        data = "";
 
         // The compression operation succeeded, so a true is returned.
         return true;
