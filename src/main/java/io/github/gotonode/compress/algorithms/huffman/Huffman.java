@@ -62,7 +62,7 @@ public class Huffman implements CompressAlgorithm {
             this.binaryWriteTool = new BinaryWriteTool(target);
         } catch (FileNotFoundException ex) {
             UiController.printErrorMessage(ex);
-            return;
+            return; // Find a way to inform the user about a failed initialization.
         }
 
     }
