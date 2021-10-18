@@ -14,7 +14,7 @@ repositories {
 dependencies {
     compile 'com.google.guava:guava:20.0'
     testCompile 'junit:junit:4.12'
-    testCompile group: 'commons-io', name: 'commons-io', version: '2.6'
+    testCompile group: 'commons-io', name: 'commons-io', version: '2.11.0'
 }
 
 mainClassName = 'io.github.gotonode.compress.main.Main'
