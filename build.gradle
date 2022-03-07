@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.guava:guava:20.0'
+    compile 'com.google.guava:guava:31.1-jre'
     testCompile 'junit:junit:4.12'
     testCompile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
